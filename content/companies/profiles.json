@@ -1,0 +1,82 @@
+[
+  {
+    "slug": "dhl",
+    "name": "DHL",
+    "tagline": "Logistics at planetary scale with operational discipline.",
+    "context": "Expect questions that connect technology to physical networks: hubs, last mile, customs, and real-time tracking. Reliability and safety are cultural defaults.",
+    "themes": [
+      "Global operations and time zones",
+      "Asset tracking and telemetry",
+      "Partner ecosystems and SLAs",
+      "Resilience during peak seasons"
+    ],
+    "pressureAngles": [
+      "How do you prioritize when a software fix competes with a physical constraint?",
+      "Describe cost control when fuel, labor, and network variability move weekly."
+    ],
+    "questionsToExpect": [
+      "How would you modernize legacy depot systems without stopping the world?",
+      "What metrics would you show a regional COO to prove IT is improving throughput?"
+    ]
+  },
+  {
+    "slug": "world-bank",
+    "name": "World Bank",
+    "tagline": "Mission-driven technology with governance and inclusion.",
+    "context": "Stakeholder complexity is high: member countries, partners, and beneficiaries. Integrity, transparency, and procurement rigor matter as much as architecture.",
+    "themes": [
+      "Data ethics and responsible use",
+      "Procurement and multilateral processes",
+      "Inclusive digital public goods",
+      "Cyber risk in politically sensitive contexts"
+    ],
+    "pressureAngles": [
+      "How do you move quickly while respecting institutional process?",
+      "How do you communicate trade-offs when every choice affects public trust?"
+    ],
+    "questionsToExpect": [
+      "Describe a program where you balanced innovation with safeguards.",
+      "How would you design access controls for highly sensitive datasets across partners?"
+    ]
+  },
+  {
+    "slug": "safaricom",
+    "name": "Safaricom",
+    "tagline": "Mobile-first innovation with national-scale impact.",
+    "context": "Expect mobile money, telco-grade availability, and ecosystem thinking. Consumer trust and regulatory relationships are part of the product.",
+    "themes": [
+      "High availability for financial services",
+      "Fraud detection and customer protection",
+      "Ecosystem APIs and developer experience",
+      "Rural connectivity and inclusive access"
+    ],
+    "pressureAngles": [
+      "How do you ship features fast without compromising financial integrity?",
+      "Tell me about a time public scrutiny forced you to change course."
+    ],
+    "questionsToExpect": [
+      "How would you architect a platform that scales promotions on peak days?",
+      "What is your approach to third-party risk for fintech partners?"
+    ]
+  },
+  {
+    "slug": "aws",
+    "name": "AWS",
+    "tagline": "Customer obsession, bar raising, and operational excellence at hyperscale.",
+    "context": "Behavioral depth matters: ownership, disagree and commit, and diving deep. Be ready to translate your experience into Amazon-style mechanisms without sounding like a brochure.",
+    "themes": [
+      "Leadership principles in practice",
+      "Operational excellence and postmortems",
+      "Working backwards from customer outcomes",
+      "Scale, safety, and velocity together"
+    ],
+    "pressureAngles": [
+      "Tell me about a time you had insufficient data but needed a decision.",
+      "Describe a mistake that taught you something durable about customers."
+    ],
+    "questionsToExpect": [
+      "Most challenging technical trade-off you owned end to end.",
+      "How do you raise the bar on hiring without slowing teams down?"
+    ]
+  }
+]

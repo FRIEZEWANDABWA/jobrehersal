@@ -1,0 +1,137 @@
+[
+  {
+    "id": "q-001",
+    "prompt": "Describe a time you turned around a failing program without replacing the entire team.",
+    "role": "CTO",
+    "department": "Leadership",
+    "difficulty": "executive",
+    "tags": ["turnaround", "people"],
+    "hint": "Focus on clarity, metrics, and coaching—not blame."
+  },
+  {
+    "id": "q-002",
+    "prompt": "How do you decide build versus buy for a core platform capability?",
+    "role": "VP Engineering",
+    "department": "Strategy",
+    "difficulty": "mid",
+    "tags": ["platform", "vendor"],
+    "hint": "Name switching costs, differentiation, and operational burden."
+  },
+  {
+    "id": "q-003",
+    "prompt": "Walk me through your approach to zero trust in a legacy-heavy estate.",
+    "role": "CISO",
+    "department": "Security",
+    "difficulty": "executive",
+    "tags": ["zero trust", "legacy"],
+    "hint": "Sequence: identity, visibility, segmentation, logging, culture."
+  },
+  {
+    "id": "q-004",
+    "prompt": "Tell me about a major outage: what happened, what you did in the first hour, and what changed afterward.",
+    "role": "Head of Infrastructure",
+    "department": "Infrastructure",
+    "difficulty": "mid",
+    "tags": ["incident", "reliability"],
+    "hint": "Stability first, communication second, durable fixes third."
+  },
+  {
+    "id": "q-005",
+    "prompt": "How do you communicate security risk to a board that is not technical?",
+    "role": "CISO",
+    "department": "Security",
+    "difficulty": "executive",
+    "tags": ["board", "communication"],
+    "hint": "Materiality, trends, funding asks, and what you are accepting explicitly."
+  },
+  {
+    "id": "q-006",
+    "prompt": "Describe a vendor negotiation where you improved commercial terms without damaging the relationship.",
+    "role": "CIO",
+    "department": "Finance",
+    "difficulty": "mid",
+    "tags": ["vendor", "negotiation"],
+    "hint": "BATNA, value mapping, and joint success metrics."
+  },
+  {
+    "id": "q-007",
+    "prompt": "How do you govern generative AI adoption in a regulated environment?",
+    "role": "Chief Digital Officer",
+    "department": "AI",
+    "difficulty": "executive",
+    "tags": ["AI", "governance"],
+    "hint": "Policy, approved routes, logging, evaluation, exception paths."
+  },
+  {
+    "id": "q-008",
+    "prompt": "Give an example of a portfolio decision you stopped funding—and how you communicated it.",
+    "role": "CTO",
+    "department": "Leadership",
+    "difficulty": "executive",
+    "tags": ["portfolio", "stakeholders"],
+    "hint": "Criteria, sunk cost fallacy, reallocation, and empathy."
+  },
+  {
+    "id": "q-009",
+    "prompt": "How do you set SLOs that engineering trusts and the business understands?",
+    "role": "VP Platform",
+    "department": "Infrastructure",
+    "difficulty": "mid",
+    "tags": ["SLO", "reliability"],
+    "hint": "User journeys, error budgets, and executive dashboards."
+  },
+  {
+    "id": "q-010",
+    "prompt": "Tell me about a time you inherited low psychological safety. What changed in 90 days?",
+    "role": "Director",
+    "department": "People",
+    "difficulty": "foundation",
+    "tags": ["culture", "safety"],
+    "hint": "Behaviors, rituals, and one or two visible wins."
+  },
+  {
+    "id": "q-011",
+    "prompt": "How do you approach technical debt when product demands are relentless?",
+    "role": "Engineering Manager",
+    "department": "Engineering",
+    "difficulty": "foundation",
+    "tags": ["debt", "prioritization"],
+    "hint": "Risk framing, incremental paydown, and measurable outcomes."
+  },
+  {
+    "id": "q-012",
+    "prompt": "Describe your multi-year cloud economics strategy and how you report progress.",
+    "role": "CIO",
+    "department": "Finance",
+    "difficulty": "executive",
+    "tags": ["FinOps", "cloud"],
+    "hint": "Unit economics, guardrails, and forecasting discipline."
+  },
+  {
+    "id": "q-013",
+    "prompt": "How do you run a security incident without creating chaos in legal and communications?",
+    "role": "CISO",
+    "department": "Security",
+    "difficulty": "mid",
+    "tags": ["incident", "cross-functional"],
+    "hint": "RACI, templates, rehearsal, and single narrative owners."
+  },
+  {
+    "id": "q-014",
+    "prompt": "What is your framework for evaluating an acquisition's technology risk?",
+    "role": "CTO",
+    "department": "Strategy",
+    "difficulty": "executive",
+    "tags": ["M&A", "diligence"],
+    "hint": "People, architecture, security, data, and integration cost."
+  },
+  {
+    "id": "q-015",
+    "prompt": "How do you measure whether your engineering organization is improving year over year?",
+    "role": "VP Engineering",
+    "department": "People",
+    "difficulty": "mid",
+    "tags": ["metrics", "org health"],
+    "hint": "Delivery, quality, attrition, diversity, and customer outcomes."
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "star-001",
+    "title": "Amazon-scale ordering incident",
+    "situation": "Peak season traffic exposed a race condition in checkout that only appeared under specific regional cache warm-up patterns.",
+    "task": "Lead cross-team response, protect revenue, and restore confidence with retail leadership within hours—not days.",
+    "action": "Declared incident severity, pooled on-call leads, rolled out a targeted feature flag, added temporary rate limits with clear customer messaging, and instrumented the failing path for permanent fix.",
+    "result": "Checkout error rate returned to baseline within 47 minutes; post-incident changes reduced similar-class defects by a measurable margin in the next quarter.",
+    "tags": ["incident", "scale", "cross-functional"]
+  },
+  {
+    "id": "star-002",
+    "title": "Network transformation under tight downtime windows",
+    "situation": "A global WAN refresh risked disrupting trading floors and contact centers with hard maintenance windows.",
+    "task": "Modernize core routing and segmentation without exceeding fifteen-minute cumulative outage per site.",
+    "action": "Built rehearsal environments, automated rollback checks, sequenced migrations by risk tier, and paired network and app teams for validation scripts.",
+    "result": "Completed migration across regions with zero SLA breaches; cut recurring operational tickets tied to legacy routing by a double-digit percentage.",
+    "tags": ["infrastructure", "WAN", "risk"]
+  },
+  {
+    "id": "star-003",
+    "title": "Vendor negotiation: enterprise agreement renewal",
+    "situation": "A strategic database vendor renewal arrived with double-digit uplift and aggressive lock-in clauses.",
+    "task": "Secure sustainable economics while preserving partnership for roadmap-critical features.",
+    "action": "Mapped workloads to true needs, validated competitive alternatives for credible BATNA, proposed outcome-based growth tiers, and aligned legal on IP and audit clauses.",
+    "result": "Reduced net uplift materially while extending flexibility on portability terms; shortened procurement cycle versus prior renewal.",
+    "tags": ["vendor", "finance", "negotiation"]
+  },
+  {
+    "id": "star-004",
+    "title": "Security incident with regulatory clock",
+    "situation": "Anomalous privileged access suggested lateral movement in a regulated business unit.",
+    "task": "Contain threat, preserve evidence, and coordinate legal and communications with regulators in scope.",
+    "action": "Isolated affected accounts, rotated credentials with controlled blast radius, engaged forensics, established single comms owner, and delivered timed stakeholder updates with verified facts only.",
+    "result": "No confirmed data exfiltration; regulators received timely notifications; durable controls added for privileged access reviews and segmentation.",
+    "tags": ["security", "incident", "compliance"]
+  },
+  {
+    "id": "star-005",
+    "title": "Turnaround: low trust engineering org",
+    "situation": "Inherited a platform team with high attrition, unclear priorities, and frequent escalations from product partners.",
+    "task": "Stabilize delivery and rebuild credibility within one quarter.",
+    "action": "Published a simple north-star metric, fixed weekly stakeholder forum, replaced heroics with on-call hygiene, and invested in two quick reliability wins with visible customer impact.",
+    "result": "Attrition slowed, incident volume dropped, and product NPS for internal platform APIs improved in the following survey cycle.",
+    "tags": ["leadership", "culture", "platform"]
+  }
+]
