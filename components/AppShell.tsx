@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useCallback, useEffect, useReducer } from "react";
 import { CommandPalette } from "@/components/CommandPalette";
-import { LogoutButton } from "@/components/LogoutButton";
 import { mainNav } from "@/lib/navigation";
 
 type PaletteState = { open: boolean; instanceKey: number };
@@ -95,7 +94,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             >
               Quick jump <span className="text-slate-500">⌘K</span>
             </button>
-            <LogoutButton className="w-full" />
           </div>
         </aside>
 
@@ -111,16 +109,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </p>
               </Link>
               <div className="flex shrink-0 flex-col items-end gap-2">
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={openPalette}
-                    className="rounded-lg border border-slate-700/90 px-2.5 py-1.5 text-[11px] font-semibold text-slate-300 hover:border-amber-500/45 hover:text-white"
-                  >
-                    ⌘K
-                  </button>
-                  <LogoutButton />
-                </div>
+                <button
+                  type="button"
+                  onClick={openPalette}
+                  className="rounded-lg border border-slate-700/90 px-2.5 py-1.5 text-[11px] font-semibold text-slate-300 hover:border-amber-500/45 hover:text-white"
+                >
+                  ⌘K
+                </button>
               </div>
             </div>
             <nav
@@ -144,7 +139,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </main>
 
           <footer className="shrink-0 border-t border-slate-800/80 bg-slate-950/95 px-4 py-4 text-center text-xs text-slate-500 sm:px-6 lg:px-12">
-            Signed-in workspace · static-first content · use{" "}
+            Static-first content · use{" "}
             <span className="font-mono text-slate-400">⌘K</span> /{" "}
             <span className="font-mono text-slate-400">Ctrl+K</span> to jump anywhere
             fast.
