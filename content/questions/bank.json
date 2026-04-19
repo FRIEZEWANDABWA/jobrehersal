@@ -6,7 +6,8 @@
     "department": "Leadership",
     "difficulty": "executive",
     "tags": ["turnaround", "people"],
-    "hint": "Focus on clarity, metrics, and coaching—not blame."
+    "hint": "Focus on clarity, metrics, and coaching—not blame.",
+    "eliteAnswer": "I would anchor on outcomes and standards, not personalities: baseline delivery and incident data, then a small set of non‑negotiables—ownership, escalation discipline, and weekly visibility. I invested in coaching where the gap was skill, and in clear consequences where the gap was accountability. Quick, customer‑visible wins rebuilt trust while we removed structural friction (unclear priorities, noisy on‑call). The story closes with sustained metrics—predictability up, escalations down—and how the team became credible without a purge."
   },
   {
     "id": "q-002",
@@ -15,7 +16,8 @@
     "department": "Strategy",
     "difficulty": "mid",
     "tags": ["platform", "vendor"],
-    "hint": "Name switching costs, differentiation, and operational burden."
+    "hint": "Name switching costs, differentiation, and operational burden.",
+    "eliteAnswer": "I start from where we must differentiate versus where we should be world‑class but not unique. Build when the capability is strategic IP, pace of change is extreme, or integration cost of SaaS exceeds build+operate over a realistic horizon. Buy when time‑to‑value, security posture, and vendor roadmap beat internal capacity. I force an explicit decision on switching costs, exit strategy, data residency, and who owns reliability—then document the trade we are accepting. The answer is never ideology; it is risk‑adjusted value and speed."
   },
   {
     "id": "q-003",
@@ -24,7 +26,8 @@
     "department": "Security",
     "difficulty": "executive",
     "tags": ["zero trust", "legacy"],
-    "hint": "Sequence: identity, visibility, segmentation, logging, culture."
+    "hint": "Sequence: identity, visibility, segmentation, logging, culture.",
+    "eliteAnswer": "Zero Trust in legacy is a journey, not a slogan. I sequence identity and privileged access first—MFA, PAM, JML discipline—because that reduces blast radius immediately. Next comes visibility and segmentation so compromise does not become free movement. Then logging and detection with tuned executive reporting. I align business units on controlled exceptions with expiry, not permanent holes. I measure progress in reduced lateral paths and faster containment, not tool counts."
   },
   {
     "id": "q-004",
@@ -33,7 +36,8 @@
     "department": "Infrastructure",
     "difficulty": "mid",
     "tags": ["incident", "reliability"],
-    "hint": "Stability first, communication second, durable fixes third."
+    "hint": "Stability first, communication second, durable fixes third.",
+    "eliteAnswer": "First hour: single incident commander, severity declared, customer‑impacting services identified, containment over root‑cause theatre—rollback, failover, or traffic shaping with clear comms to stakeholders. Parallel track: vendor and internal experts with time‑boxed updates. After restoration: blameless RCA, architectural debt called out explicitly, and a funded remediation plan. I emphasize trust—what leadership knew when—and how we made repeat failure more expensive than prevention."
   },
   {
     "id": "q-005",
@@ -42,7 +46,8 @@
     "department": "Security",
     "difficulty": "executive",
     "tags": ["board", "communication"],
-    "hint": "Materiality, trends, funding asks, and what you are accepting explicitly."
+    "hint": "Materiality, trends, funding asks, and what you are accepting explicitly.",
+    "eliteAnswer": "I translate cyber into business exposure: revenue continuity, customer trust, regulatory and legal liability, and speed of recovery. I show trend—not a snapshot—with clear decisions: invest, accept with mitigation, or accept with eyes open. I avoid fear without options; I bring two paths and a recommendation. Boards fund judgment they trust; my job is to make risk, cost of inaction, and confidence in execution legible."
   },
   {
     "id": "q-006",
@@ -51,7 +56,8 @@
     "department": "Finance",
     "difficulty": "mid",
     "tags": ["vendor", "negotiation"],
-    "hint": "BATNA, value mapping, and joint success metrics."
+    "hint": "BATNA, value mapping, and joint success metrics.",
+    "eliteAnswer": "I lead with data and mutual value: consumption reality, SLA history, and roadmap dependency—not emotion. I prepare a credible BATNA so the discussion is about outcomes, not begging. I propose structure that grows with success—usage tiers, outcome credits, flexibility on portability—so the vendor can win when we win. I keep legal and security aligned early so late surprises do not poison trust. The relationship survives because the narrative is partnership economics, not zero‑sum haggling."
   },
   {
     "id": "q-007",
@@ -60,7 +66,8 @@
     "department": "AI",
     "difficulty": "executive",
     "tags": ["AI", "governance"],
-    "hint": "Policy, approved routes, logging, evaluation, exception paths."
+    "hint": "Policy, approved routes, logging, evaluation, exception paths.",
+    "eliteAnswer": "Governance is value, risk, control, ownership. Approved use cases and data classes first; banned paths for sensitive data second. Technical controls: logging, access boundaries, human review for high‑impact decisions, and model evaluation on drift. Legal and compliance co‑own exceptions with expiry. I position AI as decision leverage under accountability—not shadow IT—so the business gets speed without creating silent regulatory debt."
   },
   {
     "id": "q-008",
@@ -69,7 +76,8 @@
     "department": "Leadership",
     "difficulty": "executive",
     "tags": ["portfolio", "stakeholders"],
-    "hint": "Criteria, sunk cost fallacy, reallocation, and empathy."
+    "hint": "Criteria, sunk cost fallacy, reallocation, and empathy.",
+    "eliteAnswer": "I use transparent criteria: strategic fit, risk reduction, cost of carry, and opportunity cost. I stopped funding where the ROI timeline no longer matched business reality—after validating with data, not opinion. Communication was direct and respectful: what we gain by stopping, where capacity re‑flows, and what we still owe on operational safety. I acknowledge sunk cost emotionally, then redirect to the next best bet. Leadership accepts endings when trust in the decision process is high."
   },
   {
     "id": "q-009",
@@ -78,7 +86,8 @@
     "department": "Infrastructure",
     "difficulty": "mid",
     "tags": ["SLO", "reliability"],
-    "hint": "User journeys, error budgets, and executive dashboards."
+    "hint": "User journeys, error budgets, and executive dashboards.",
+    "eliteAnswer": "I anchor SLOs on user‑visible journeys, not internal vanity metrics. Engineering co‑creates targets and error budgets so ownership is real. The business sees plain language: what good looks like, what breaks customer trust, and what investment buys margin. I tie reviews to incidents and capacity so SLOs drive prioritization—not slide décor. When trade‑offs appear, we negotiate with data, not slogans."
   },
   {
     "id": "q-010",
@@ -87,7 +96,8 @@
     "department": "People",
     "difficulty": "foundation",
     "tags": ["culture", "safety"],
-    "hint": "Behaviors, rituals, and one or two visible wins."
+    "hint": "Behaviors, rituals, and one or two visible wins.",
+    "eliteAnswer": "I listened first—skip levels, anonymous themes, and incident retros—to see where fear came from: unpredictability, blame, or unclear priorities. I published a few predictable rituals: clear priorities, blameless postmortems, and protected focus time. I removed one punitive pattern that eroded trust and shipped two small wins that proved we reward learning. Ninety days is enough to shift tone when leaders model calm consistency and follow through."
   },
   {
     "id": "q-011",
@@ -96,7 +106,8 @@
     "department": "Engineering",
     "difficulty": "foundation",
     "tags": ["debt", "prioritization"],
-    "hint": "Risk framing, incremental paydown, and measurable outcomes."
+    "hint": "Risk framing, incremental paydown, and measurable outcomes.",
+    "eliteAnswer": "I classify debt by risk and customer impact—not all debt is equal. I negotiate a steady allocation for paydown inside delivery, tied to incident reduction or velocity gains so product sees ROI. I sell debt work as risk buy‑down and predictability, not purity. I make progress visible so the team believes the organization is serious. The goal is sustainable pace, not heroic sprints."
   },
   {
     "id": "q-012",
@@ -105,7 +116,8 @@
     "department": "Finance",
     "difficulty": "executive",
     "tags": ["FinOps", "cloud"],
-    "hint": "Unit economics, guardrails, and forecasting discipline."
+    "hint": "Unit economics, guardrails, and forecasting discipline.",
+    "eliteAnswer": "I treat cloud as a portfolio: guardrails on provisioning, tagging discipline, reserved and savings plans where forecast is stable, and rightsizing where not. I report unit economics—cost per transaction, per user, per workload—and trend against business growth so Finance sees efficiency, not just spend. I tie major increases to explicit bets with owners. The narrative is controlled scale, not surprise invoices."
   },
   {
     "id": "q-013",
@@ -114,7 +126,8 @@
     "department": "Security",
     "difficulty": "mid",
     "tags": ["incident", "cross-functional"],
-    "hint": "RACI, templates, rehearsal, and single narrative owners."
+    "hint": "RACI, templates, rehearsal, and single narrative owners.",
+    "eliteAnswer": "Single comms owner to the executive layer; legal and PR have pre‑approved templates and join on timed cadence. Facts before speculation; severity drives cadence. Technical track contains and preserves evidence; business track manages customers and regulators. We rehearse this before crisis so titles do not invent process under fire. Calm structure beats heroic improvisation for trust."
   },
   {
     "id": "q-014",
@@ -123,7 +136,8 @@
     "department": "Strategy",
     "difficulty": "executive",
     "tags": ["M&A", "diligence"],
-    "hint": "People, architecture, security, data, and integration cost."
+    "hint": "People, architecture, security, data, and integration cost.",
+    "eliteAnswer": "I use stabilize‑visibility‑prioritize‑integrate‑optimize mentally: continuity risk first, then architecture and data gravity, security and identity debt, vendor lock‑in, and integration cost. People risk is as real as code risk—key retention and culture fit. Output is a ranked risk register with cost ranges and decision owners, not a slide of findings. The board wants integration confidence and where we will not compromise."
   },
   {
     "id": "q-015",
@@ -132,6 +146,7 @@
     "department": "People",
     "difficulty": "mid",
     "tags": ["metrics", "org health"],
-    "hint": "Delivery, quality, attrition, diversity, and customer outcomes."
+    "hint": "Delivery, quality, attrition, diversity, and customer outcomes.",
+    "eliteAnswer": "I balance delivery health, quality, and human outcomes: lead time, change failure rate, incidents, customer‑visible defects, attrition and diversity trends, and developer experience signals. No single metric tells the truth; the basket must align to strategy. I review with leadership as trends with interventions—what we stopped doing, what we invested in—so metrics drive behavior, not dashboards for guilt."
   }
 ]

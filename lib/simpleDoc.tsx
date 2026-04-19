@@ -1,7 +1,23 @@
 import type { ReactNode } from "react";
 
+function renderInline(text: string): ReactNode {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+  if (parts.length === 1) return text;
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={idx} className="font-semibold text-slate-100">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
 function slugify(s: string) {
   return s
+    .replace(/\*\*/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
@@ -29,7 +45,7 @@ export function renderSimpleDoc(markdown: string) {
           id={slugify(text)}
           className="mt-8 text-lg font-semibold tracking-tight text-slate-100"
         >
-          {text}
+          {renderInline(text)}
         </h3>,
       );
       i++;
@@ -43,7 +59,7 @@ export function renderSimpleDoc(markdown: string) {
           id={slugify(text)}
           className="mt-10 scroll-mt-24 text-xl font-semibold tracking-tight text-amber-100/95 first:mt-0"
         >
-          {text}
+          {renderInline(text)}
         </h2>,
       );
       i++;
@@ -56,7 +72,7 @@ export function renderSimpleDoc(markdown: string) {
           key={nextKey()}
           className="text-2xl font-semibold tracking-tight text-slate-50"
         >
-          {text}
+          {renderInline(text)}
         </h1>,
       );
       i++;
@@ -73,8 +89,8 @@ export function renderSimpleDoc(markdown: string) {
           key={nextKey()}
           className="mt-4 list-inside list-disc space-y-2 text-slate-300"
         >
-          {items.map((t) => (
-            <li key={t}>{t}</li>
+          {items.map((t, idx) => (
+            <li key={`${idx}-${t}`}>{renderInline(t)}</li>
           ))}
         </ul>,
       );
@@ -92,7 +108,7 @@ export function renderSimpleDoc(markdown: string) {
           key={nextKey()}
           className="mt-4 leading-relaxed text-slate-300 first:mt-0"
         >
-          {text}
+          {renderInline(text)}
         </p>,
       );
     }

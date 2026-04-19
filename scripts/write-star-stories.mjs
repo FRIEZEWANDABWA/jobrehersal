@@ -1,0 +1,132 @@
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const out = path.join(__dirname, "..", "content", "star", "stories.json");
+
+const stories = [
+  {
+    id: "star-access-control-roadmap",
+    title: "Fragmented access control → unified roadmap (multi-site)",
+    situation:
+      "When I joined my previous organization, each site operated its own fragmented access control system. Different vendors, outdated software, and manual visitor logs created major security gaps and administrative inefficiencies. There was no centralized visibility, and maintaining multiple licenses was costing us over KES 3 million annually.",
+    task:
+      "As Head of IT, I was tasked with developing an IT infrastructure roadmap that would standardize access control, improve security visibility, and reduce operational costs — all while ensuring 24/7 facility accessibility for our workforce.",
+    action:
+      "I began by performing a cost-benefit and risk assessment, benchmarking existing systems against modern integrated access control platforms.\n\nI developed a comprehensive business case for the executive team, detailing projected ROI, operational efficiencies, and long-term sustainability.\n\nOnce approved, I worked with Finance and Procurement on a zero-based budget and vendor selection through competitive tendering.\n\nThe roadmap included: designing a unified access control system integrated with HR and IT directories; deploying smart cards usable across all locations; implementing a central management dashboard for real-time access logs, user status, and emergency override; automating access provisioning tied to onboarding/offboarding; and running change management sessions so adoption stuck.",
+    result:
+      "The new solution rolled out across all centres within six months, cutting licensing costs by over KES 1 million per year. Security visibility improved dramatically — real-time access analytics and elimination of unauthorized entry incidents. Operational efficiency improved: one card for any site, remote monitoring for management after hours. The work strengthened compliance with data protection and physical security policies and was later referenced as a regional best practice.",
+    tags: ["access control", "roadmap", "ROI", "multi-site", "DHL-ready"],
+    executiveLesson:
+      "The most impactful IT initiatives are not those with the biggest budgets — they are the ones with strategic alignment, measurable ROI, and stakeholder buy-in from day one. That is the philosophy I bring when building roadmaps for efficiency, resilience, and long-term value.",
+  },
+  {
+    id: "star-kofisi-centralized-network",
+    title: "KOFISI: decentralized chaos → centralized network architecture",
+    situation:
+      "When I joined KOFISI, each centre ran on decentralized, independently managed networks — separate firewalls, routers, and ISP setups with no central visibility or unified policy enforcement. Fragmentation made performance, endpoint security, and incident response hard. Over 60% of IT support tickets were network-related; recurring outages drove client dissatisfaction and lost revenue estimated at over KES 7 million per month.",
+    task:
+      "My mandate was to design and implement a centralized network architecture for all centres — improving security and reliability, enabling proactive monitoring, and reducing cost — without breaking service continuity during migration.",
+    action:
+      "I ran a comprehensive network audit across centres to document assets, configurations, and vendor dependencies, then analyzed incident logs to tie failure patterns to downtime and revenue.\n\nI briefed senior management on decentralization cost, instability losses, and the case for a centralized SDN-style model with unified firewall management and monitoring.\n\nAfter executive and finance approval, I phased rollout: centralized firewall cluster with unified threat management and cloud monitoring; real-time dashboards for links, incidents, and bandwidth; consolidated ISP contracts with automated failover; segmentation and role-based access; and tight coordination with Finance and Procurement on licensing and support contracts.",
+    result:
+      "The centralized network went live within six months. Network-related tickets dropped ~80%, customer satisfaction and trust improved materially (retention and referrals), redundant SonicWall spend fell by about KES 3.5M annually plus ~KES 1M in maintenance, and centralized monitoring enabled faster response. Stronger visibility led clients to ask us to design and manage their environments — a new revenue stream — and repositioned IT as a value driver, not only a cost centre.",
+    tags: ["network transformation", "SDN", "KOFISI", "cost reduction", "DHL-ready"],
+    executiveLesson:
+      "A serious IT roadmap starts with data-driven insight, earns executive alignment, and ends with measurable business transformation — the same principle I apply when using centralized architecture, analytics, and automation to improve reliability and reduce risk.",
+  },
+  {
+    id: "star-tanzania-core-switch",
+    title: "Tanzania centre: core switch failure with no resident IT",
+    situation:
+      "At our Tanzania site, the core switch failed and operations disrupted. With no resident IT officer, local connectivity — Wi‑Fi and LAN — collapsed, threatening service delivery to clients.",
+    task:
+      "As regional IT lead, I had to restore connectivity quickly, protect continuity, and keep stakeholders calm.",
+    action:
+      "Activated remote access immediately and engaged the on-site support contractor.\n\nPrioritized Wi‑Fi restoration: traced AP cabling, repatched through the firewall’s Ethernet ports, and reconfigured those ports for LAN service — restoring roughly 65% of functionality within hours.\n\nWorked with finance for emergency funds and coordinated rapid shipment of a replacement switch.\n\nSupervised remote installation, verified configuration, and validated VLAN and VPN links.",
+    result:
+      "Full network services restored within two days with no data loss and minimal business disruption. The escalation pattern became the regional template for remote-site incident handling.",
+    tags: ["incident", "regional", "Tanzania", "hardware", "continuity"],
+    executiveLesson:
+      "Disciplined prioritization, vendor collaboration, and calm communication turn a potential crisis into a demonstration of resilience — the mindset I carry into high-stakes logistics environments.",
+  },
+  {
+    id: "star-amazon-launch-power-surge",
+    title: "Amazon office launch: power surge minutes before a presidential visit",
+    situation:
+      "During the Amazon office launch — attended by the President — a power surge damaged two TVs and the PA system minutes before the event.",
+    task:
+      "As IT lead on site, I had to keep the programme on track despite the damage.",
+    action:
+      "Convened an emergency huddle with IT and facilities with clear role splits: spare TVs from the boardroom, damage assessment, AV vendor for temporary gear.\n\nI owned stakeholder communication — timelines and recovery steps for management and client reps.\n\nOversaw rapid re-cabling, power testing, and generator isolation to prevent further surges.",
+    result:
+      "Full audiovisual service restored within ~45 minutes; the event ran cleanly. Post-event feedback rated IT support 5/5; we later institutionalized a surge-protection SOP from the incident.",
+    tags: ["crisis", "events", "Amazon", "leadership under pressure"],
+    executiveLesson:
+      "Leadership under pressure is composure, clarity, and communication — essential in fast-paced logistics where minutes matter.",
+  },
+  {
+    id: "star-subsea-fiber-cut",
+    title: "Sub-sea fiber cut: ISP outage beyond our direct control",
+    situation:
+      "Our main ISP suffered a sub-sea fiber cut, disrupting VPN-based services — access control, VoIP, and several client links.",
+    task:
+      "Maintain continuity for clients and internal users until the primary link returned.",
+    action:
+      "Stood up a virtual war room with IT engineers.\n\nSplit workstreams: one team coordinated with ISPs, another re-routed VPNs to backup links.\n\nNegotiated temporary bandwidth upgrades from both ISPs.\n\nProvisioned new backup links for clients without redundancy.\n\nLed proactive communication with management and affected clients.",
+    result:
+      "Within about six hours, ~95% of services were restored via backups; client operations continued with minimal disruption. The response became a reference case for proactive continuity planning.",
+    tags: ["ISP", "continuity", "communication", "VPN"],
+    executiveLesson:
+      "Transparency and readiness preserve customer trust even when the root cause is external — aligned with a reliability-first operating culture.",
+  },
+  {
+    id: "star-amazon-latency-voip",
+    title: "Cross-party diagnosis: latency and VoIP drops (Kofisi ↔ Amazon ↔ ISP)",
+    situation:
+      "Users at Kofisi and Amazon sites reported rising latency and VoIP call drops between environments.",
+    task:
+      "Find root cause across our network, Amazon’s environment, and the ISP — not blame, evidence.",
+    action:
+      "Formed a tri-party investigation group (Kofisi + Amazon + ISP).\n\nAnalyzed firewall, switch, and AP logs line-by-line and correlated timestamps with packet loss.\n\nIdentified dual causes: AP frequency interference and a faulty ISP switch that was auto-rebooting.\n\nCoordinated AP frequency remapping and ISP hardware replacement with clear joint comms.",
+    result:
+      "Latency fell from about 350 ms to ~40 ms; call drops went to zero. Amazon IT acknowledged transparency and later extended our service contract.",
+    tags: ["VoIP", "troubleshooting", "partnerships", "Amazon"],
+    executiveLesson:
+      "Joint problem-solving with partners builds credibility — I extend that by aligning IT with business and supplier ecosystems.",
+  },
+  {
+    id: "star-firewall-firmware-multi-site",
+    title: "Multi-site firewall firmware failure: evidence, options, fast replacement",
+    situation:
+      "Five sites experienced firewall firmware corruption simultaneously, cutting VPN and internet access.",
+    task:
+      "Minimize downtime, protect data, and land a sustainable fix — not endless patching in production.",
+    action:
+      "Verified logs, ruled out power and network as root causes, and escalated with the vendor.\n\nWhen patches failed, presented impact analysis and options to management and secured approval for emergency replacement hardware.\n\nOrganized parallel deployment teams; replaced and reconfigured all five sites within about four days.\n\nTightened change control to include staged firmware testing going forward.",
+    result:
+      "Operations normalized; exposure per site kept under roughly 24 hours. The vendor later acknowledged a firmware defect and issued a global advisory.",
+    tags: ["security", "firewall", "multi-site", "vendor", "governance"],
+    executiveLesson:
+      "Evidence-based escalation and decisive leadership reduce blast radius — critical in always-on operations.",
+  },
+  {
+    id: "star-rogue-dhcp-breach",
+    title: "Rogue devices and unauthorized DHCP across VLANs",
+    situation:
+      "We detected rogue devices issuing unauthorized IP addresses across VLANs — effectively hijacking traffic paths.",
+    task:
+      "Identify the source, contain the threat, and prevent recurrence with governance that auditors would respect.",
+    action:
+      "Isolated affected VLANs to stop IP bleed.\n\nUsed switch-port tracking to pinpoint the exact port and device; removed hardware with local support and escalated to management.\n\nEnforced contract termination where policy required.\n\nRolled port-security lockdowns across switches and tightened onboarding checklists plus monitoring for rogue DHCP activity.",
+    result:
+      "No data loss; normal operations restored in under two hours. Compliance auditors rated the response excellent.",
+    tags: ["security", "network", "compliance", "containment"],
+    executiveLesson:
+      "Security governance is rapid detection, decisive containment, and transparent communication — not tools alone.",
+  },
+];
+
+fs.writeFileSync(out, JSON.stringify(stories, null, 2), "utf8");
+console.log("Wrote", stories.length, "stories to", out);

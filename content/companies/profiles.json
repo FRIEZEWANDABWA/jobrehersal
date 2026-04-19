@@ -78,5 +78,45 @@
       "Most challenging technical trade-off you owned end to end.",
       "How do you raise the bar on hiring without slowing teams down?"
     ]
+  },
+  {
+    "slug": "microsoft",
+    "name": "Microsoft",
+    "tagline": "Platform scale with customer trust, compliance, and ecosystem gravity.",
+    "context": "Expect cloud and productivity narratives tied to measurable business outcomes—security, identity, data residency, and responsible AI are table stakes. Partner ecosystems and co-innovation with enterprises matter as much as product depth.",
+    "themes": [
+      "Azure and hybrid sovereignty patterns",
+      "Identity, Zero Trust, and modern workplace",
+      "Enterprise sales cycles and co-sell motion",
+      "Responsible AI and governance at scale"
+    ],
+    "pressureAngles": [
+      "How do you balance velocity with regulatory and customer trust expectations?",
+      "Describe a time you had to simplify a complex portfolio for a skeptical CIO."
+    ],
+    "questionsToExpect": [
+      "How would you prioritize platform investments when every business unit wants priority?",
+      "What is your approach to third-party and open-source risk at global scale?"
+    ]
+  },
+  {
+    "slug": "barclays",
+    "name": "Barclays",
+    "tagline": "Regulated banking with resilience, conduct risk, and digital acceleration.",
+    "context": "Panels blend technology leadership with control environments: resilience, fraud, conduct, and regulatory change. Cost discipline and legacy modernization appear alongside customer experience and platform reliability.",
+    "themes": [
+      "Operational resilience and critical services",
+      "Legacy core vs cloud migration pragmatism",
+      "Financial crime, fraud, and data protection",
+      "Board and regulator-ready transparency"
+    ],
+    "pressureAngles": [
+      "How do you fund innovation when regulatory and run-the-bank spend dominate?",
+      "Tell me about a control failure or near-miss and what changed structurally after."
+    ],
+    "questionsToExpect": [
+      "How would you run a major vendor migration without destabilizing payments?",
+      "What metrics would you show the CRO to prove IT reduced operational risk?"
+    ]
   }
 ]
