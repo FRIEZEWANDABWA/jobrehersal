@@ -1,44 +1,26 @@
 import type { ReactNode } from "react";
-import { PersonalRefinementLayer } from "@/components/PersonalRefinementLayer";
-import { ReadRefinePracticeRail } from "@/components/ReadRefinePracticeRail";
+import { ChapterReadingExperience } from "@/components/ChapterReadingExperience";
+import type { SimpleDocHeading } from "@/lib/simpleDoc";
 
-type KnowledgeChapterShellProps = {
+export type KnowledgeChapterShellProps = {
   hub: string;
   slug: string;
   practiceHref?: string;
   readAnchor?: string;
   refineAnchor?: string;
-  children: ReactNode;
+  eyebrow: string;
+  title: string;
+  description: string;
+  backHref: string;
+  backLabel: string;
+  documentBody: ReactNode;
+  tocHeadings: SimpleDocHeading[];
 };
 
 /**
- * Wraps chapter body with Read anchor, Refinement layer, and Read→Refine→Practice rail.
- * `hub` + `slug` form a stable localStorage key (unique across the library).
+ * Chapter reading layout: sticky chrome, wide reading column with optional
+ * section cards, outline + personal notes rail (desktop), focus mode.
  */
-export function KnowledgeChapterShell({
-  hub,
-  slug,
-  practiceHref,
-  readAnchor = "ecc-read",
-  refineAnchor = "ecc-refine",
-  children,
-}: KnowledgeChapterShellProps) {
-  const storageKey = `knowledge:${hub}:${slug}`;
-  return (
-    <div className="space-y-8">
-      <ReadRefinePracticeRail
-        practiceHref={practiceHref}
-        readAnchor={readAnchor}
-        refineAnchor={refineAnchor}
-      />
-      <div id={readAnchor} className="space-y-10 scroll-mt-24">
-        {children}
-      </div>
-      <PersonalRefinementLayer
-        variant="knowledge"
-        storageKey={storageKey}
-        refineAnchorId={refineAnchor}
-      />
-    </div>
-  );
+export function KnowledgeChapterShell(props: KnowledgeChapterShellProps) {
+  return <ChapterReadingExperience {...props} />;
 }

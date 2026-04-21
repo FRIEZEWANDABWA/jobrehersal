@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { PageIntro } from "@/components/PageIntro";
-import { renderSimpleDoc } from "@/lib/simpleDoc";
+import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import {
   getPeopleCulturePage,
   isPeopleCultureSlug,
   peopleCulturePages,
 } from "@/lib/peopleCulturePages";
-import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import { readPeopleCultureChapter } from "@/lib/readPeopleCultureChapter";
 import { metadataForKnowledgeSlug } from "@/lib/chapterPageMetadata";
+import { buildSimpleDoc } from "@/lib/simpleDoc";
 
 export function generateStaticParams() {
   return peopleCulturePages.map((p) => ({ slug: p.slug }));
@@ -29,31 +27,29 @@ export async function generateMetadata({
   });
 }
 
-export default async function PeopleCultureChapterPage({ params }: PageProps) {
+export default async function PeopleCultureChapterPage({
+  params,
+}: PageProps) {
   const { slug } = await params;
   if (!isPeopleCultureSlug(slug)) notFound();
 
-  const pageMeta = getPeopleCulturePage(slug);
+  const meta = getPeopleCulturePage(slug);
   const markdown = await readPeopleCultureChapter(slug);
+  const doc = buildSimpleDoc(markdown, { layout: "chapter" });
 
   return (
-    <article className="space-y-10">
-      <KnowledgeChapterShell hub="people-culture" slug={slug}>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageIntro
-            eyebrow="Knowledge Hub · People & culture"
-            title={pageMeta?.title ?? slug}
-            description={pageMeta?.description ?? ""}
-          />
-          <Link
-            href="/knowledge/people-culture"
-            className="shrink-0 text-sm font-medium text-amber-400/90 hover:text-amber-200"
-          >
-            ← People & culture overview
-          </Link>
-        </div>
-        {renderSimpleDoc(markdown)}
-      </KnowledgeChapterShell>
+    <article>
+      <KnowledgeChapterShell
+        hub="people-culture"
+        slug={slug}
+        eyebrow="Knowledge Hub · People & culture"
+        title={meta?.title ?? slug}
+        description={meta?.description ?? ""}
+        backHref="/knowledge/people-culture"
+        backLabel="← People & culture overview"
+        documentBody={doc.body}
+        tocHeadings={doc.headings}
+      />
     </article>
   );
 }

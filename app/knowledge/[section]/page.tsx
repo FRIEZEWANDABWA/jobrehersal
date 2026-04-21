@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
-import { PageIntro } from "@/components/PageIntro";
-import { renderSimpleDoc } from "@/lib/simpleDoc";
 import { knowledgeSections } from "@/lib/navigation";
 import { readKnowledgeSection } from "@/lib/readKnowledge";
 import type { KnowledgeSection } from "@/lib/types";
+import { buildSimpleDoc } from "@/lib/simpleDoc";
 
 /** Hubs with their own routes (multi-page), not single markdown files here. */
 const markdownSections = knowledgeSections.filter(
@@ -59,28 +57,24 @@ export default async function KnowledgeSectionPage({ params }: PageProps) {
 
   const meta = knowledgeSections.find((s) => s.id === section);
   const markdown = await readKnowledgeSection(section);
+  const doc = buildSimpleDoc(markdown, { layout: "chapter" });
 
   return (
-    <article className="space-y-10">
-      <KnowledgeChapterShell hub="overview" slug={section}>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageIntro
-            eyebrow="Knowledge Hub"
-            title={meta?.label ?? section}
-            description={
-              meta?.description ??
-              "Executive-grade notes you can extend with your own evidence."
-            }
-          />
-          <Link
-            href="/knowledge"
-            className="shrink-0 text-sm font-medium text-amber-400/90 hover:text-amber-200"
-          >
-            ← All sections
-          </Link>
-        </div>
-        {renderSimpleDoc(markdown)}
-      </KnowledgeChapterShell>
+    <article>
+      <KnowledgeChapterShell
+        hub="overview"
+        slug={section}
+        eyebrow="Knowledge Hub"
+        title={meta?.label ?? section}
+        description={
+          meta?.description ??
+          "Executive-grade notes you can extend with your own evidence."
+        }
+        backHref="/knowledge"
+        backLabel="← All sections"
+        documentBody={doc.body}
+        tocHeadings={doc.headings}
+      />
     </article>
   );
 }

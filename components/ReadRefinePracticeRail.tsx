@@ -15,14 +15,14 @@ export function ReadRefinePracticeRail({
   return (
     <nav
       aria-label="Read, Refine, Practice"
-      className="flex flex-wrap items-center gap-2 rounded-2xl border border-slate-800/80 bg-slate-950/50 px-4 py-3 text-sm"
+      className="flex max-w-full flex-wrap items-center gap-1.5 rounded-xl border border-slate-800/80 bg-slate-950/55 px-2.5 py-2 text-xs sm:gap-2 sm:rounded-2xl sm:px-3 sm:py-2.5 sm:text-sm"
     >
       <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
         Loop
       </span>
       <a
         href={`#${readAnchor}`}
-        className="rounded-full border border-slate-700/90 bg-slate-900/60 px-3 py-1.5 font-medium text-slate-200 transition hover:border-amber-500/40 hover:text-amber-50"
+        className="rounded-full border border-slate-700/90 bg-slate-900/60 px-2.5 py-1 font-medium text-slate-200 transition hover:border-amber-500/40 hover:text-amber-50 sm:px-3 sm:py-1.5"
       >
         Read
       </a>
@@ -31,7 +31,7 @@ export function ReadRefinePracticeRail({
       </span>
       <a
         href={`#${refineAnchor}`}
-        className="rounded-full border border-amber-500/25 bg-amber-500/[0.08] px-3 py-1.5 font-medium text-amber-100/95 transition hover:border-amber-400/50"
+        className="rounded-full border border-amber-500/25 bg-amber-500/[0.08] px-2.5 py-1 font-medium text-amber-100/95 transition hover:border-amber-400/50 sm:px-3 sm:py-1.5"
       >
         Refine
       </a>
@@ -40,7 +40,7 @@ export function ReadRefinePracticeRail({
       </span>
       <Link
         href={practiceHref}
-        className="rounded-full border border-slate-700/90 bg-slate-900/60 px-3 py-1.5 font-medium text-slate-200 transition hover:border-amber-500/40 hover:text-amber-50"
+        className="rounded-full border border-slate-700/90 bg-slate-900/60 px-2.5 py-1 font-medium text-slate-200 transition hover:border-amber-500/40 hover:text-amber-50 sm:px-3 sm:py-1.5"
       >
         Practice
       </Link>

@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { PageIntro } from "@/components/PageIntro";
-import { renderSimpleDoc } from "@/lib/simpleDoc";
+import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import {
   financialManagementPages,
   getFinancialManagementPage,
   isFinancialManagementSlug,
 } from "@/lib/financialManagementPages";
-import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import { readFinancialManagementChapter } from "@/lib/readFinancialManagementChapter";
 import { metadataForKnowledgeSlug } from "@/lib/chapterPageMetadata";
+import { buildSimpleDoc } from "@/lib/simpleDoc";
 
 export function generateStaticParams() {
   return financialManagementPages.map((p) => ({ slug: p.slug }));
@@ -35,27 +33,23 @@ export default async function FinancialManagementChapterPage({
   const { slug } = await params;
   if (!isFinancialManagementSlug(slug)) notFound();
 
-  const pageMeta = getFinancialManagementPage(slug);
+  const meta = getFinancialManagementPage(slug);
   const markdown = await readFinancialManagementChapter(slug);
+  const doc = buildSimpleDoc(markdown, { layout: "chapter" });
 
   return (
-    <article className="space-y-10">
-      <KnowledgeChapterShell hub="financial-management" slug={slug}>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageIntro
-            eyebrow="Knowledge Hub · Financial management"
-            title={pageMeta?.title ?? slug}
-            description={pageMeta?.description ?? ""}
-          />
-          <Link
-            href="/knowledge/financial-management"
-            className="shrink-0 text-sm font-medium text-amber-400/90 hover:text-amber-200"
-          >
-            ← Financial management overview
-          </Link>
-        </div>
-        {renderSimpleDoc(markdown)}
-      </KnowledgeChapterShell>
+    <article>
+      <KnowledgeChapterShell
+        hub="financial-management"
+        slug={slug}
+        eyebrow="Knowledge Hub · Financial management"
+        title={meta?.title ?? slug}
+        description={meta?.description ?? ""}
+        backHref="/knowledge/financial-management"
+        backLabel="← Financial management overview"
+        documentBody={doc.body}
+        tocHeadings={doc.headings}
+      />
     </article>
   );
 }

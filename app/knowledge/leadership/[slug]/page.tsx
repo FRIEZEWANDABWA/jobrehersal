@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { PageIntro } from "@/components/PageIntro";
-import { renderSimpleDoc } from "@/lib/simpleDoc";
+import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import {
   getLeadershipPage,
   isLeadershipSlug,
   leadershipPages,
 } from "@/lib/leadershipPages";
-import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import { readLeadershipChapter } from "@/lib/readLeadershipChapter";
 import { metadataForKnowledgeSlug } from "@/lib/chapterPageMetadata";
+import { buildSimpleDoc } from "@/lib/simpleDoc";
 
 export function generateStaticParams() {
   return leadershipPages.map((p) => ({ slug: p.slug }));
@@ -35,25 +33,21 @@ export default async function LeadershipChapterPage({ params }: PageProps) {
 
   const meta = getLeadershipPage(slug);
   const markdown = await readLeadershipChapter(slug);
+  const doc = buildSimpleDoc(markdown, { layout: "chapter" });
 
   return (
-    <article className="space-y-10">
-      <KnowledgeChapterShell hub="leadership" slug={slug}>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageIntro
-            eyebrow="Knowledge Hub · Leadership"
-            title={meta?.title ?? slug}
-            description={meta?.description ?? ""}
-          />
-          <Link
-            href="/knowledge/leadership"
-            className="shrink-0 text-sm font-medium text-amber-400/90 hover:text-amber-200"
-          >
-            ← Leadership overview
-          </Link>
-        </div>
-        {renderSimpleDoc(markdown)}
-      </KnowledgeChapterShell>
+    <article>
+      <KnowledgeChapterShell
+        hub="leadership"
+        slug={slug}
+        eyebrow="Knowledge Hub · Leadership"
+        title={meta?.title ?? slug}
+        description={meta?.description ?? ""}
+        backHref="/knowledge/leadership"
+        backLabel="← Leadership overview"
+        documentBody={doc.body}
+        tocHeadings={doc.headings}
+      />
     </article>
   );
 }

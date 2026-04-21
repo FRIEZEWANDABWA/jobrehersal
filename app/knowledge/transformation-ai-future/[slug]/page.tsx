@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { PageIntro } from "@/components/PageIntro";
-import { renderSimpleDoc } from "@/lib/simpleDoc";
-import { readTransformationAiFutureChapter } from "@/lib/readTransformationAiFutureChapter";
+import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import {
   getTransformationAiFuturePage,
   isTransformationAiFutureSlug,
   transformationAiFuturePages,
 } from "@/lib/transformationAiFuturePages";
-import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
+import { readTransformationAiFutureChapter } from "@/lib/readTransformationAiFutureChapter";
 import { metadataForKnowledgeSlug } from "@/lib/chapterPageMetadata";
+import { buildSimpleDoc } from "@/lib/simpleDoc";
 
 export function generateStaticParams() {
   return transformationAiFuturePages.map((p) => ({ slug: p.slug }));
@@ -35,27 +33,23 @@ export default async function TransformationAiFutureChapterPage({
   const { slug } = await params;
   if (!isTransformationAiFutureSlug(slug)) notFound();
 
-  const pageMeta = getTransformationAiFuturePage(slug);
+  const meta = getTransformationAiFuturePage(slug);
   const markdown = await readTransformationAiFutureChapter(slug);
+  const doc = buildSimpleDoc(markdown, { layout: "chapter" });
 
   return (
-    <article className="space-y-10">
-      <KnowledgeChapterShell hub="transformation-ai-future" slug={slug}>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageIntro
-            eyebrow="Knowledge Hub · Transformation & AI"
-            title={pageMeta?.title ?? slug}
-            description={pageMeta?.description ?? ""}
-          />
-          <Link
-            href="/knowledge/transformation-ai-future"
-            className="shrink-0 text-sm font-medium text-amber-400/90 hover:text-amber-200"
-          >
-            ← Transformation &amp; AI overview
-          </Link>
-        </div>
-        {renderSimpleDoc(markdown)}
-      </KnowledgeChapterShell>
+    <article>
+      <KnowledgeChapterShell
+        hub="transformation-ai-future"
+        slug={slug}
+        eyebrow="Knowledge Hub · Transformation & AI"
+        title={meta?.title ?? slug}
+        description={meta?.description ?? ""}
+        backHref="/knowledge/transformation-ai-future"
+        backLabel="← Transformation & AI overview"
+        documentBody={doc.body}
+        tocHeadings={doc.headings}
+      />
     </article>
   );
 }

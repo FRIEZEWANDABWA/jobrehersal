@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { PageIntro } from "@/components/PageIntro";
-import { renderSimpleDoc } from "@/lib/simpleDoc";
-import { readFullMockInterviewPanelChapter } from "@/lib/readFullMockInterviewPanelChapter";
+import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
 import {
   fullMockInterviewPanelPages,
   getFullMockInterviewPanelPage,
   isFullMockInterviewPanelSlug,
 } from "@/lib/fullMockInterviewPanelPages";
-import { KnowledgeChapterShell } from "@/components/KnowledgeChapterShell";
+import { readFullMockInterviewPanelChapter } from "@/lib/readFullMockInterviewPanelChapter";
 import { metadataForKnowledgeSlug } from "@/lib/chapterPageMetadata";
+import { buildSimpleDoc } from "@/lib/simpleDoc";
 
 export function generateStaticParams() {
   return fullMockInterviewPanelPages.map((p) => ({ slug: p.slug }));
@@ -37,25 +35,21 @@ export default async function FullMockInterviewPanelChapterPage({
 
   const pageMeta = getFullMockInterviewPanelPage(slug);
   const markdown = await readFullMockInterviewPanelChapter(slug);
+  const doc = buildSimpleDoc(markdown, { layout: "chapter" });
 
   return (
-    <article className="space-y-10">
-      <KnowledgeChapterShell hub="full-mock-interview-panel" slug={slug}>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <PageIntro
-            eyebrow="Knowledge Hub · Full mock interview panel"
-            title={pageMeta?.title ?? slug}
-            description={pageMeta?.description ?? ""}
-          />
-          <Link
-            href="/knowledge/full-mock-interview-panel"
-            className="shrink-0 text-sm font-medium text-amber-400/90 hover:text-amber-200"
-          >
-            ← Panel overview
-          </Link>
-        </div>
-        {renderSimpleDoc(markdown)}
-      </KnowledgeChapterShell>
+    <article>
+      <KnowledgeChapterShell
+        hub="full-mock-interview-panel"
+        slug={slug}
+        eyebrow="Knowledge Hub · Full mock interview panel"
+        title={pageMeta?.title ?? slug}
+        description={pageMeta?.description ?? ""}
+        backHref="/knowledge/full-mock-interview-panel"
+        backLabel="← Panel overview"
+        documentBody={doc.body}
+        tocHeadings={doc.headings}
+      />
     </article>
   );
 }
