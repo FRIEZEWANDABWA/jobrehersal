@@ -121,5 +121,6 @@ export const mainNav = [
   { href: "/company", label: "Company Mode" },
   { href: "/executive-dashboard", label: "Executive dashboard" },
   { href: "/final-prep", label: "Final prep" },
+  { href: "/networking-playbook", label: "Networking playbook" },
   { href: "/interview-reflection", label: "Reflection" },
 ] as const;
