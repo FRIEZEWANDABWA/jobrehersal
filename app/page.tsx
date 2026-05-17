@@ -56,6 +56,16 @@ const financialManagement = [
   },
 ];
 
+const dataProtection = [
+  {
+    title: "Data Protection & Compliance",
+    description: "GDPR, Kenya Data Protection Act, and ISO 27001—built-in systems security, governance, and organizational compliance.",
+    href: "/data-protection",
+    layer: "Layer 1 · Compliance",
+  },
+];
+
+
 const interviewRehearsal = [
   {
     title: "Mock interview",
@@ -164,6 +174,18 @@ export default function CommandCentrePage() {
             ))}
           </div>
         </section>
+
+        <section>
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-purple-500/80 mb-6">
+            Data Protection & Compliance
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {dataProtection.map((item) => (
+              <CommandCentreCard key={item.href} {...item} />
+            ))}
+          </div>
+        </section>
+
 
         <section>
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-500/80 mb-6">

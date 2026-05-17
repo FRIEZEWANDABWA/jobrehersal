@@ -114,6 +114,7 @@ export const mainNav = [
   { href: "/", label: "Command Centre" },
   { href: "/search", label: "Search" },
   { href: "/knowledge", label: "Knowledge Hub" },
+  { href: "/data-protection", label: "Data Protection" },
   { href: "/budget", label: "Budget" },
   { href: "/star-vault", label: "STAR Vault" },
   { href: "/interview-bank", label: "Interview Bank" },

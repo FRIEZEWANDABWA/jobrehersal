@@ -192,6 +192,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   // Context-aware logic: Hide sidebar and show immersive dock when reading documents.
   const isReadingMode =
     pathname === "/budget" ||
+    pathname === "/data-protection" ||
     pathname === "/star-vault" ||
     pathname === "/rapid-revision" ||
     (pathname.startsWith("/knowledge/") && pathname.split("/").length > 3);
