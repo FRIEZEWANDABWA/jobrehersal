@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { CommandPalette } from "@/components/CommandPalette";
 import { NavigationDrawer } from "@/components/NavigationDrawer";
 import { FloatingDock } from "@/components/FloatingDock";
@@ -153,6 +153,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   });
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  // Scroll Progress Hooks
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   const openPalette = useCallback(() => dispatchPalette({ type: "open" }), []);
   const togglePalette = useCallback(() => dispatchPalette({ type: "toggle" }), []);
   const closePalette = useCallback(() => dispatchPalette({ type: "close" }), []);
@@ -213,6 +221,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         instanceKey={palette.instanceKey}
       />
       {isReadingMode && <NavigationDrawer isOpen={drawerOpen} onClose={closeDrawer} />}
+
+      {/* Dynamic Scroll Progress Bar */}
+      {isReadingMode && (
+        <motion.div
+          style={{ scaleX }}
+          className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 origin-left z-50"
+        />
+      )}
 
       <div className={`flex h-dvh max-h-dvh min-h-0 w-full overflow-hidden bg-slate-950 text-slate-100 relative ${isReadingMode ? 'flex-col' : 'flex-1'}`}>
         

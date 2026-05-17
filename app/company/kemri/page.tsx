@@ -4,6 +4,45 @@ import { useState } from "react";
 import Link from "next/link";
 import { PageIntro } from "@/components/PageIntro";
 import { kemriSection1, kemriSection2 } from "@/lib/kemriData";
+import { ExecutiveBrief, ActiveRecallQuiz, TermTooltip } from "@/components/learningComponents";
+
+// Boardroom Terms Glossary definitions for inline hover tooltips
+const termsGlossary = [
+  { term: "RTO", definition: "Recovery Time Objective - the target duration of time to restore service after an outage." },
+  { term: "RPO", definition: "Recovery Point Objective - the maximum age of data that must be recovered from backup storage." },
+  { term: "SLA", definition: "Service Level Agreement - contractually committed uptime or response metrics with third-party vendors." },
+  { term: "MTTR", definition: "Mean Time To Repair/Restore - key operations metric measuring average duration of downtime resolution." },
+  { term: "WAN", definition: "Wide Area Network - network infrastructure connecting multiple geographically separate offices." },
+  { term: "CCTV", definition: "Closed-Circuit Television - centralized video surveillance infrastructure managed by IT operations." },
+  { term: "ISP", definition: "Internet Service Provider - third-party circuit carriers delivering DIA (Dedicated Internet Access)." },
+  { term: "ITIL", definition: "Information Technology Infrastructure Library - standard gold framework for IT Service Management." },
+  { term: "CapEx", definition: "Capital Expenditures - one-time major infrastructure procurement costs amortized over years." },
+  { term: "OpEx", definition: "Operational Expenditures - ongoing operational software, cloud, and team support subscriptions." },
+];
+
+// High-fidelity keyword replacement engine to insert TermTooltips on word boundaries
+function renderAnswerWithTooltips(text: string) {
+  let parts: (string | React.ReactNode)[] = [text];
+  
+  termsGlossary.forEach(({ term, definition }) => {
+    parts = parts.flatMap((part) => {
+      if (typeof part !== "string") return part;
+      
+      // Use exact word boundary \b to prevent matching strings inside other words
+      const regex = new RegExp(`\\b(${term})\\b`, "g");
+      const subparts = part.split(regex);
+      
+      return subparts.map((sub, i) => {
+        if (i % 2 === 1) {
+          return <TermTooltip key={`${term}-${i}`} term={sub} definition={definition} />;
+        }
+        return sub;
+      });
+    });
+  });
+  
+  return <>{parts}</>;
+}
 
 function Pill({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
@@ -50,7 +89,7 @@ export default function KemriPrepPage() {
   );
 
   return (
-    <div className="space-y-12 sm:space-y-14">
+    <div className="space-y-10 sm:space-y-12">
       {/* ─── HEADER ─── */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <PageIntro
@@ -116,6 +155,13 @@ export default function KemriPrepPage() {
         </div>
       </div>
 
+      {/* ─── PEDAGOGICAL EXECUTIVE BRIEFING ─── */}
+      <ExecutiveBrief
+        strategy="Establish Frieze Wandabwa as a world-class IT leader ready to modernize KEMRI's multi-site health research networks, bolster national data protection compliance, and lead massive-scale operational resilience."
+        terms={["MTTR reduction", "Sovereign data integrity", "Access standardization", "ITIL service delivery", "CapEx optimization"]}
+        alert="Do not speak in purely local terms. Emphasize that medical research is collaborative and international; your infrastructure policies must reflect global standards (Wellcome Trust, WHO guidelines) while respecting the Kenya Data Protection Act."
+      />
+
       {/* ─── TABS & CONTROLS ─── */}
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row gap-4 sm:items-center justify-between border-b border-slate-800/60 pb-4">
@@ -171,6 +217,13 @@ export default function KemriPrepPage() {
         {/* ─── TAB CONTENT: SECTION 1 ─── */}
         {activeMainTab === "section1" && (
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            
+            {/* Active Recall Challenge */}
+            <ActiveRecallQuiz
+              question="When the KEMRI panel asks you to introduce yourself, how do you immediately establish your experience with multi-site operations?"
+              responseGuide="State your 10+ years of East African enterprise leadership first, immediately connect your current role at KOFISI to multi-site branch networks, and reference your major centralized network transformation project as proof of your execution capability."
+            />
+
             {/* Category Pills (Only visible when NOT searching) */}
             {!searchQuery ? (
               <div className="flex flex-wrap gap-2 pb-2">
@@ -198,7 +251,7 @@ export default function KemriPrepPage() {
                 filteredSection1Items.map((item) => (
                   <div
                     key={item.id}
-                    className="rounded-3xl border border-slate-800/80 bg-slate-900/10 p-6 sm:p-8 space-y-4 transition hover:border-slate-800"
+                    className="rounded-3xl border border-slate-800/80 bg-slate-900/10 p-6 sm:p-8 space-y-4 transition hover:border-slate-850"
                   >
                     <div className="flex flex-wrap gap-1.5">
                       {item.tags?.map((tag) => (
@@ -214,7 +267,7 @@ export default function KemriPrepPage() {
                       Q: "{item.q}"
                     </h3>
                     <p className="text-slate-300 text-xs sm:text-sm leading-relaxed border-l border-slate-800 pl-4 italic">
-                      "{item.a}"
+                      "{renderAnswerWithTooltips(item.a)}"
                     </p>
                   </div>
                 ))
@@ -230,6 +283,13 @@ export default function KemriPrepPage() {
         {/* ─── TAB CONTENT: SECTION 2 ─── */}
         {activeMainTab === "section2" && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            
+            {/* Active Recall Challenge */}
+            <ActiveRecallQuiz
+              question="If KEMRI's distributed laboratory endpoints are hit with a zero-day ransomware strain, how do you lead the recovery under pressure?"
+              responseGuide="Lead with Containment and Isolation first to protect the core research databases. Communicate immediately with the COO and Director in high-level business risk terms, delegate isolation tasks to the Security Operations team, and restore services using isolated offline 3-2-1 backups rather than paying the ransom."
+            />
+
             <div className="rounded-3xl border border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-slate-950 p-6 sm:p-8 space-y-4">
               <h4 className="text-sm sm:text-base font-bold text-amber-400">Boardroom Readiness & Executive Stance</h4>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -244,10 +304,10 @@ export default function KemriPrepPage() {
                   return (
                     <div
                       key={item.id}
-                      className={`rounded-2xl border transition-all duration-300 ${
+                      className={`rounded-2xl border transition-all duration-350 ${
                         isExpanded
-                          ? "border-slate-700 bg-slate-900/20"
-                          : "border-slate-800/60 bg-slate-950/10 hover:border-slate-800 hover:bg-slate-900/10"
+                          ? "border-slate-700 bg-slate-900/20 shadow-xl shadow-slate-950/20"
+                          : "border-slate-850 bg-slate-950/10 hover:border-slate-800 hover:bg-slate-900/10"
                       }`}
                     >
                       <button
@@ -277,7 +337,7 @@ export default function KemriPrepPage() {
                       {isExpanded && (
                         <div className="px-5 pb-6 pt-2 border-t border-slate-800/60 animate-in fade-in duration-200">
                           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed italic pl-4 border-l border-slate-800">
-                            "{item.a}"
+                            "{renderAnswerWithTooltips(item.a)}"
                           </p>
                         </div>
                       )}

@@ -1,3 +1,16 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div className="page-enter">{children}</div>;
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 12 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="h-full w-full"
+    >
+      {children}
+    </motion.div>
+  );
 }

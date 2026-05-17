@@ -2,9 +2,41 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { PersonalRefinementLayer } from "@/components/PersonalRefinementLayer";
 import { ReadRefinePracticeRail } from "@/components/ReadRefinePracticeRail";
 import type { SimpleDocHeading } from "@/lib/simpleDoc";
+
+// Import all chapter static page configurations to build dynamic linear navigation flows
+import { operationsPages } from "@/lib/operationsPages";
+import { cybersecurityPages } from "@/lib/cybersecurityPages";
+import { leadershipPages } from "@/lib/leadershipPages";
+import { peopleCulturePages } from "@/lib/peopleCulturePages";
+import { financialManagementPages } from "@/lib/financialManagementPages";
+import { behavioralPressurePages } from "@/lib/behavioralPressurePages";
+import { infrastructureArchitecturePages } from "@/lib/infrastructureArchitecturePages";
+import { securityLeadershipPages } from "@/lib/securityLeadershipPages";
+import { executivePresencePages } from "@/lib/executivePresencePages";
+import { transformationAiFuturePages } from "@/lib/transformationAiFuturePages";
+import { mockCaseStudiesPages } from "@/lib/mockCaseStudiesPages";
+import { executiveAnswerVaultPages } from "@/lib/executiveAnswerVaultPages";
+import { fullMockInterviewPanelPages } from "@/lib/fullMockInterviewPanelPages";
+
+const hubPagesMap: Record<string, { slug: string; title: string; shortLabel?: string }[]> = {
+  operations: operationsPages,
+  cybersecurity: cybersecurityPages,
+  leadership: leadershipPages,
+  "people-culture": peopleCulturePages,
+  "financial-management": financialManagementPages,
+  "behavioral-pressure": behavioralPressurePages,
+  "infrastructure-architecture": infrastructureArchitecturePages,
+  "security-leadership": securityLeadershipPages,
+  "executive-presence": executivePresencePages,
+  "transformation-ai-future": transformationAiFuturePages,
+  "mock-case-studies": mockCaseStudiesPages,
+  "executive-answer-vault": executiveAnswerVaultPages,
+  "full-mock-interview-panel": fullMockInterviewPanelPages,
+};
 
 type ChapterReadingExperienceProps = {
   hub: string;
@@ -101,11 +133,41 @@ export function ChapterReadingExperience({
   documentBody,
   tocHeadings,
 }: ChapterReadingExperienceProps) {
+  const router = useRouter();
   const storageKey = `knowledge:${hub}:${slug}`;
   const [focusMode, setFocusMode] = useState(false);
   const toggleFocus = useCallback(() => {
     setFocusMode((v) => !v);
   }, []);
+
+  // Compute neighboring slides for keyboard arrows and bottom navigator cards
+  const pages = useMemo(() => hubPagesMap[hub] || [], [hub]);
+  const currentIndex = useMemo(() => pages.findIndex((p) => p.slug === slug), [pages, slug]);
+  const prevPage = currentIndex > 0 ? pages[currentIndex - 1] : null;
+  const nextPage = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null;
+
+  // Keyboard navigation listener (Left/Right Arrows to transition chapters)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore keys if user is actively writing notes or searching
+      if (
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA" ||
+        document.activeElement?.getAttribute("contenteditable") === "true"
+      ) {
+        return;
+      }
+
+      if (e.key === "ArrowLeft" && prevPage) {
+        router.push(`/knowledge/${hub}/${prevPage.slug}`);
+      } else if (e.key === "ArrowRight" && nextPage) {
+        router.push(`/knowledge/${hub}/${nextPage.slug}`);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [hub, prevPage, nextPage, router]);
 
   return (
     <div className="space-y-0">
@@ -161,7 +223,45 @@ export function ChapterReadingExperience({
         }
       >
         <div id={readAnchor} className="min-w-0 scroll-mt-28 space-y-8">
-          <div className="mx-auto w-full max-w-[42rem] xl:mx-0">{documentBody}</div>
+          {/* Optimal line-width container for reading comfort, wrapped with reading-prose */}
+          <div className="mx-auto w-full max-w-[44rem] xl:mx-0 reading-prose">
+            {documentBody}
+
+            {/* Linear Navigator Slide Cards */}
+            {(prevPage || nextPage) && (
+              <div className="mt-16 border-t border-slate-800/40 pt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose">
+                {prevPage ? (
+                  <Link
+                    href={`/knowledge/${hub}/${prevPage.slug}`}
+                    className="group text-left p-5 rounded-2xl border border-slate-850 bg-slate-950/20 hover:bg-slate-900/15 hover:border-amber-500/25 transition flex flex-col justify-between"
+                  >
+                    <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500 group-hover:text-amber-400 transition mb-1.5">
+                      ← PREVIOUS SLIDE (ArrowLeft)
+                    </span>
+                    <span className="text-xs font-bold text-slate-300 group-hover:text-slate-100 line-clamp-2 leading-snug">
+                      {prevPage.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+
+                {nextPage && (
+                  <Link
+                    href={`/knowledge/${hub}/${nextPage.slug}`}
+                    className="group text-right p-5 rounded-2xl border border-slate-850 bg-slate-950/20 hover:bg-slate-900/15 hover:border-amber-500/25 transition flex flex-col justify-between"
+                  >
+                    <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500 group-hover:text-amber-400 transition mb-1.5">
+                      NEXT SLIDE (ArrowRight) →
+                    </span>
+                    <span className="text-xs font-bold text-slate-300 group-hover:text-slate-100 line-clamp-2 leading-snug">
+                      {nextPage.title}
+                    </span>
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <div

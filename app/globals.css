@@ -49,3 +49,65 @@ body {
     animation: none;
   }
 }
+
+/* Premium Typography Lenses for Reading Mode */
+.reading-prose {
+  max-width: 48rem; /* 768px - Optimal 65-75 character count */
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.0625rem; /* 17px for smooth readability */
+  line-height: 1.8; /* Relaxed leading to avoid eye strain */
+  color: #cbd5e1; /* slate-300 */
+}
+
+.reading-prose p {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.reading-prose strong {
+  color: #f59e0b; /* amber-500 */
+  font-weight: 700;
+}
+
+.reading-prose h1, .reading-prose h2, .reading-prose h3 {
+  color: #f8fafc; /* slate-50 */
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.reading-prose h2 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+  padding-bottom: 0.5rem;
+}
+
+.reading-prose h3 {
+  font-size: 1.25rem;
+}
+
+.reading-prose ul, .reading-prose ol {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.625rem;
+}
+
+.reading-prose li {
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  position: relative;
+}
+
+.reading-prose blockquote {
+  border-left-width: 4px;
+  border-left-color: rgba(245, 158, 11, 0.4);
+  background-color: rgba(15, 23, 42, 0.4);
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  font-style: italic;
+  color: #e2e8f0;
+}
