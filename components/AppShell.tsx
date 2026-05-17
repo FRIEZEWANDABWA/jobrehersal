@@ -64,7 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex h-dvh max-h-dvh min-h-0 w-full flex-col overflow-hidden bg-slate-950 text-slate-100 relative">
         <main 
           id="main-scroll-container"
-          className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-12 sm:px-8 lg:px-16 xl:px-24 mx-auto w-full max-w-7xl relative"
+          className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-12 sm:px-8 lg:px-16 xl:px-24 mx-auto w-full max-w-7xl relative no-scrollbar"
         >
           <AnimatePresence mode="wait">
             <motion.div

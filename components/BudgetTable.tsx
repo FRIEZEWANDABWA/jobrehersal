@@ -16,7 +16,7 @@ type BudgetTableProps = {
 export function BudgetTable({ columns, data, totalLabel, totalValue }: BudgetTableProps) {
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/30 backdrop-blur-sm shadow-sm">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto no-scrollbar">
         <table className="w-full text-left text-sm text-slate-300">
           <thead className="bg-slate-950/50 text-xs uppercase tracking-[0.1em] text-slate-500">
             <tr>

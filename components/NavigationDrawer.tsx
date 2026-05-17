@@ -35,7 +35,7 @@ export function NavigationDrawer({
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 left-0 z-50 flex w-72 flex-col overflow-y-auto border-r border-slate-800/80 bg-slate-950/95 shadow-2xl"
+            className="fixed inset-y-0 left-0 z-50 flex w-72 flex-col overflow-y-auto no-scrollbar border-r border-slate-800/80 bg-slate-950/95 shadow-2xl"
           >
             <div className="flex items-center justify-between px-6 py-6 border-b border-slate-800/60">
               <div>
