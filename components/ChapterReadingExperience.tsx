@@ -109,7 +109,7 @@ export function ChapterReadingExperience({
 
   return (
     <div className="space-y-0">
-      <header className="sticky top-0 z-30 -mx-4 mb-8 border-b border-slate-800/80 bg-slate-950/92 px-4 py-4 backdrop-blur-md sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+      <header className="relative z-10 -mx-4 mb-8 border-b border-slate-800/80 bg-slate-950/92 px-4 py-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0 flex-1 space-y-2">
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -168,7 +168,7 @@ export function ChapterReadingExperience({
           className={
             focusMode
               ? "mx-auto w-full max-w-[46rem] space-y-8 border-t border-slate-800/70 pt-10"
-              : "min-w-0 space-y-8 xl:sticky xl:top-[5.5rem] xl:max-h-[calc(100dvh-6rem)] xl:overflow-y-auto xl:overscroll-y-contain xl:pr-1"
+              : "min-w-0 space-y-8"
           }
         >
           {!focusMode ? <DocOutline headings={tocHeadings} /> : null}
