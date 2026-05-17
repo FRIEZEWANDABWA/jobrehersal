@@ -173,7 +173,7 @@ function ComplianceDashboard() {
 export default function DataProtectionMasterbook() {
   const [activeSystem, setActiveSystem] = useState<"learning" | "interview" | "operational" | "governance" | "executive">("learning");
   const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso">("gdpr");
-  const [activeQnaLevel, setActiveQnaLevel] = useState<"all" | "tier1" | "tier2" | "tier3" | "tier4" | "leadership" | "casestudy">("all");
+  const [activeQnaLevel, setActiveQnaLevel] = useState<"all" | "gdpr_kdpa" | "tier1" | "tier2" | "tier3" | "tier4" | "leadership" | "casestudy">("all");
   const [searchQuery, setSearchQuery] = useState("");
   
   // Interactive Simulator State (kept for simulation tab)
@@ -202,133 +202,217 @@ export default function DataProtectionMasterbook() {
 
   // Verbatim Interview Q&As list
   const qnas = [
-    // 🧠 TIER 1 — TECHNICAL & SECURITY GOVERNANCE QUESTIONS
+    // 📖 GDPR & KENYA DPA ESSENTIAL FOUNDATIONAL QUESTIONS
     {
       id: 1,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "What is GDPR?",
+      a: "GDPR is a global privacy and data protection framework that governs how organizations collect, process, store, share, and protect personal data. It emphasizes transparency, accountability, user privacy rights, and strong operational safeguards to protect sensitive information."
+    },
+    {
+      id: 2,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "What is personal data?",
+      a: "Personal data refers to any information that can identify an individual either directly or indirectly. Examples include names, emails, phone numbers, IP addresses, biometrics, access records, and CCTV footage."
+    },
+    {
+      id: 3,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "What is Privacy by Design?",
+      a: "Privacy by Design means security and privacy controls must be integrated into systems and operational processes from the beginning rather than added later. Examples include MFA, encryption, least privilege access, secure backups, audit logging, and network segmentation."
+    },
+    {
+      id: 4,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "What is the difference between a Data Controller and Data Processor?",
+      a: "A Data Controller determines why and how personal data is processed, while a Data Processor processes data on behalf of the controller. In enterprise environments, organizations may act as either or both depending on operational responsibilities and managed services."
+    },
+    {
+      id: 5,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "How would you implement GDPR in a multi-site enterprise environment?",
+      a: "I would begin with data discovery and operational risk assessment to understand where personal data exists, how it flows, who accesses it, and the associated operational risks. I would then implement governance controls including: MFA, encryption, access governance, vendor governance, audit logging, backup governance, retention policies, incident response, and continuous monitoring. I would also maintain stakeholder awareness, governance reporting, and regular compliance reviews to ensure operational alignment."
+    },
+    {
+      id: 6,
+      level: "gdpr_kdpa",
+      framework: "kdpa",
+      q: "How would you ensure compliance with the Kenya Data Protection Act?",
+      a: "I would ensure compliance through governance, operational controls, technical safeguards, staff awareness, vendor governance, and continuous monitoring. This includes: access governance, encryption, retention policies, audit logging, backup governance, vendor assessments, and incident response procedures."
+    },
+    {
+      id: 7,
+      level: "gdpr_kdpa",
+      framework: "kdpa",
+      q: "What is Data Protection by Design?",
+      a: "Data Protection by Design (under Section 41 of the Kenya DPA) requires that data protection, privacy, and security controls are built into systems by default. This involves default MFA, encrypted devices (BitLocker), least-privilege role boundaries, separate network VLAN segments, secure VPN channels, centralized audit logging, and automated cloud backup encryption."
+    },
+    {
+      id: 8,
+      level: "gdpr_kdpa",
+      framework: "iso",
+      q: "What is the relationship between GDPR, KDPA, and ISO 27001?",
+      a: "GDPR and KDPA are legal compliance frameworks defining privacy principles, rights, and regulatory mandates. ISO 27001 is a practical, structured information security governance system (ISMS) that provides the actual tech controls, risks, processes, and people structures required to enforce and prove compliance with both laws."
+    },
+    {
+      id: 9,
+      level: "gdpr_kdpa",
+      framework: "iso",
+      q: "How would you implement ISO 27001 in an enterprise environment?",
+      a: "I would build it around a formal Information Security Management System (ISMS) scoping People, Processes, Technology, Risk, Compliance, and Continuity. This involves: creating asset inventories, enforcing strict access controls (MFA/RBAC), drafting incident containment playbooks, auditing physical security (Suprema door blocks, CCTV subnets), testing backup restoration schedules, and conducting regular risk assessments."
+    },
+    {
+      id: 10,
+      level: "gdpr_kdpa",
+      framework: "iso",
+      q: "Why is compliance important for a Head of IT?",
+      a: "Compliance is not just a regulatory check; it is a critical driver of business resilience and commercial trust. As Head of IT, protecting client data, avoiding breaches, keeping systems compliant with ODPC laws, and holding documented audits is what secures enterprise vendor SLAs and protects the company from catastrophic downtime and fines."
+    },
+    {
+      id: 11,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "How would you handle a data breach?",
+      a: "I would initiate our 3-phase Incident Response playbook: 1. Detection and verification. 2. Immediate containment (isolating infected VLANs, locking credentials, protecting Veeam backups). 3. Legal and regulatory escalation, notifying executive stakeholders and filing formal ODPC notifications within the mandatory 72-hour legal breach window."
+    },
+
+    // 🧠 TIER 1 — TECHNICAL & SECURITY GOVERNANCE QUESTIONS
+    {
+      id: 12,
       level: "tier1",
       framework: "iso",
       q: "What is the difference between hashing and encryption?",
       a: "Encryption is a reversible process used to protect data confidentiality, where information can be decrypted using authorized keys. Hashing, on the other hand, is a one-way cryptographic process primarily used for integrity verification and secure password storage. In enterprise environments, encryption protects sensitive operational data such as cloud storage, backups, VPN traffic, and finance systems, while hashing is commonly used for password protection, integrity validation, and digital verification."
     },
     {
-      id: 2,
+      id: 13,
       level: "tier1",
       framework: "iso",
       q: "What is RBAC?",
       a: "Role-Based Access Control is a governance model where system access is assigned based on organizational roles and operational responsibilities rather than individual preference. RBAC improves governance by enforcing least privilege access, reducing insider risk, improving auditability, and simplifying operational access management across enterprise systems."
     },
     {
-      id: 3,
+      id: 14,
       level: "tier1",
       framework: "iso",
       q: "What is Zero Trust?",
       a: "Zero Trust is a modern security architecture model based on the principle of ‘never trust, always verify.’ It assumes no user, device, network, or system should automatically be trusted, even inside the internal network. Access decisions are continuously validated using identity, device posture, location, behavior, and risk signals. In enterprise environments, Zero Trust improves operational resilience by reducing lateral movement, minimizing insider risk, and strengthening cloud and remote-access governance."
     },
     {
-      id: 4,
+      id: 15,
       level: "tier1",
       framework: "iso",
       q: "What is a SIEM?",
       a: "A SIEM, or Security Information and Event Management platform, centralizes security logs, correlates events, detects suspicious activity, and improves incident visibility across enterprise environments. It enables security teams to identify threats faster, investigate incidents, maintain audit evidence, and improve operational monitoring and compliance governance."
     },
+
     // 🧠 TIER 2 — GOVERNANCE QUESTIONS
     {
-      id: 5,
+      id: 16,
       level: "tier2",
       framework: "iso",
       q: "How do you implement an ISMS?",
       a: "I would begin with organizational risk assessment, asset identification, governance scoping, and executive stakeholder alignment. From there, I would establish: policies, operational standards, security controls, incident response procedures, access governance, vendor governance, monitoring frameworks, and audit processes. The ISMS must align with operational realities, business objectives, regulatory obligations, and organizational risk exposure. Continuous improvement through reviews, audits, KPI tracking, and governance meetings is also critical."
     },
     {
-      id: 6,
+      id: 7,
       level: "tier2",
       framework: "iso",
       q: "How do you conduct information security audits?",
       a: "I approach audits through structured governance and evidence-based validation. The process includes: scope definition, control assessment, policy reviews, evidence collection, access reviews, vulnerability reviews, vendor assessments, and operational walkthroughs. I also validate whether operational practices align with documented governance controls and compliance requirements. Audit findings are then categorized by risk level, operational impact, remediation priority, and governance exposure."
     },
     {
-      id: 7,
+      id: 18,
       level: "tier2",
       framework: "iso",
       q: "How do you manage third-party risk?",
       a: "Third-party governance is critical because vendors often have direct or indirect access to organizational systems, infrastructure, and sensitive data. I manage third-party risk through: security assessments, SLA governance, vendor onboarding reviews, access governance, contractual security obligations, compliance validation, and continuous performance monitoring. I also ensure vendors follow least privilege access principles and maintain proper audit visibility."
     },
+
     // 🧠 TIER 3 — EXECUTIVE QUESTIONS
     {
-      id: 8,
+      id: 19,
       level: "tier3",
       framework: "iso",
       q: "How do you communicate cyber risk to executives?",
       a: "I avoid overly technical language and instead communicate cyber risk in terms of business impact, operational continuity, financial exposure, reputational impact, regulatory risk, and organizational resilience. For example, instead of discussing firewall vulnerabilities technically, I may explain how a control weakness could increase operational downtime, expose sensitive client data, or affect organizational continuity. Executives need visibility into business impact, risk exposure, mitigation status, and investment priorities rather than purely technical details."
     },
     {
-      id: 9,
+      id: 20,
       level: "tier3",
       framework: "iso",
       q: "How do you justify security spending?",
       a: "I justify security investment by aligning it to: operational continuity, regulatory compliance, organizational resilience, risk reduction, and long-term business protection. Security investment should be viewed as risk management and operational enablement rather than simply technical expenditure. I also communicate measurable value such as: reduced downtime, improved recovery capability, compliance alignment, operational resilience, and reduced exposure to ransomware or operational disruption."
     },
     {
-      id: 10,
+      id: 21,
       level: "tier3",
       framework: "iso",
       q: "How do you balance usability and security?",
       a: "Strong governance requires balancing operational productivity with appropriate security controls. Security should not unnecessarily block business operations, but operational convenience should also not compromise organizational protection. My approach focuses on layered security, risk-based controls, user awareness, automation, and intelligent access governance to maintain both usability and operational resilience."
     },
+
     // 🧠 TIER 4 — CRISIS & INCIDENT QUESTIONS
     {
-      id: 11,
+      id: 22,
       level: "tier4",
       framework: "gdpr",
       q: "A ransomware attack happens during working hours. What do you do?",
       a: "I would immediately activate incident response governance procedures. The first priority would be containment, operational isolation, and protection of unaffected systems. This may include isolating VLANs, disabling compromised accounts, restricting lateral movement, and protecting backups. I would then preserve evidence, activate leadership escalation, coordinate communication, assess operational impact, validate recovery capability, and initiate recovery procedures. After stabilization, I would conduct root-cause analysis, governance review, remediation, and lessons learned assessment."
     },
     {
-      id: 12,
+      id: 23,
       level: "tier4",
       framework: "gdpr",
       q: "An executive email account is compromised.",
       a: "I would immediately isolate the affected account, revoke active sessions, enforce password resets, review MFA status, and analyze audit logs for suspicious activity. Because executive accounts typically have elevated exposure and reputational impact, I would also assess email forwarding rules, sensitive communications, cloud application access, and potential lateral movement. I would escalate internally, preserve evidence, coordinate communication, and validate recovery and governance remediation procedures."
     },
     {
-      id: 13,
+      id: 24,
       level: "tier4",
       framework: "kdpa",
       q: "Sensitive CCTV footage leaks online.",
       a: "I would immediately restrict access to CCTV infrastructure, preserve forensic evidence, assess the source of exposure, review access logs, and isolate affected systems or accounts. I would then coordinate legal review, executive escalation, regulatory assessment, and communication governance. The incident would also trigger access governance review, retention policy review, contractor assessment, and operational remediation activities."
     },
     {
-      id: 14,
+      id: 25,
       level: "tier4",
       framework: "iso",
       q: "A disaster recovery test fails.",
       a: "I would treat a failed DR test as a critical governance issue because it directly impacts organizational resilience and recovery capability. I would immediately assess root cause, recovery gaps, operational exposure, backup integrity, and failover dependencies. Corrective actions may include infrastructure redesign, backup optimization, process improvements, additional testing, and governance escalation. DR governance must remain continuously validated rather than assumed."
     },
+
     // 🧠 LEADERSHIP COMMUNICATION QUESTIONS
     {
-      id: 15,
+      id: 26,
       level: "leadership",
       framework: "iso",
       q: "How do you explain a cyber incident calmly to executives?",
       a: "I focus on clarity, facts, business impact, and recovery status rather than technical panic. I communicate what happened, what systems are affected, operational impact, containment status, mitigation actions, and next steps. The objective is maintaining executive confidence while ensuring transparency, accountability, and coordinated decision-making."
     },
     {
-      id: 16,
+      id: 27,
       level: "leadership",
       framework: "iso",
       q: "How do you avoid overwhelming executives with technical details?",
       a: "I translate technical issues into operational and business language. Executives typically care about: operational continuity, client impact, financial exposure, legal exposure, recovery timelines, and organizational risk. My role is bridging technical complexity into strategic decision-making visibility."
     },
+
     // 🧠 CASE STUDY QUESTIONS & FINAL
     {
-      id: 17,
+      id: 28,
       level: "casestudy",
       framework: "iso",
       q: "What lessons did you learn from major breaches like Equifax or Colonial Pipeline?",
       a: "Major breaches consistently demonstrate that governance failures, weak visibility, poor patch management, insufficient segmentation, weak identity governance, and delayed incident response can create catastrophic organizational impact. The key lesson is that cybersecurity is not only a technical function — it is an operational governance and organizational resilience function. Strong visibility, layered controls, continuous monitoring, incident preparedness, executive accountability, and operational discipline are critical."
     },
     {
-      id: 18,
+      id: 29,
       level: "casestudy",
       framework: "iso",
       q: "What makes a strong Head of IT in modern enterprise environments?",
@@ -363,7 +447,7 @@ export default function DataProtectionMasterbook() {
             ← Command Centre
           </Link>
           <span className="text-[10px] text-slate-500 font-mono">
-            Protected Sandbox Environment v1.4
+            Protected Sandbox Environment v1.5
           </span>
         </div>
       </div>
@@ -698,6 +782,14 @@ export default function DataProtectionMasterbook() {
               }`}
             >
               All Q&As ({qnas.length})
+            </button>
+            <button
+              onClick={() => setActiveQnaLevel("gdpr_kdpa")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                activeQnaLevel === "gdpr_kdpa" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              GDPR & KDPA Basics ({qnas.filter(q => q.level === "gdpr_kdpa").length})
             </button>
             <button
               onClick={() => setActiveQnaLevel("tier1")}
