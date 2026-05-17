@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useReducer, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { CommandPalette } from "@/components/CommandPalette";
 import { NavigationDrawer } from "@/components/NavigationDrawer";
 import { FloatingDock } from "@/components/FloatingDock";
+import { mainNav } from "@/lib/navigation";
 
 type PaletteState = { open: boolean; instanceKey: number };
 
@@ -52,6 +54,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [togglePalette]);
 
+  // Context-aware logic: Hide sidebar and show immersive dock when reading documents.
+  const isReadingMode =
+    pathname === "/budget" ||
+    pathname === "/star-vault" ||
+    pathname === "/rapid-revision" ||
+    (pathname.startsWith("/knowledge/") && pathname.split("/").length > 3);
+
   return (
     <>
       <CommandPalette
@@ -59,28 +68,122 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         onClose={closePalette}
         instanceKey={palette.instanceKey}
       />
-      <NavigationDrawer isOpen={drawerOpen} onClose={closeDrawer} />
+      {isReadingMode && <NavigationDrawer isOpen={drawerOpen} onClose={closeDrawer} />}
 
-      <div className="flex h-dvh max-h-dvh min-h-0 w-full flex-col overflow-hidden bg-slate-950 text-slate-100 relative">
-        <main 
-          id="main-scroll-container"
-          className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-12 sm:px-8 lg:px-16 xl:px-24 mx-auto w-full max-w-7xl relative no-scrollbar"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="h-full pb-32" // Padding bottom to avoid content hiding behind the dock
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
-        </main>
+      <div className={`flex h-dvh max-h-dvh min-h-0 w-full overflow-hidden bg-slate-950 text-slate-100 relative ${isReadingMode ? 'flex-col' : 'flex-1'}`}>
         
-        <FloatingDock onOpenMenu={openDrawer} onOpenPalette={openPalette} />
+        {/* Permanent Sidebar (Only visible when NOT in reading mode) */}
+        {!isReadingMode && (
+          <aside className="hidden h-full min-h-0 w-64 shrink-0 flex-col overflow-y-auto overscroll-y-contain border-r border-slate-800/80 bg-slate-950/95 px-4 py-8 lg:flex">
+            <div className="px-2">
+              <Link href="/" className="block">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400/90">
+                  Executive OS
+                </p>
+                <p className="mt-1 text-lg font-semibold leading-snug text-slate-50">
+                  Command Centre
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                  Frieze Wandabwa · IT leadership
+                </p>
+              </Link>
+            </div>
+            <nav className="mt-10 flex-1 space-y-1" aria-label="Primary">
+              {mainNav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block rounded-lg px-3 py-2 text-sm text-slate-300 transition hover:bg-slate-800/80 hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="mt-8 space-y-3 border-t border-slate-800/80 pt-6">
+              <button
+                type="button"
+                onClick={openPalette}
+                className="w-full rounded-lg border border-slate-700/90 px-3 py-2 text-left text-xs font-semibold text-slate-300 transition hover:border-amber-500/45 hover:text-white"
+              >
+                Quick jump <span className="text-slate-500">⌘K</span>
+              </button>
+            </div>
+          </aside>
+        )}
+
+        <div className={`flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden relative`}>
+          {/* Mobile Header (Only visible when NOT in reading mode) */}
+          {!isReadingMode && (
+            <header className="shrink-0 border-b border-slate-800/80 bg-slate-950/95 px-4 py-4 backdrop-blur lg:hidden z-20 relative">
+              <div className="flex items-start justify-between gap-3">
+                <Link href="/" className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-slate-50">
+                    Command Centre
+                  </p>
+                  <p className="truncate text-xs text-slate-500">
+                    Executive IT leadership OS
+                  </p>
+                </Link>
+                <div className="flex shrink-0 flex-col items-end gap-2">
+                  <button
+                    type="button"
+                    onClick={openPalette}
+                    className="rounded-lg border border-slate-700/90 px-2.5 py-1.5 text-[11px] font-semibold text-slate-300 hover:border-amber-500/45 hover:text-white"
+                  >
+                    ⌘K
+                  </button>
+                </div>
+              </div>
+              <nav
+                className="mt-3 flex gap-2 overflow-x-auto pb-1 text-xs no-scrollbar"
+                aria-label="Primary mobile"
+              >
+                {mainNav.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="shrink-0 rounded-full border border-slate-700/80 px-3 py-1 text-slate-200 hover:border-amber-500/50 hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </header>
+          )}
+
+          <main 
+            id="main-scroll-container"
+            className={`min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-8 sm:px-8 lg:px-12 relative no-scrollbar ${isReadingMode ? 'max-w-7xl mx-auto w-full xl:px-24' : ''}`}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={pathname}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className={`h-full ${isReadingMode ? 'pb-32' : ''}`}
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </main>
+
+          {/* Floating Dock (Only visible in reading mode) */}
+          {isReadingMode && (
+            <FloatingDock onOpenMenu={openDrawer} onOpenPalette={openPalette} />
+          )}
+
+          {/* Standard Footer (Only visible when NOT in reading mode) */}
+          {!isReadingMode && (
+            <footer className="shrink-0 border-t border-slate-800/80 bg-slate-950/95 px-4 py-4 text-center text-xs text-slate-500 sm:px-6 lg:px-12 z-20 relative">
+              Static-first content · use{" "}
+              <span className="font-mono text-slate-400">⌘K</span> /{" "}
+              <span className="font-mono text-slate-400">Ctrl+K</span> to jump anywhere
+              fast.
+            </footer>
+          )}
+        </div>
       </div>
     </>
   );
