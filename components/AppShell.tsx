@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useReducer } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { CommandPalette } from "@/components/CommandPalette";
 import { mainNav } from "@/lib/navigation";
 
@@ -25,6 +27,7 @@ function paletteReducer(
 }
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [palette, dispatchPalette] = useReducer(paletteReducer, {
     open: false,
     instanceKey: 0,
@@ -97,8 +100,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </aside>
 
-        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
-          <header className="shrink-0 border-b border-slate-800/80 bg-slate-950/95 px-4 py-4 backdrop-blur lg:hidden">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden relative">
+          <header className="shrink-0 border-b border-slate-800/80 bg-slate-950/95 px-4 py-4 backdrop-blur lg:hidden z-20 relative">
             <div className="flex items-start justify-between gap-3">
               <Link href="/" className="min-w-0">
                 <p className="truncate text-sm font-semibold text-slate-50">
@@ -134,11 +137,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </nav>
           </header>
 
-          <main className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-8 sm:px-8 lg:px-12">
-            {children}
+          <main className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-8 sm:px-8 lg:px-12 relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={pathname}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="h-full"
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
           </main>
 
-          <footer className="shrink-0 border-t border-slate-800/80 bg-slate-950/95 px-4 py-4 text-center text-xs text-slate-500 sm:px-6 lg:px-12">
+          <footer className="shrink-0 border-t border-slate-800/80 bg-slate-950/95 px-4 py-4 text-center text-xs text-slate-500 sm:px-6 lg:px-12 z-20 relative">
             Static-first content · use{" "}
             <span className="font-mono text-slate-400">⌘K</span> /{" "}
             <span className="font-mono text-slate-400">Ctrl+K</span> to jump anywhere
