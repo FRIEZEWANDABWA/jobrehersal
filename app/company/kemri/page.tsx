@@ -4,7 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { PageIntro } from "@/components/PageIntro";
 import { kemriSection1, kemriSection2 } from "@/lib/kemriData";
-import { ExecutiveBrief, ActiveRecallQuiz, TermTooltip } from "@/components/learningComponents";
+import { ExecutiveBrief, ActiveRecallQuiz, TermTooltip, StarStoryDrawer } from "@/components/learningComponents";
+import { starStories } from "@/lib/contentData";
+import type { StarStory } from "@/lib/types";
 
 // Boardroom Terms Glossary definitions for inline hover tooltips
 const termsGlossary = [
@@ -19,6 +21,24 @@ const termsGlossary = [
   { term: "CapEx", definition: "Capital Expenditures - one-time major infrastructure procurement costs amortized over years." },
   { term: "OpEx", definition: "Operational Expenditures - ongoing operational software, cloud, and team support subscriptions." },
 ];
+
+// Map KEMRI Section 1 Q&As to relevant stories.json IDs
+const starMappingSection1: { [key: number]: string } = {
+  1: "star-kofisi-centralized-network",      // Tell Us About Yourself -> Kofisi centralized network
+  10: "star-kofisi-centralized-network",     // Major IT Transformation -> Kofisi centralized network
+  11: "star-access-control-roadmap",         // Influence Business Decision -> Fragmented access control roadmap
+  15: "star-rogue-dhcp-breach",              // Security Incident -> Rogue devices breach
+  21: "star-subsea-fiber-cut",               // Critical Outage -> Subsea fiber cut outage
+  34: "star-amazon-latency-voip",            // Difficult Leadership -> Cross-party VoIP latency
+  45: "star-amazon-latency-voip",            // Difficult Stakeholder -> Amazon user-centric wireless audit
+  54: "star-amazon-launch-power-surge",      // Pressure Decision -> launch event power surge
+};
+
+// Map KEMRI Section 2 Q&As to relevant stories.json IDs
+const starMappingSection2: { [key: number]: string } = {
+  6: "star-rogue-dhcp-breach",               // Ransomware attack containment -> rogue device containment
+  15: "star-amazon-latency-voip",            // Difficult people management -> amazon latency troubleshooting
+};
 
 // High-fidelity keyword replacement engine to insert TermTooltips on word boundaries
 function renderAnswerWithTooltips(text: string) {
@@ -64,6 +84,9 @@ export default function KemriPrepPage() {
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedSection2Index, setExpandedSection2Index] = useState<number | null>(null);
+
+  // Dynamic STAR Story drawer state
+  const [activeStarStory, setActiveStarStory] = useState<StarStory | null>(null);
 
   // Filter Section 1 items by category AND search query
   const currentCategory = kemriSection1[selectedCategoryIndex];
@@ -248,29 +271,48 @@ export default function KemriPrepPage() {
             {/* Q&A Cards List */}
             <div className="space-y-6">
               {filteredSection1Items.length > 0 ? (
-                filteredSection1Items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="rounded-3xl border border-slate-800/80 bg-slate-900/10 p-6 sm:p-8 space-y-4 transition hover:border-slate-850"
-                  >
-                    <div className="flex flex-wrap gap-1.5">
-                      {item.tags?.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-semibold tracking-wider uppercase"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                filteredSection1Items.map((item) => {
+                  const relatedStoryId = starMappingSection1[item.id];
+                  const relatedStory = relatedStoryId ? starStories.find((s) => s.id === relatedStoryId) : null;
+                  
+                  return (
+                    <div
+                      key={item.id}
+                      className="rounded-3xl border border-slate-800/80 bg-slate-900/10 p-6 sm:p-8 space-y-4 transition hover:border-slate-850 flex flex-col justify-between"
+                    >
+                      <div className="space-y-4">
+                        <div className="flex flex-wrap gap-1.5 justify-between items-start">
+                          <div className="flex flex-wrap gap-1.5">
+                            {item.tags?.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-semibold tracking-wider uppercase"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          
+                          {/* 🔗 STAR Story Quick-connect trigger */}
+                          {relatedStory && (
+                            <button
+                              onClick={() => setActiveStarStory(relatedStory)}
+                              className="px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/20 text-[9px] font-extrabold text-amber-400 hover:bg-amber-500/20 hover:text-amber-300 transition shadow-sm"
+                            >
+                              ✨ Related STAR Story
+                            </button>
+                          )}
+                        </div>
+                        <h3 className="text-sm sm:text-base font-extrabold text-amber-300 leading-tight">
+                          Q: "{item.q}"
+                        </h3>
+                        <p className="text-slate-300 text-xs sm:text-sm leading-relaxed border-l border-slate-800 pl-4 italic">
+                          "{renderAnswerWithTooltips(item.a)}"
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="text-sm sm:text-base font-extrabold text-amber-300 leading-tight">
-                      Q: "{item.q}"
-                    </h3>
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed border-l border-slate-800 pl-4 italic">
-                      "{renderAnswerWithTooltips(item.a)}"
-                    </p>
-                  </div>
-                ))
+                  );
+                })
               ) : (
                 <div className="text-center py-10 rounded-3xl border border-dashed border-slate-800/60 bg-slate-950/20">
                   <p className="text-sm text-slate-500 italic">No questions found matching your search.</p>
@@ -301,6 +343,9 @@ export default function KemriPrepPage() {
               {filteredSection2Items.length > 0 ? (
                 filteredSection2Items.map((item, index) => {
                   const isExpanded = expandedSection2Index === index;
+                  const relatedStoryId = starMappingSection2[item.id];
+                  const relatedStory = relatedStoryId ? starStories.find((s) => s.id === relatedStoryId) : null;
+                  
                   return (
                     <div
                       key={item.id}
@@ -310,29 +355,44 @@ export default function KemriPrepPage() {
                           : "border-slate-850 bg-slate-950/10 hover:border-slate-800 hover:bg-slate-900/10"
                       }`}
                     >
-                      <button
+                      <div
                         onClick={() => setExpandedSection2Index(isExpanded ? null : index)}
-                        className="w-full text-left p-5 flex items-center justify-between gap-4"
+                        className="w-full text-left p-5 flex items-center justify-between gap-4 cursor-pointer"
                       >
-                        <div className="space-y-1.5">
-                          <div className="flex flex-wrap gap-1.5">
-                            {item.tags?.map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-500 text-[9px] font-mono tracking-wider uppercase"
+                        <div className="space-y-1.5 flex-1">
+                          <div className="flex flex-wrap gap-1.5 justify-between items-center pr-2">
+                            <div className="flex flex-wrap gap-1.5">
+                              {item.tags?.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-500 text-[9px] font-mono tracking-wider uppercase"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+
+                            {/* 🔗 STAR Story Quick-connect trigger */}
+                            {relatedStory && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation(); // Stop collapsing parent
+                                  setActiveStarStory(relatedStory);
+                                }}
+                                className="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-[9px] font-extrabold text-amber-400 hover:bg-amber-500/20 hover:text-amber-300 transition"
                               >
-                                {tag}
-                              </span>
-                            ))}
+                                ✨ Related STAR Story
+                              </button>
+                            )}
                           </div>
-                          <span className="text-xs sm:text-sm font-bold text-amber-200 hover:text-amber-100 block">
+                          <span className="text-xs sm:text-sm font-bold text-amber-200 hover:text-amber-100 block mt-1">
                             Q{index + 1}. {item.q}
                           </span>
                         </div>
-                        <span className="text-slate-500 text-lg transition-transform duration-200">
+                        <span className="text-slate-500 text-lg transition-transform duration-200 shrink-0">
                           {isExpanded ? "▲" : "▼"}
                         </span>
-                      </button>
+                      </div>
 
                       {isExpanded && (
                         <div className="px-5 pb-6 pt-2 border-t border-slate-800/60 animate-in fade-in duration-200">
@@ -353,6 +413,12 @@ export default function KemriPrepPage() {
           </div>
         )}
       </div>
+
+      {/* ─── 🔗 STAR VAULT DRAWER COMPONENT ─── */}
+      <StarStoryDrawer
+        story={activeStarStory}
+        onClose={() => setActiveStarStory(null)}
+      />
     </div>
   );
 }

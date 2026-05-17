@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { BudgetNav } from "@/components/BudgetNav";
 import { BudgetTable } from "@/components/BudgetTable";
+import { BudgetSimulator } from "@/components/learningComponents";
 import {
   fullBudget,
   opexBreakdown,
@@ -172,6 +173,10 @@ export default function BudgetPage() {
                 </div>
               </div>
             </section>
+
+            {/* 📊 Interactive Boardroom Budget Stress-test Simulator */}
+            <BudgetSimulator />
+
 
             <section className="space-y-6">
               <SectionTitle title="Complete Line-Item Allocation" subtitle="Percentage-based weight of all fifteen ICT budget lines." />
