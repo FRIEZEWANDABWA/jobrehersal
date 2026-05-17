@@ -26,6 +26,7 @@ const masterbookGlossary = [
   { term: "WAN", definition: "Wide Area Network - secure communications framework linking multi-site branch networks." },
   { term: "VPN", definition: "Virtual Private Network - encrypted connection channel for secure remote network access." },
   { term: "DR", definition: "Disaster Recovery - strategic playbooks to restore core systems operational continuity." },
+  { term: "DIA", definition: "Dedicated Internet Access - isolated, uncontended high-speed corporate fiber circuits." },
 ];
 
 function renderAnswerWithTooltips(text: string) {
@@ -207,104 +208,153 @@ export default function DataProtectionMasterbook() {
       id: 1,
       level: "gdpr_kdpa",
       framework: "gdpr",
-      q: "What is GDPR?",
-      a: "GDPR is a global privacy and data protection framework that governs how organizations collect, process, store, share, and protect personal data. It emphasizes transparency, accountability, user privacy rights, and strong operational safeguards to protect sensitive information."
+      q: "What is data protection?",
+      a: "Data protection is the strategic process of safeguarding critical business and personal information from unauthorized access, loss, corruption, or compromise, while ensuring its confidentiality, integrity, and availability. In modern enterprise operations, it spans three essential layers: technical safeguards (such as encryption and MFA), legal compliance (such as the KDPA and GDPR), and operational governance (such as access reviews and incident response blueprints)."
     },
     {
       id: 2,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "What is General Data Protection (GDPR)?",
+      a: "GDPR is a global privacy and data protection framework that governs how organizations collect, process, store, share, and protect personal data. It emphasizes transparency, accountability, user privacy rights, and strong operational safeguards to protect sensitive information."
+    },
+    {
+      id: 3,
       level: "gdpr_kdpa",
       framework: "gdpr",
       q: "What is personal data?",
       a: "Personal data refers to any information that can identify an individual either directly or indirectly. Examples include names, emails, phone numbers, IP addresses, biometrics, access records, and CCTV footage."
     },
     {
-      id: 3,
+      id: 4,
       level: "gdpr_kdpa",
       framework: "gdpr",
       q: "What is Privacy by Design?",
       a: "Privacy by Design means security and privacy controls must be integrated into systems and operational processes from the beginning rather than added later. Examples include MFA, encryption, least privilege access, secure backups, audit logging, and network segmentation."
     },
     {
-      id: 4,
+      id: 5,
       level: "gdpr_kdpa",
       framework: "gdpr",
       q: "What is the difference between a Data Controller and Data Processor?",
       a: "A Data Controller determines why and how personal data is processed, while a Data Processor processes data on behalf of the controller. In enterprise environments, organizations may act as either or both depending on operational responsibilities and managed services."
     },
     {
-      id: 5,
+      id: 6,
       level: "gdpr_kdpa",
       framework: "gdpr",
       q: "How would you implement GDPR in a multi-site enterprise environment?",
       a: "I would begin with data discovery and operational risk assessment to understand where personal data exists, how it flows, who accesses it, and the associated operational risks. I would then implement governance controls including: MFA, encryption, access governance, vendor governance, audit logging, backup governance, retention policies, incident response, and continuous monitoring. I would also maintain stakeholder awareness, governance reporting, and regular compliance reviews to ensure operational alignment."
     },
     {
-      id: 6,
+      id: 7,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "How does GDPR affect Frieze Wandabwa's day-to-day ICT operations?",
+      a: "GDPR significantly impacts ICT operations because IT departments are responsible for the systems, infrastructure, access controls, and security safeguards that protect personal data. As Head of IT, I would ensure personal data is processed securely through encryption, access control, monitoring, backup governance, retention policies, vendor governance, and incident response procedures while ensuring operational systems align with privacy requirements."
+    },
+    {
+      id: 8,
       level: "gdpr_kdpa",
       framework: "kdpa",
       q: "How would you ensure compliance with the Kenya Data Protection Act?",
       a: "I would ensure compliance through governance, operational controls, technical safeguards, staff awareness, vendor governance, and continuous monitoring. This includes: access governance, encryption, retention policies, audit logging, backup governance, vendor assessments, and incident response procedures."
     },
     {
-      id: 7,
+      id: 9,
       level: "gdpr_kdpa",
       framework: "kdpa",
       q: "What is Data Protection by Design?",
       a: "Data Protection by Design (under Section 41 of the Kenya DPA) requires that data protection, privacy, and security controls are built into systems by default. This involves default MFA, encrypted devices (BitLocker), least-privilege role boundaries, separate network VLAN segments, secure VPN channels, centralized audit logging, and automated cloud backup encryption."
     },
     {
-      id: 8,
+      id: 10,
       level: "gdpr_kdpa",
       framework: "iso",
       q: "What is the relationship between GDPR, KDPA, and ISO 27001?",
       a: "GDPR and KDPA are legal compliance frameworks defining privacy principles, rights, and regulatory mandates. ISO 27001 is a practical, structured information security governance system (ISMS) that provides the actual tech controls, risks, processes, and people structures required to enforce and prove compliance with both laws."
     },
     {
-      id: 9,
+      id: 11,
       level: "gdpr_kdpa",
       framework: "iso",
       q: "How would you implement ISO 27001 in an enterprise environment?",
       a: "I would build it around a formal Information Security Management System (ISMS) scoping People, Processes, Technology, Risk, Compliance, and Continuity. This involves: creating asset inventories, enforcing strict access controls (MFA/RBAC), drafting incident containment playbooks, auditing physical security (Suprema door blocks, CCTV subnets), testing backup restoration schedules, and conducting regular risk assessments."
     },
     {
-      id: 10,
+      id: 12,
       level: "gdpr_kdpa",
       framework: "iso",
       q: "Why is compliance important for a Head of IT?",
       a: "Compliance is not just a regulatory check; it is a critical driver of business resilience and commercial trust. As Head of IT, protecting client data, avoiding breaches, keeping systems compliant with ODPC laws, and holding documented audits is what secures enterprise vendor SLAs and protects the company from catastrophic downtime and fines."
     },
     {
-      id: 11,
+      id: 13,
       level: "gdpr_kdpa",
       framework: "gdpr",
       q: "How would you handle a data breach?",
       a: "I would initiate our 3-phase Incident Response playbook: 1. Detection and verification. 2. Immediate containment (isolating infected VLANs, locking credentials, protecting Veeam backups). 3. Legal and regulatory escalation, notifying executive stakeholders and filing formal ODPC notifications within the mandatory 72-hour legal breach window."
     },
+    {
+      id: 14,
+      level: "gdpr_kdpa",
+      framework: "gdpr",
+      q: "How would you define the role of Head of IT during a major data breach?",
+      a: "I would immediately activate our Incident Response containment protocols. This involves isolating affected VLAN segments, locking compromised SaaS admin consoles, preserving forensic server images for audit records, notifying legal and regulatory stakeholders within our 72-hour mandate, and preparing a transparent root-cause analysis for review by executive leadership."
+    },
+    {
+      id: 15,
+      level: "gdpr_kdpa",
+      framework: "kdpa",
+      q: "What is Frieze's exact boardroom justification for implementing Section 41 (Privacy-by-Design)?",
+      a: "Section 41 shifts IT from a reactive mode to a proactive engineering posture. Emphasize that default MFA, segmented client networks, and automated offboarding prevent compliance failures before they can trigger legal action or catastrophic data theft."
+    },
+    {
+      id: 16,
+      level: "gdpr_kdpa",
+      framework: "kdpa",
+      q: "How would Frieze prepare our distributed multi-site centers to comply with the KDPA?",
+      a: "Compliance requires combining rigorous controls with clean governance. I would register KOFISI/KEMRI as data controllers, configure automatic AES-256 backup encryption, restrict NVR CCTV recordings to a strict 30-day archival policy, enforce MFA by default across our Zoho and SaaS environments, and train staff to eliminate social engineering vulnerabilities."
+    },
+    {
+      id: 17,
+      level: "gdpr_kdpa",
+      framework: "iso",
+      q: "How does Frieze implement ISO 27001 risk management in an enterprise multi-site environment?",
+      a: "I approach security as a core risk management exercise. I begin by identifying risks (e.g. ransomware, fiber cuts), evaluating their business SLA impact, deploying controls (immutable backups, active-active ISPs), and continuously auditing for improvement."
+    },
+    {
+      id: 18,
+      level: "gdpr_kdpa",
+      framework: "iso",
+      q: "Why is compliance with frameworks like ISO 27001 important for an IT Director?",
+      a: "Compliance is the bedrock of commercial trust. At senior executive levels, I am no longer simply resolving system patches—I am actively protecting KOFISI/KEMRI from major reputational damage, operational downtime, client SLA defaults, and catastrophic financial and legal exposure."
+    },
 
     // 🧠 TIER 1 — TECHNICAL & SECURITY GOVERNANCE QUESTIONS
     {
-      id: 12,
+      id: 19,
       level: "tier1",
       framework: "iso",
       q: "What is the difference between hashing and encryption?",
       a: "Encryption is a reversible process used to protect data confidentiality, where information can be decrypted using authorized keys. Hashing, on the other hand, is a one-way cryptographic process primarily used for integrity verification and secure password storage. In enterprise environments, encryption protects sensitive operational data such as cloud storage, backups, VPN traffic, and finance systems, while hashing is commonly used for password protection, integrity validation, and digital verification."
     },
     {
-      id: 13,
+      id: 20,
       level: "tier1",
       framework: "iso",
       q: "What is RBAC?",
       a: "Role-Based Access Control is a governance model where system access is assigned based on organizational roles and operational responsibilities rather than individual preference. RBAC improves governance by enforcing least privilege access, reducing insider risk, improving auditability, and simplifying operational access management across enterprise systems."
     },
     {
-      id: 14,
+      id: 21,
       level: "tier1",
       framework: "iso",
       q: "What is Zero Trust?",
       a: "Zero Trust is a modern security architecture model based on the principle of ‘never trust, always verify.’ It assumes no user, device, network, or system should automatically be trusted, even inside the internal network. Access decisions are continuously validated using identity, device posture, location, behavior, and risk signals. In enterprise environments, Zero Trust improves operational resilience by reducing lateral movement, minimizing insider risk, and strengthening cloud and remote-access governance."
     },
     {
-      id: 15,
+      id: 22,
       level: "tier1",
       framework: "iso",
       q: "What is a SIEM?",
@@ -313,21 +363,21 @@ export default function DataProtectionMasterbook() {
 
     // 🧠 TIER 2 — GOVERNANCE QUESTIONS
     {
-      id: 16,
+      id: 23,
       level: "tier2",
       framework: "iso",
       q: "How do you implement an ISMS?",
       a: "I would begin with organizational risk assessment, asset identification, governance scoping, and executive stakeholder alignment. From there, I would establish: policies, operational standards, security controls, incident response procedures, access governance, vendor governance, monitoring frameworks, and audit processes. The ISMS must align with operational realities, business objectives, regulatory obligations, and organizational risk exposure. Continuous improvement through reviews, audits, KPI tracking, and governance meetings is also critical."
     },
     {
-      id: 7,
+      id: 24,
       level: "tier2",
       framework: "iso",
       q: "How do you conduct information security audits?",
       a: "I approach audits through structured governance and evidence-based validation. The process includes: scope definition, control assessment, policy reviews, evidence collection, access reviews, vulnerability reviews, vendor assessments, and operational walkthroughs. I also validate whether operational practices align with documented governance controls and compliance requirements. Audit findings are then categorized by risk level, operational impact, remediation priority, and governance exposure."
     },
     {
-      id: 18,
+      id: 25,
       level: "tier2",
       framework: "iso",
       q: "How do you manage third-party risk?",
@@ -336,21 +386,21 @@ export default function DataProtectionMasterbook() {
 
     // 🧠 TIER 3 — EXECUTIVE QUESTIONS
     {
-      id: 19,
+      id: 26,
       level: "tier3",
       framework: "iso",
       q: "How do you communicate cyber risk to executives?",
       a: "I avoid overly technical language and instead communicate cyber risk in terms of business impact, operational continuity, financial exposure, reputational impact, regulatory risk, and organizational resilience. For example, instead of discussing firewall vulnerabilities technically, I may explain how a control weakness could increase operational downtime, expose sensitive client data, or affect organizational continuity. Executives need visibility into business impact, risk exposure, mitigation status, and investment priorities rather than purely technical details."
     },
     {
-      id: 20,
+      id: 27,
       level: "tier3",
       framework: "iso",
       q: "How do you justify security spending?",
       a: "I justify security investment by aligning it to: operational continuity, regulatory compliance, organizational resilience, risk reduction, and long-term business protection. Security investment should be viewed as risk management and operational enablement rather than simply technical expenditure. I also communicate measurable value such as: reduced downtime, improved recovery capability, compliance alignment, operational resilience, and reduced exposure to ransomware or operational disruption."
     },
     {
-      id: 21,
+      id: 28,
       level: "tier3",
       framework: "iso",
       q: "How do you balance usability and security?",
@@ -359,28 +409,28 @@ export default function DataProtectionMasterbook() {
 
     // 🧠 TIER 4 — CRISIS & INCIDENT QUESTIONS
     {
-      id: 22,
+      id: 29,
       level: "tier4",
       framework: "gdpr",
       q: "A ransomware attack happens during working hours. What do you do?",
       a: "I would immediately activate incident response governance procedures. The first priority would be containment, operational isolation, and protection of unaffected systems. This may include isolating VLANs, disabling compromised accounts, restricting lateral movement, and protecting backups. I would then preserve evidence, activate leadership escalation, coordinate communication, assess operational impact, validate recovery capability, and initiate recovery procedures. After stabilization, I would conduct root-cause analysis, governance review, remediation, and lessons learned assessment."
     },
     {
-      id: 23,
+      id: 30,
       level: "tier4",
       framework: "gdpr",
       q: "An executive email account is compromised.",
       a: "I would immediately isolate the affected account, revoke active sessions, enforce password resets, review MFA status, and analyze audit logs for suspicious activity. Because executive accounts typically have elevated exposure and reputational impact, I would also assess email forwarding rules, sensitive communications, cloud application access, and potential lateral movement. I would escalate internally, preserve evidence, coordinate communication, and validate recovery and governance remediation procedures."
     },
     {
-      id: 24,
+      id: 31,
       level: "tier4",
       framework: "kdpa",
       q: "Sensitive CCTV footage leaks online.",
       a: "I would immediately restrict access to CCTV infrastructure, preserve forensic evidence, assess the source of exposure, review access logs, and isolate affected systems or accounts. I would then coordinate legal review, executive escalation, regulatory assessment, and communication governance. The incident would also trigger access governance review, retention policy review, contractor assessment, and operational remediation activities."
     },
     {
-      id: 25,
+      id: 32,
       level: "tier4",
       framework: "iso",
       q: "A disaster recovery test fails.",
@@ -389,14 +439,14 @@ export default function DataProtectionMasterbook() {
 
     // 🧠 LEADERSHIP COMMUNICATION QUESTIONS
     {
-      id: 26,
+      id: 33,
       level: "leadership",
       framework: "iso",
       q: "How do you explain a cyber incident calmly to executives?",
       a: "I focus on clarity, facts, business impact, and recovery status rather than technical panic. I communicate what happened, what systems are affected, operational impact, containment status, mitigation actions, and next steps. The objective is maintaining executive confidence while ensuring transparency, accountability, and coordinated decision-making."
     },
     {
-      id: 27,
+      id: 34,
       level: "leadership",
       framework: "iso",
       q: "How do you avoid overwhelming executives with technical details?",
@@ -405,14 +455,14 @@ export default function DataProtectionMasterbook() {
 
     // 🧠 CASE STUDY QUESTIONS & FINAL
     {
-      id: 28,
+      id: 35,
       level: "casestudy",
       framework: "iso",
       q: "What lessons did you learn from major breaches like Equifax or Colonial Pipeline?",
       a: "Major breaches consistently demonstrate that governance failures, weak visibility, poor patch management, insufficient segmentation, weak identity governance, and delayed incident response can create catastrophic organizational impact. The key lesson is that cybersecurity is not only a technical function — it is an operational governance and organizational resilience function. Strong visibility, layered controls, continuous monitoring, incident preparedness, executive accountability, and operational discipline are critical."
     },
     {
-      id: 29,
+      id: 36,
       level: "casestudy",
       framework: "iso",
       q: "What makes a strong Head of IT in modern enterprise environments?",
@@ -447,7 +497,7 @@ export default function DataProtectionMasterbook() {
             ← Command Centre
           </Link>
           <span className="text-[10px] text-slate-500 font-mono">
-            Protected Sandbox Environment v1.5
+            Protected Sandbox Environment v1.6
           </span>
         </div>
       </div>
@@ -583,7 +633,7 @@ export default function DataProtectionMasterbook() {
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Module 1 — GDPR Fundamentals</span>
                 <h3 className="text-sm font-extrabold text-slate-100">GDPR — General Data Protection Regulation</h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  GDPR is the European Union’s data privacy regulation. It governs how organizations <strong>collect, process, store, transfer, protect, and delete personal data</strong>. Even if a company is outside Europe, GDPR may still apply if it handles EU citizen data, works with international organizations, uses global cloud services, or supports multinational clients.
+                  GDPR is the European Union’s flagship data privacy regulation. It governs how organizations <strong>collect, process, store, transfer, protect, and delete personal data</strong>. Even if a company is outside Europe, GDPR may still apply if it handles EU citizen data, works with international organizations, uses global cloud services, or supports multinational clients.
                 </p>
                 <p className="text-[10px] text-purple-300 font-semibold uppercase tracking-wider">
                   ⚠️ Critical Environment Scope: Gates Foundation, Amazon, international NGOs, cloud systems, and global clients.
@@ -652,7 +702,7 @@ export default function DataProtectionMasterbook() {
               {/* Environmental Mapping */}
               <div className="space-y-4">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">📖 Module 8 — Environment Mapping</span>
-                <h4 className="text-xs sm:text-sm font-extrabold text-purple-400 uppercase tracking-wider">
+                <h4 className="text-xs sm:text-sm font-purple-400 uppercase tracking-wider text-purple-400">
                   Mapping GDPR to Your Actual Multi-Site Environment
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
@@ -716,7 +766,7 @@ export default function DataProtectionMasterbook() {
                   <div className="space-y-3">
                     <div className="space-y-1">
                       <span className="font-bold text-slate-200 block">Section 41 — Data Protection by Design</span>
-                      <p className="text-slate-400">Security and privacy must be built INTO systems from the beginning. Examples include: MFA enabled by default, encrypted laptops, role-based access, limited permissions, secure WiFi segmentation, CCTV access restrictions, VPN enforcement, password policies, and backup encryption.</p>
+                      <p className="text-slate-400">Security and privacy must be built INTO systems from the beginning. Examples include: MFA enabled by default, encrypted devices (BitLocker), role-based access, limited permissions, secure WiFi segmentation, CCTV access restrictions, VPN enforcement, password policies, and backup encryption.</p>
                       <p className="text-purple-400/90 text-[11px] font-semibold mt-1">The Act specifically requires: risk identification, safeguards, encryption, ability to restore systems, and continuous improvement.</p>
                     </div>
                     <div className="space-y-1">
@@ -738,6 +788,49 @@ export default function DataProtectionMasterbook() {
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   ISO 27001 is the biggest executive framework. It is NOT just cybersecurity. It is a governance framework for managing information security organization-wide, scoping People, Processes, Technology, Risk, Compliance, and Continuity.
                 </p>
+              </div>
+
+              {/* Restored ISO Focus Area Table from initial implementation */}
+              <div className="rounded-2xl border border-slate-800 bg-slate-900/10 p-5 space-y-4">
+                <h4 className="font-extrabold text-amber-300 text-xs sm:text-sm uppercase tracking-wider">
+                  ISMS Core Scoping Areas
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-800 text-slate-500 uppercase tracking-wider font-extrabold">
+                        <th className="py-2 pr-4">ISMS Scoping Area</th>
+                        <th className="py-2">Operational Focus Under ISO 27001</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                      <tr>
+                        <td className="py-2.5 pr-4 font-bold text-slate-200">People</td>
+                        <td className="py-2.5 text-slate-400">Staff awareness, security drills, phishing simulations, and least-privilege administrative mindset training.</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 pr-4 font-bold text-slate-200">Processes</td>
+                        <td className="py-2.5 text-slate-400">Documented security policies, onboarding/offboarding blueprints, access logs authorization, and incident escalation paths.</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 pr-4 font-bold text-slate-200">Technology</td>
+                        <td className="py-2.5 text-slate-400">MFA enforcement, storage BitLocker/AES-256 encryption, isolated VLAN routers, secure local NVR cams subnets, and Veeam backups.</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 pr-4 font-bold text-slate-200">Risk</td>
+                        <td className="py-2.5 text-slate-400">CIA risk registries, threat classification models, likelihood/severity metrics, and periodic boardroom risk reviews.</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 pr-4 font-bold text-slate-200">Compliance</td>
+                        <td className="py-2.5 text-slate-400">Section 41 and 43 alignment under ODPC guidelines, GDPR contractual obligations, and internal audit evidence trails.</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2.5 pr-4 font-bold text-slate-200">Continuity</td>
+                        <td className="py-2.5 text-slate-400">Disaster recovery failover, Tested secondary ISP lines, redundant firewalls, and Veeam database restoration audits.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm">
@@ -905,7 +998,7 @@ export default function DataProtectionMasterbook() {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-8 animate-in fade-in"
         >
-          <div className="p-5 rounded-2xl border border-slate-850 bg-slate-950/40 space-y-3">
+          <div className="p-5 rounded-2xl border border-slate-855 bg-slate-950/40 space-y-3">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-purple-400">🛡️ Operational System Playbooks</span>
             <h3 className="text-sm font-extrabold text-slate-100">Frieze Wandabwa's Multi-Site Governance Blueprints</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -913,9 +1006,102 @@ export default function DataProtectionMasterbook() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            {/* Access Governance */}
+          {/* Restored: Daily Operational Area / Responsibility quick-reference mapping table */}
+          <div className="space-y-4">
+            <h4 className="text-xs sm:text-sm font-extrabold text-purple-400 uppercase tracking-wider border-b border-slate-850 pb-2">
+              Framework Operational Mapping Table
+            </h4>
+            <div className="overflow-x-auto rounded-2xl border border-slate-800">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-800 bg-slate-950/40 text-slate-400 font-bold">
+                    <th className="p-3">Daily Operational Area</th>
+                    <th className="p-3">Your Specific Responsibility (Boardroom Defensible)</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Internet Infrastructure</td>
+                    <td className="p-3">Secure segmentation, redundant firewalls, and active-active failover across 3-ISP routes.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Cloud Systems</td>
+                    <td className="p-3">Identity management, strict MFA enforcement, conditional access, and secure cloud API keys.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Access Control</td>
+                    <td className="p-3">Least privilege biometric rules (Suprema/Improv integration) and centralized audit logs.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">CCTV Surveillance</td>
+                    <td className="p-3">Restricted NVR console logins and strict 30-day auto-recycling storage logs.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Google Workspace</td>
+                    <td className="p-3">User admin rights auditing, email DKIM/SPF protection, and multi-tenant domain isolation.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Zoho / ERP</td>
+                    <td className="p-3">Strict database credentials, geo-restricted logins, and customer personal data masking.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Finance Systems</td>
+                    <td className="p-3">Enforce local partition encryption (BitLocker active) and highly restricted administrative accounts.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Backups</td>
+                    <td className="p-3">Centralized AES-256 database protection, WORM backup vaults, and weekly restore tests.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Vendor Management</td>
+                    <td className="p-3">Perform comprehensive security risk audits and enforce strict SLAs before contract approvals.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-semibold text-slate-200">Staff Offboarding</td>
+                    <td className="p-3">Immediate, automated access removal across all SaaS tools, biometrics, and active credentials.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Restored: What You Should Implement Day-to-Day Cards */}
+          <div className="space-y-4 pt-4">
+            <h4 className="text-xs sm:text-sm font-extrabold text-amber-300 uppercase tracking-wider border-b border-slate-850 pb-2">
+              Critical Control Enforcements
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/10 space-y-2">
+                <span className="font-extrabold text-slate-200 block text-xs sm:text-sm">1. Access Governance</span>
+                <p className="text-slate-400 text-xs leading-relaxed">Implement mandatory MFA enforcements, strict RBAC layers, password complexities, Privileged Access Management (PAM), and formal quarterly administrative reviews.</p>
+              </div>
+
+              <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/10 space-y-2">
+                <span className="font-extrabold text-slate-200 block text-xs sm:text-sm">2. Data Classification</span>
+                <p className="text-slate-400 text-xs leading-relaxed">Map and classify all organization-wide files into clear categories: Public, Internal, Confidential, and Restricted. Segment databases to align with access roles.</p>
+              </div>
+
+              <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/10 space-y-2">
+                <span className="font-extrabold text-slate-200 block text-xs sm:text-sm">3. Logging & Monitoring</span>
+                <p className="text-slate-400 text-xs leading-relaxed">Collect and monitor logs for: VPN remote tunnels, administrative logins, failed authorization attempts, SaaS modifications, and firewall events.</p>
+              </div>
+
+              <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/10 space-y-2">
+                <span className="font-extrabold text-slate-200 block text-xs sm:text-sm">4. Backup Governance</span>
+                <p className="text-slate-400 text-xs leading-relaxed">Maintain fully encrypted local backups, immutable cloud backups, offsite database replication channels, and regular disaster restore validations.</p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl border border-purple-500/20 bg-purple-500/[0.01] space-y-2">
+              <span className="font-extrabold text-purple-300 block text-xs sm:text-sm">5. Staff Awareness Campaigns</span>
+              <p className="text-slate-300 text-xs leading-relaxed">
+                One of the biggest security risks is social engineering. Regularly run simulated phishing campaigns to train employees on passwords hygiene, safe link executions, and secure file sharing protocols.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+            {/* Access Governance Playbook Card */}
             <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/10 space-y-4 text-xs sm:text-sm">
               <h4 className="font-extrabold text-amber-300 uppercase tracking-wider flex items-center gap-2">
                 <span>🔐</span> Access Governance Playbook
@@ -932,7 +1118,7 @@ export default function DataProtectionMasterbook() {
               </div>
             </div>
 
-            {/* Cloud Governance */}
+            {/* Cloud Governance Playbook Card */}
             <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/10 space-y-4 text-xs sm:text-sm">
               <h4 className="font-extrabold text-blue-300 uppercase tracking-wider flex items-center gap-2">
                 <span>☁️</span> Cloud Governance Playbook
@@ -949,7 +1135,7 @@ export default function DataProtectionMasterbook() {
               </div>
             </div>
 
-            {/* CCTV Governance */}
+            {/* CCTV Governance Playbook Card */}
             <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/10 space-y-4 text-xs sm:text-sm">
               <h4 className="font-extrabold text-emerald-300 uppercase tracking-wider flex items-center gap-2">
                 <span>📹</span> CCTV Governance Playbook
@@ -966,7 +1152,7 @@ export default function DataProtectionMasterbook() {
               </div>
             </div>
 
-            {/* Incident Response */}
+            {/* Incident Response Playbook Card */}
             <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/10 space-y-4 text-xs sm:text-sm">
               <h4 className="font-extrabold text-purple-300 uppercase tracking-wider flex items-center gap-2">
                 <span>🚨</span> Incident Response Playbook
@@ -1196,8 +1382,8 @@ export default function DataProtectionMasterbook() {
                   <pre className="whitespace-pre-wrap leading-normal">
 {`[INCIDENT REPORT TEMPLATE - CONFIDENTIAL]
 ID: INC-2026-05-17
-Severity Rating: [LOW / MEDIUM / HIGH / CRITICAL]
 Reported By: Frieze Wandabwa (Head of IT)
+Severity Rating: [LOW / MEDIUM / HIGH / CRITICAL]
 
 1. Incident Description:
    [Provide details of systems compromise, compromised VLAN segments, or client environments]
