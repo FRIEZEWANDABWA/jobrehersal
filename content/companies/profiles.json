@@ -1,5 +1,25 @@
 [
   {
+    "slug": "kemri",
+    "name": "KEMRI-Wellcome Trust",
+    "tagline": "Global health research enabling operations with secure, reliable infrastructure.",
+    "context": "A world-class medical research partnership requiring rigorous cybersecurity, absolute data integrity, international collaboration, and operational resilience across distributed labs and campuses.",
+    "themes": [
+      "Medical research data protection",
+      "High-availability laboratory networks",
+      "Multilateral health partnerships",
+      "Public health digital transformation"
+    ],
+    "pressureAngles": [
+      "How do you secure highly sensitive genetic and epidemiologic research data from sovereign threats?",
+      "Describe your approach to supporting researchers who prioritize direct software execution over corporate security compliance."
+    ],
+    "questionsToExpect": [
+      "How would you align ICT strategies across distributed, multi-site campuses in East Africa?",
+      "What is your plan to elevate cybersecurity maturity to international standards within 180 days?"
+    ]
+  },
+  {
     "slug": "dhl",
     "name": "DHL",
     "tagline": "Logistics at planetary scale with operational discipline.",

@@ -9,7 +9,9 @@ import {
 } from "@/lib/companyPrep";
 
 export function generateStaticParams() {
-  return companyProfiles.map((c) => ({ slug: c.slug }));
+  return companyProfiles
+    .filter((c) => c.slug !== "kemri")
+    .map((c) => ({ slug: c.slug }));
 }
 
 type PageProps = { params: Promise<{ slug: string }> };

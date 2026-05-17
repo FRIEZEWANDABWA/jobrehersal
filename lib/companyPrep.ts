@@ -1,5 +1,7 @@
 /** How panels in this lens typically sound — use to tune tone, not to memorize. */
 export const companyInterviewStyle: Record<string, string> = {
+  kemri:
+    "Academic rigor combined with medical-grade operational standards. Panels seek deep cybersecurity maturity, absolute respect for data sovereignty and protection, and service-oriented frameworks that empower complex research rather than policing it.",
   dhl:
     "Operational and physical-world storytelling: hubs, SLAs, peak season, cost of downtime, and partner ecosystems. Numbers beat adjectives.",
   "world-bank":
@@ -18,6 +20,11 @@ export type CompanyPrepLink = { href: string; label: string };
 
 /** After reading the profile, deepen in the library by function (not book order). */
 export const companySuggestedKnowledge: Record<string, CompanyPrepLink[]> = {
+  kemri: [
+    { href: "/knowledge/security-leadership", label: "Security & compliance" },
+    { href: "/knowledge/operations", label: "Service management & resilience" },
+    { href: "/knowledge/financial-management", label: "Financial governance" },
+  ],
   dhl: [
     { href: "/knowledge/operations", label: "Operations & continuity" },
     { href: "/knowledge/infrastructure-architecture", label: "Infrastructure & scale" },
