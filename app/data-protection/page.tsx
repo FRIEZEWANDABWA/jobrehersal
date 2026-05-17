@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExecutiveBrief, ActiveRecallQuiz, TermTooltip } from "@/components/learningComponents";
-import { Shield, BookOpen, UserCheck, Activity, Award, FileText, CheckCircle, AlertTriangle, AlertCircle, RefreshCw } from "lucide-react";
+import { Shield, BookOpen, UserCheck, Activity, Award, FileText, CheckCircle, AlertTriangle, AlertCircle } from "lucide-react";
 
 // Boardroom Terms Glossary definitions for inline hover tooltips
 const masterbookGlossary = [
@@ -22,6 +22,10 @@ const masterbookGlossary = [
   { term: "DPIA", definition: "Data Protection Impact Assessment - formal process to identify and minimize systems data privacy risks." },
   { term: "DPO", definition: "Data Protection Officer - designated governance lead overseeing data privacy compliance." },
   { term: "ODPC", definition: "Office of the Data Protection Commissioner - the regulatory oversight authority in Kenya." },
+  { term: "SIEM", definition: "Security Information and Event Management - platform centralizing security logs and correlations." },
+  { term: "WAN", definition: "Wide Area Network - secure communications framework linking multi-site branch networks." },
+  { term: "VPN", definition: "Virtual Private Network - encrypted connection channel for secure remote network access." },
+  { term: "DR", definition: "Disaster Recovery - strategic playbooks to restore core systems operational continuity." },
 ];
 
 function renderAnswerWithTooltips(text: string) {
@@ -46,13 +50,8 @@ function renderAnswerWithTooltips(text: string) {
   return <>{parts}</>;
 }
 
-export default function DataProtectionMasterbook() {
-  const [activeSystem, setActiveSystem] = useState<"learning" | "interview" | "operational" | "governance" | "executive">("learning");
-  const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso">("gdpr");
-  const [activeQnaLevel, setActiveQnaLevel] = useState<"all" | "beginner" | "intermediate" | "executive" | "scenario">("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  
-  // Interactive Simulator State
+// Sub-component for interactive compliance risk stress-testing
+function ComplianceDashboard() {
   const [gdprAudit, setGdprAudit] = useState(false);
   const [kdpaRegistered, setKdpaRegistered] = useState(false);
   const [isoControlActive, setIsoControlActive] = useState(false);
@@ -75,6 +74,120 @@ export default function DataProtectionMasterbook() {
     scoreLabel = "MODERATE REGULATORY RISK (ACTION REQUIRED)";
   }
 
+  return (
+    <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/30 to-slate-950 p-6 sm:p-8 space-y-6">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-800/80 pb-4">
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-purple-400">
+            Compliance Risk stress-tester
+          </span>
+          <h3 className="text-base sm:text-lg font-black text-slate-100 mt-1">
+            Data Protection & Compliance Risk Dashboard
+          </h3>
+        </div>
+        <div className={`px-3 py-1.5 rounded-xl border text-[11px] font-extrabold tracking-wide ${scoreColor} self-start`}>
+          {scoreLabel}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Checkbox Inputs */}
+        <div className="space-y-4">
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={gdprAudit}
+              onChange={(e) => setGdprAudit(e.target.checked)}
+              className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
+            />
+            <div className="text-xs">
+              <span className="font-bold text-slate-200 group-hover:text-slate-100 block">GDPR Risk Audit & Mapping</span>
+              <span className="text-slate-400">EU personal data lifecycle mapped, third-party vendor risks resolved.</span>
+            </div>
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={kdpaRegistered}
+              onChange={(e) => setKdpaRegistered(e.target.checked)}
+              className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
+            />
+            <div className="text-xs">
+              <span className="font-bold text-slate-200 group-hover:text-slate-100 block">Kenya Data Commissioner Registration</span>
+              <span className="text-slate-400">Section 41 Privacy-by-design active, 72h breach procedures set.</span>
+            </div>
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={isoControlActive}
+              onChange={(e) => setIsoControlActive(e.target.checked)}
+              className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
+            />
+            <div className="text-xs">
+              <span className="font-bold text-slate-200 group-hover:text-slate-100 block">ISO 27001 Information Security Controls</span>
+              <span className="text-slate-400">Asset logs mapped, CIA risk registries established, MFA enforced.</span>
+            </div>
+          </label>
+
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={staffAwareness}
+              onChange={(e) => setStaffAwareness(e.target.checked)}
+              className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
+            />
+            <div className="text-xs">
+              <span className="font-bold text-slate-200 group-hover:text-slate-100 block">Quarterly Staff Awareness Campaigns</span>
+              <span className="text-slate-400">Simulated phishing active, least-privilege security culture trained.</span>
+            </div>
+          </label>
+        </div>
+
+        {/* Live score display */}
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-800 bg-slate-950/40 p-6 text-center space-y-2">
+          <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+            Total Compliance Score
+          </span>
+          <div className="text-4xl sm:text-5xl font-mono font-black tracking-tight text-slate-100">
+            <span className={complianceScore > 80 ? "text-emerald-400 animate-bounce" : complianceScore > 50 ? "text-amber-400" : "text-rose-500"}>
+              {complianceScore}
+            </span>
+            <span className="text-slate-600">/100</span>
+          </div>
+          <p className="text-xs text-slate-400 max-w-xs leading-relaxed mt-2">
+            {complianceScore >= 90
+              ? "✅ Defensible posture. Your multi-site operations are insulated from catastrophic compliance liability and fines."
+              : complianceScore >= 60
+              ? "⚠️ Warning: Legal vulnerabilities exist. File KDPA certificates and activate least-privilege controls instantly."
+              : "🚨 Critical Risk: Unprepared status. You are heavily exposed to heavy fines, data theft, and brand damage."}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function DataProtectionMasterbook() {
+  const [activeSystem, setActiveSystem] = useState<"learning" | "interview" | "operational" | "governance" | "executive">("learning");
+  const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso">("gdpr");
+  const [activeQnaLevel, setActiveQnaLevel] = useState<"all" | "tier1" | "tier2" | "tier3" | "tier4" | "leadership" | "casestudy">("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  // Interactive Simulator State (kept for simulation tab)
+  const [simGdpr, setSimGdpr] = useState(false);
+  const [simKdpa, setSimKdpa] = useState(false);
+  const [simIso, setSimIso] = useState(false);
+  const [simStaff, setSimStaff] = useState(false);
+
+  let simScore = 30;
+  if (simGdpr) simScore += 20;
+  if (simKdpa) simScore += 20;
+  if (simIso) simScore += 20;
+  if (simStaff) simScore += 10;
+
   // Active Template State
   const [selectedTemplate, setSelectedTemplate] = useState<"incident" | "breach" | "access" | "dpia">("incident");
 
@@ -89,68 +202,137 @@ export default function DataProtectionMasterbook() {
 
   // Verbatim Interview Q&As list
   const qnas = [
+    // 🧠 TIER 1 — TECHNICAL & SECURITY GOVERNANCE QUESTIONS
     {
       id: 1,
-      level: "beginner",
-      framework: "gdpr",
-      q: "What is GDPR?",
-      a: "GDPR is a global privacy and data protection framework that governs how organizations collect, process, store, share, and protect personal data. It emphasizes transparency, accountability, user privacy rights, and strong operational safeguards to protect sensitive information."
+      level: "tier1",
+      framework: "iso",
+      q: "What is the difference between hashing and encryption?",
+      a: "Encryption is a reversible process used to protect data confidentiality, where information can be decrypted using authorized keys. Hashing, on the other hand, is a one-way cryptographic process primarily used for integrity verification and secure password storage. In enterprise environments, encryption protects sensitive operational data such as cloud storage, backups, VPN traffic, and finance systems, while hashing is commonly used for password protection, integrity validation, and digital verification."
     },
     {
       id: 2,
-      level: "beginner",
-      framework: "gdpr",
-      q: "What is personal data?",
-      a: "Personal data refers to any information that can identify an individual either directly or indirectly. Examples include names, emails, phone numbers, IP addresses, biometrics, access records, and CCTV footage."
+      level: "tier1",
+      framework: "iso",
+      q: "What is RBAC?",
+      a: "Role-Based Access Control is a governance model where system access is assigned based on organizational roles and operational responsibilities rather than individual preference. RBAC improves governance by enforcing least privilege access, reducing insider risk, improving auditability, and simplifying operational access management across enterprise systems."
     },
     {
       id: 3,
-      level: "intermediate",
-      framework: "gdpr",
-      q: "What is Privacy by Design?",
-      a: "Privacy by Design means security and privacy controls must be integrated into systems and operational processes from the beginning rather than added later. Examples include MFA, encryption, least privilege access, secure backups, audit logging, and network segmentation."
+      level: "tier1",
+      framework: "iso",
+      q: "What is Zero Trust?",
+      a: "Zero Trust is a modern security architecture model based on the principle of ‘never trust, always verify.’ It assumes no user, device, network, or system should automatically be trusted, even inside the internal network. Access decisions are continuously validated using identity, device posture, location, behavior, and risk signals. In enterprise environments, Zero Trust improves operational resilience by reducing lateral movement, minimizing insider risk, and strengthening cloud and remote-access governance."
     },
     {
       id: 4,
-      level: "intermediate",
-      framework: "gdpr",
-      q: "What is the difference between a Data Controller and Data Processor?",
-      a: "A Data Controller determines why and how personal data is processed, while a Data Processor processes data on behalf of the controller. In enterprise environments, organizations may act as either or both depending on operational responsibilities and managed services."
+      level: "tier1",
+      framework: "iso",
+      q: "What is a SIEM?",
+      a: "A SIEM, or Security Information and Event Management platform, centralizes security logs, correlates events, detects suspicious activity, and improves incident visibility across enterprise environments. It enables security teams to identify threats faster, investigate incidents, maintain audit evidence, and improve operational monitoring and compliance governance."
     },
+    // 🧠 TIER 2 — GOVERNANCE QUESTIONS
     {
       id: 5,
-      level: "executive",
-      framework: "gdpr",
-      q: "How would you implement GDPR in a multi-site enterprise environment?",
-      a: "I would begin with data discovery and operational risk assessment to understand where personal data exists, how it flows, who accesses it, and the associated operational risks. I would then implement governance controls including: MFA, encryption, access governance, vendor governance, audit logging, backup governance, retention policies, incident response, and continuous monitoring. I would also maintain stakeholder awareness, governance reporting, and regular compliance reviews to ensure operational alignment."
+      level: "tier2",
+      framework: "iso",
+      q: "How do you implement an ISMS?",
+      a: "I would begin with organizational risk assessment, asset identification, governance scoping, and executive stakeholder alignment. From there, I would establish: policies, operational standards, security controls, incident response procedures, access governance, vendor governance, monitoring frameworks, and audit processes. The ISMS must align with operational realities, business objectives, regulatory obligations, and organizational risk exposure. Continuous improvement through reviews, audits, KPI tracking, and governance meetings is also critical."
     },
     {
       id: 6,
-      level: "executive",
-      framework: "kdpa",
-      q: "How would you ensure compliance with the Kenya Data Protection Act?",
-      a: "I would ensure compliance through governance, operational controls, technical safeguards, staff awareness, vendor governance, and continuous monitoring. This includes: access governance, encryption, retention policies, audit logging, backup governance, vendor assessments, and incident response procedures."
+      level: "tier2",
+      framework: "iso",
+      q: "How do you conduct information security audits?",
+      a: "I approach audits through structured governance and evidence-based validation. The process includes: scope definition, control assessment, policy reviews, evidence collection, access reviews, vulnerability reviews, vendor assessments, and operational walkthroughs. I also validate whether operational practices align with documented governance controls and compliance requirements. Audit findings are then categorized by risk level, operational impact, remediation priority, and governance exposure."
     },
     {
       id: 7,
-      level: "executive",
+      level: "tier2",
       framework: "iso",
-      q: "What is ISO 27001?",
-      a: "ISO 27001 is an internationally recognized framework for establishing and managing an Information Security Management System. It provides governance structures, operational controls, and risk management processes that help organizations protect information assets, strengthen operational resilience, and improve compliance."
+      q: "How do you manage third-party risk?",
+      a: "Third-party governance is critical because vendors often have direct or indirect access to organizational systems, infrastructure, and sensitive data. I manage third-party risk through: security assessments, SLA governance, vendor onboarding reviews, access governance, contractual security obligations, compliance validation, and continuous performance monitoring. I also ensure vendors follow least privilege access principles and maintain proper audit visibility."
     },
+    // 🧠 TIER 3 — EXECUTIVE QUESTIONS
     {
       id: 8,
-      level: "executive",
+      level: "tier3",
       framework: "iso",
-      q: "How do you manage information security risks?",
-      a: "I manage information security risks through continuous risk assessment, governance reviews, monitoring, layered security controls, staff awareness, and operational resilience planning."
+      q: "How do you communicate cyber risk to executives?",
+      a: "I avoid overly technical language and instead communicate cyber risk in terms of business impact, operational continuity, financial exposure, reputational impact, regulatory risk, and organizational resilience. For example, instead of discussing firewall vulnerabilities technically, I may explain how a control weakness could increase operational downtime, expose sensitive client data, or affect organizational continuity. Executives need visibility into business impact, risk exposure, mitigation status, and investment priorities rather than purely technical details."
     },
     {
       id: 9,
-      level: "scenario",
+      level: "tier3",
+      framework: "iso",
+      q: "How do you justify security spending?",
+      a: "I justify security investment by aligning it to: operational continuity, regulatory compliance, organizational resilience, risk reduction, and long-term business protection. Security investment should be viewed as risk management and operational enablement rather than simply technical expenditure. I also communicate measurable value such as: reduced downtime, improved recovery capability, compliance alignment, operational resilience, and reduced exposure to ransomware or operational disruption."
+    },
+    {
+      id: 10,
+      level: "tier3",
+      framework: "iso",
+      q: "How do you balance usability and security?",
+      a: "Strong governance requires balancing operational productivity with appropriate security controls. Security should not unnecessarily block business operations, but operational convenience should also not compromise organizational protection. My approach focuses on layered security, risk-based controls, user awareness, automation, and intelligent access governance to maintain both usability and operational resilience."
+    },
+    // 🧠 TIER 4 — CRISIS & INCIDENT QUESTIONS
+    {
+      id: 11,
+      level: "tier4",
       framework: "gdpr",
-      q: "An employee loses a laptop containing sensitive data. What would you do?",
-      a: "I would immediately initiate incident response procedures including: isolating access, disabling accounts, assessing encryption status, reviewing audit logs, evaluating exposure risk, and preserving evidence. I would then escalate internally, assess notification obligations, validate containment measures, and implement remediation and lessons learned activities."
+      q: "A ransomware attack happens during working hours. What do you do?",
+      a: "I would immediately activate incident response governance procedures. The first priority would be containment, operational isolation, and protection of unaffected systems. This may include isolating VLANs, disabling compromised accounts, restricting lateral movement, and protecting backups. I would then preserve evidence, activate leadership escalation, coordinate communication, assess operational impact, validate recovery capability, and initiate recovery procedures. After stabilization, I would conduct root-cause analysis, governance review, remediation, and lessons learned assessment."
+    },
+    {
+      id: 12,
+      level: "tier4",
+      framework: "gdpr",
+      q: "An executive email account is compromised.",
+      a: "I would immediately isolate the affected account, revoke active sessions, enforce password resets, review MFA status, and analyze audit logs for suspicious activity. Because executive accounts typically have elevated exposure and reputational impact, I would also assess email forwarding rules, sensitive communications, cloud application access, and potential lateral movement. I would escalate internally, preserve evidence, coordinate communication, and validate recovery and governance remediation procedures."
+    },
+    {
+      id: 13,
+      level: "tier4",
+      framework: "kdpa",
+      q: "Sensitive CCTV footage leaks online.",
+      a: "I would immediately restrict access to CCTV infrastructure, preserve forensic evidence, assess the source of exposure, review access logs, and isolate affected systems or accounts. I would then coordinate legal review, executive escalation, regulatory assessment, and communication governance. The incident would also trigger access governance review, retention policy review, contractor assessment, and operational remediation activities."
+    },
+    {
+      id: 14,
+      level: "tier4",
+      framework: "iso",
+      q: "A disaster recovery test fails.",
+      a: "I would treat a failed DR test as a critical governance issue because it directly impacts organizational resilience and recovery capability. I would immediately assess root cause, recovery gaps, operational exposure, backup integrity, and failover dependencies. Corrective actions may include infrastructure redesign, backup optimization, process improvements, additional testing, and governance escalation. DR governance must remain continuously validated rather than assumed."
+    },
+    // 🧠 LEADERSHIP COMMUNICATION QUESTIONS
+    {
+      id: 15,
+      level: "leadership",
+      framework: "iso",
+      q: "How do you explain a cyber incident calmly to executives?",
+      a: "I focus on clarity, facts, business impact, and recovery status rather than technical panic. I communicate what happened, what systems are affected, operational impact, containment status, mitigation actions, and next steps. The objective is maintaining executive confidence while ensuring transparency, accountability, and coordinated decision-making."
+    },
+    {
+      id: 16,
+      level: "leadership",
+      framework: "iso",
+      q: "How do you avoid overwhelming executives with technical details?",
+      a: "I translate technical issues into operational and business language. Executives typically care about: operational continuity, client impact, financial exposure, legal exposure, recovery timelines, and organizational risk. My role is bridging technical complexity into strategic decision-making visibility."
+    },
+    // 🧠 CASE STUDY QUESTIONS & FINAL
+    {
+      id: 17,
+      level: "casestudy",
+      framework: "iso",
+      q: "What lessons did you learn from major breaches like Equifax or Colonial Pipeline?",
+      a: "Major breaches consistently demonstrate that governance failures, weak visibility, poor patch management, insufficient segmentation, weak identity governance, and delayed incident response can create catastrophic organizational impact. The key lesson is that cybersecurity is not only a technical function — it is an operational governance and organizational resilience function. Strong visibility, layered controls, continuous monitoring, incident preparedness, executive accountability, and operational discipline are critical."
+    },
+    {
+      id: 18,
+      level: "casestudy",
+      framework: "iso",
+      q: "What makes a strong Head of IT in modern enterprise environments?",
+      a: "A strong Head of IT must combine: technical understanding, operational governance, cybersecurity leadership, financial accountability, vendor management, strategic thinking, compliance awareness, and organizational communication. Modern ICT leadership is no longer only about infrastructure management. It is about protecting organizational operations, enabling business continuity, governing risk, supporting growth, and ensuring technology aligns with long-term organizational objectives and resilience."
     }
   ];
 
@@ -181,10 +363,70 @@ export default function DataProtectionMasterbook() {
             ← Command Centre
           </Link>
           <span className="text-[10px] text-slate-500 font-mono">
-            Protected Sandbox Environment v1.2
+            Protected Sandbox Environment v1.4
           </span>
         </div>
       </div>
+
+      {/* ─── C-LEVEL EXECUTIVE INTRO PERSPECTIVE ─── */}
+      <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/40 via-slate-950 to-slate-950 p-6 sm:p-8 space-y-6">
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.05),transparent_50%)]" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-purple-400">
+          Executive Mindset Perspective
+        </span>
+        <h2 className="text-base sm:text-lg font-black text-slate-100">
+          Head of IT / ICT Manager / ICT Director Position
+        </h2>
+        <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
+          At Head of IT level, organizations no longer expect you to only manage infrastructure, fix systems, or manage users. They expect you to understand: <strong className="text-purple-300">governance, compliance, cyber risk, data protection, privacy, information security, operational accountability, and legal exposure</strong>.
+        </p>
+        <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
+          This is especially critical in highly complex multi-site operations like yours, handling highly sensitive data daily across:
+        </p>
+        <div className="flex flex-wrap gap-2 pt-1">
+          {["Enterprise Clients", "Global Organizations", "Cloud Systems", "Access Control", "CCTV", "Internet Infrastructure", "Finance Systems", "Bookings", "Office RnD", "Zoho", "Google Workspace", "Client-Managed Infrastructure", "Multi-Site Operations"].map((tag) => (
+            <span key={tag} className="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-semibold border border-slate-800/80">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* The 3 Critical Frameworks Overview Table */}
+        <div className="pt-4 overflow-x-auto">
+          <table className="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-500 uppercase tracking-wider font-extrabold">
+                <th className="py-2.5 pr-4">Framework</th>
+                <th className="py-2.5">Core Focus Area</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60 text-slate-300">
+              <tr>
+                <td className="py-3 pr-4 font-bold text-slate-200">1. GDPR</td>
+                <td className="py-3">Privacy & Personal Data Protection (EU Citizen / Global Client Standard)</td>
+              </tr>
+              <tr>
+                <td className="py-3 pr-4 font-bold text-slate-200">2. Kenya Data Protection Act</td>
+                <td className="py-3">Kenyan legal compliance for personal data handling in local operations</td>
+              </tr>
+              <tr>
+                <td className="py-3 pr-4 font-bold text-slate-200">3. ISO 27001</td>
+                <td className="py-3">Information Security Management System (ISMS) Governance & Controls</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Compliance dashboard widget */}
+      <ComplianceDashboard />
+
+      {/* Executivebrief */}
+      <ExecutiveBrief
+        strategy="Establish absolute administrative maturity in front of a boardroom. Demonstrate that IT compliance is a vital operational enabler, translating international frameworks like GDPR and national laws like the KDPA into bulletproof systems architectures under ISO 27001 governance."
+        terms={["Privacy-by-Design", "Section 41 Controls", "Breach forensics readiness", "Least-privilege perimeter", "ISMS risk registry"]}
+        alert="Do not treat compliance as a boring checklist activity. Frame it as the absolute bedrock of commercial trust. Prove how your secure visitor portals, encrypted backups, and vendor risk management keep the organization out of court and secure client DIA contracts."
+      />
 
       {/* ─── SYSTEM NAVIGATION DECK ─── */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -257,10 +499,10 @@ export default function DataProtectionMasterbook() {
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Module 1 — GDPR Fundamentals</span>
                 <h3 className="text-sm font-extrabold text-slate-100">GDPR — General Data Protection Regulation</h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  GDPR is the European Union’s flag-bearer data privacy regulation. It governs how organizations <strong>collect, process, store, transfer, protect, and delete personal data</strong>. Even if your physical branch operations sit entirely in East Africa, GDPR remains contractually and legally binding when managing international NGO circuits, multinational client data (Amazon events), or globally hosted cloud databases.
+                  GDPR is the European Union’s data privacy regulation. It governs how organizations <strong>collect, process, store, transfer, protect, and delete personal data</strong>. Even if a company is outside Europe, GDPR may still apply if it handles EU citizen data, works with international organizations, uses global cloud services, or supports multinational clients.
                 </p>
                 <p className="text-[10px] text-purple-300 font-semibold uppercase tracking-wider">
-                  ⚠️ Critical Environment Fit: Gates Foundation, Amazon, international NGOs, cloud systems, and global multi-site operations.
+                  ⚠️ Critical Environment Scope: Gates Foundation, Amazon, international NGOs, cloud systems, and global clients.
                 </p>
               </div>
 
@@ -268,43 +510,43 @@ export default function DataProtectionMasterbook() {
               <div className="space-y-4">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">📖 Module 2 — GDPR Principles</span>
                 <h4 className="text-xs sm:text-sm font-extrabold text-amber-300 uppercase tracking-wider border-b border-slate-800 pb-2">
-                  The Six Core Principles You Must Master
+                  Core GDPR Principles You Must Know
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
                   <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                     <span className="font-extrabold text-slate-200 block">1. Lawfulness, Fairness & Transparency</span>
-                    <p className="text-slate-400">Clearly explain why personal data is collected, how it is processed, and who holds active access.</p>
-                    <p className="text-amber-400/90 text-[11px] italic">Example: Biometric visitor logs, Suprema access cards, CCTV cameras, HR booking databases.</p>
+                    <p className="text-slate-400">You must clearly explain why data is collected, how it is used, and who accesses it.</p>
+                    <p className="text-amber-400/90 text-[11px] italic">Example in your environment: visitor management systems, access control, CCTV, HR systems, bookings systems, biometrics.</p>
                   </div>
 
                   <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                     <span className="font-extrabold text-slate-200 block">2. Purpose Limitation</span>
-                    <p className="text-slate-400">Only collect data for a highly specific, explicit, and legitimate purpose.</p>
-                    <p className="text-rose-400 text-[11px] font-semibold">❌ Bad example: Collecting national ID / passport digits just to grant local WiFi access.</p>
+                    <p className="text-slate-400">Only collect data for a highly specific and legitimate purpose.</p>
+                    <p className="text-rose-400 text-[11px] font-semibold">❌ Bad example: Collecting ID/passport data for WiFi access when not necessary.</p>
                   </div>
 
                   <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                     <span className="font-extrabold text-slate-200 block">3. Data Minimization</span>
-                    <p className="text-slate-400">Only collect the absolute minimum necessary information to provide the service.</p>
-                    <p className="text-emerald-400/90 text-[11px] font-semibold">✅ Good example: Guest WiFi signup requiring only email and phone, skipping passports, physical biometrics, or addresses.</p>
+                    <p className="text-slate-400">Only collect the minimum necessary data to perform operations.</p>
+                    <p className="text-emerald-400/90 text-[11px] font-semibold">✅ Example: For guest WiFi: maybe only email and phone number, not passport, address, or biometrics.</p>
                   </div>
 
                   <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                     <span className="font-extrabold text-slate-200 block">4. Accuracy</span>
-                    <p className="text-slate-400">Personal databases must remain continuously updated and verified.</p>
-                    <p className="text-slate-400 text-[11px]">Controls: Regular checks of access databases, tenant portals, and client CRM records.</p>
+                    <p className="text-slate-400">Data must remain updated and correct across operational networks.</p>
+                    <p className="text-slate-400 text-[11px]">Example: Access control users, staff records, tenant systems, client databases.</p>
                   </div>
 
                   <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                     <span className="font-extrabold text-slate-200 block">5. Storage Limitation</span>
-                    <p className="text-slate-400">Do not store personal logs indefinitely. Establish clear, hard deletion and archive schedules.</p>
-                    <p className="text-slate-400 text-[11px] italic">Example: Deleting CCTV records, removing former staff credentials, purging outdated visitor registers.</p>
+                    <p className="text-slate-400">Do not keep data forever. You must define retention periods, deletion policies, and archival processes.</p>
+                    <p className="text-slate-400 text-[11px] italic">Example: CCTV footage retention, former employee accounts, old visitor logs.</p>
                   </div>
 
                   <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                     <span className="font-extrabold text-slate-200 block">6. Integrity & Confidentiality</span>
-                    <p className="text-slate-400">Protect systems, access rights, backups, WAN routes, endpoints, cloud hosts, and databases.</p>
-                    <p className="text-purple-400 text-[11px] font-bold">This is where cybersecurity directly supports your compliance posture.</p>
+                    <p className="text-slate-400">You must protect: systems, access, backups, networks, endpoints, cloud environments, and databases.</p>
+                    <p className="text-purple-400 text-[11px] font-bold">This is where cybersecurity becomes part of compliance.</p>
                   </div>
                 </div>
               </div>
@@ -313,18 +555,14 @@ export default function DataProtectionMasterbook() {
               <div className="p-5 rounded-2xl border border-slate-800 bg-slate-950/40 space-y-3">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">📖 Module 3 — Data Subject Rights</span>
                 <h4 className="text-xs sm:text-sm font-extrabold text-blue-300 uppercase tracking-wider">
-                  Data Subject Rights in Enterprise Operations
+                  GDPR Rights of Users (Very Important)
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  Under GDPR guidelines, all users, staff, and enterprise tenants maintain explicit rights that IT architectures must natively facilitate:
+                  Users have the right to know what data you hold, request deletion, request correction, request export, and object to processing.
                 </p>
-                <ul className="space-y-2 pl-4 list-disc text-slate-400 text-xs sm:text-sm">
-                  <li><strong>Right to Access:</strong> Know exactly what personal data is held in central databases.</li>
-                  <li><strong>Right to Deletion (To Be Forgotten):</strong> Request permanent deletion of historical tenant profiles and CRM records.</li>
-                  <li><strong>Right to Rectification:</strong> Request correction of misaligned records (e.g. Suprema biometric cards, email logs).</li>
-                  <li><strong>Right to Portability (Export):</strong> Export a structured database of personal profiles for migration.</li>
-                  <li><strong>Right to Object/Restriction:</strong> Object to automated data collection or background processing.</li>
-                </ul>
+                <p className="text-xs text-slate-400">
+                  <strong>Example in practice:</strong> An employee requests deletion of old records, export of personal information, or removal from mailing systems.
+                </p>
               </div>
 
               {/* Environmental Mapping */}
@@ -336,35 +574,19 @@ export default function DataProtectionMasterbook() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
                   <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
                     <span className="font-bold text-slate-200 block">Access Control</span>
-                    <span className="text-slate-400 block">Biometric fingerprints and check-in logs must remain locally encrypted.</span>
+                    <span className="text-slate-400 block">Biometrics & access logs must remain locally encrypted.</span>
                   </div>
                   <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
                     <span className="font-bold text-slate-200 block">CCTV Networks</span>
-                    <span className="text-slate-400 block">Surveillance footage restricted strictly to security NVR cabinets.</span>
+                    <span className="text-slate-400 block">Surveillance privacy & NVR storage logs isolated.</span>
                   </div>
                   <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
                     <span className="font-bold text-slate-200 block">Google Workspace</span>
-                    <span className="text-slate-400 block">Admin logs, file sharing, and emails subjected to strict MFA permissions.</span>
+                    <span className="text-slate-400 block">Admin logs, file sharing, and emails governed with MFA.</span>
                   </div>
                   <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
                     <span className="font-bold text-slate-200 block">WiFi / Internet</span>
-                    <span className="text-slate-400 block">Separate VLANs isolating tenant circuits from internal server databases.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">Booking Systems</span>
-                    <span className="text-slate-400 block">Tenant registries (Office RnD, Zoho) protected under secure credentials.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">Finance Platforms</span>
-                    <span className="text-slate-400 block">Invoice details encrypted both in transit and at rest in local hosts.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">HR Systems</span>
-                    <span className="text-slate-400 block">Staff profiles and sensitive contracts restricted to authorized personnel.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">Cloud Backups</span>
-                    <span className="text-slate-400 block">Encrypted backup replication over secure AWS / offsite pipelines.</span>
+                    <span className="text-slate-400 block">VLAN network isolation between clients & guest hubs.</span>
                   </div>
                 </div>
               </div>
@@ -378,30 +600,27 @@ export default function DataProtectionMasterbook() {
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Section 2 — Kenya Data Protection Act</span>
                 <h3 className="text-sm font-extrabold text-slate-100">Kenya DPA Legal Governance</h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  The Kenya Data Protection Act governs how organizations operating in Kenya handle personal data. It aligns closely with GDPR, but mandates strict local accountability including registration with the <strong>Office of the Data Protection Commissioner (ODPC)</strong>.
-                </p>
-                <p className="text-[10px] text-purple-300 font-semibold uppercase tracking-wider">
-                  🎯 Strategic Focus: Visitor management, biometric Suprema door access, local staff records, tenant invoicing, and local multi-site branch WAN hubs.
+                  The Kenya Data Protection Act is the local implementation of data privacy governance in Kenya. Very important for you because you operate in Kenya, manage Kenyan user data, and support enterprise clients. The Act establishes rules for personal data handling, responsibilities of organizations, rights of users, and penalties for non-compliance.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-5 rounded-2xl border border-slate-850 bg-slate-900/10 space-y-3 text-xs sm:text-sm">
                   <h4 className="font-extrabold text-amber-300 uppercase tracking-wider">
-                    Key Areas You MUST Master
+                    Key Areas You MUST Know
                   </h4>
                   <ul className="space-y-2.5 pl-0 list-none text-slate-300">
                     <li>
                       <strong className="text-slate-200 block">A. Principles of Data Protection</strong>
-                      Requires personal data to be: lawfully processed, collected for explicit purposes, limited to minimum required scope, accurate, highly protected, and retained only as long as necessary.
+                      Requires personal data to be: lawfully processed, collected for specific purposes, limited to what is necessary, accurate, protected, and retained only as long as necessary.
                     </li>
                     <li>
                       <strong className="text-slate-200 block">B. Rights of Data Subjects</strong>
-                      Kenyan citizens maintain rights to access data, request corrections, request permanent deletion, and object to background processing.
+                      Kenyan citizens maintain rights to access data, request corrections, request permanent deletion, and object to processing.
                     </li>
                     <li>
                       <strong className="text-slate-200 block">C. Data Controllers & Processors</strong>
-                      Kenyan controllers/processors must formally register and implement security safeguards. Depending on client setups, KOFISI / KEMRI may act as controller, processor, or both.
+                      Organizations handling personal data must register and comply with operational safeguards. In your environment, KOFISI may act as data controller, processor, or both, depending on the service.
                     </li>
                   </ul>
                 </div>
@@ -413,11 +632,12 @@ export default function DataProtectionMasterbook() {
                   <div className="space-y-3">
                     <div className="space-y-1">
                       <span className="font-bold text-slate-200 block">Section 41 — Data Protection by Design</span>
-                      <p className="text-slate-400">Security and privacy controls must be built INTO systems from the beginning, not bolted on after. Enforce MFA, BitLocker, limited permissions, segmented guest WiFi, restricted CCTV access, and encrypted backups.</p>
+                      <p className="text-slate-400">Security and privacy must be built INTO systems from the beginning. Examples include: MFA enabled by default, encrypted laptops, role-based access, limited permissions, secure WiFi segmentation, CCTV access restrictions, VPN enforcement, password policies, and backup encryption.</p>
+                      <p className="text-purple-400/90 text-[11px] font-semibold mt-1">The Act specifically requires: risk identification, safeguards, encryption, ability to restore systems, and continuous improvement.</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="font-bold text-slate-200 block">Section 43 — Breach Notification Mandate</span>
-                      <p className="text-slate-400">If a breach occurs, the Data Commissioner (ODPC) must be formally notified within <strong className="text-rose-400">72 hours</strong>. Requires active SIEM alerts, logging, forensic readiness, and response runbooks.</p>
+                      <span className="font-bold text-slate-200 block">Section 43 — Breach Notification</span>
+                      <p className="text-slate-400">Very important. Breaches must be reported within <strong className="text-rose-400">72 hours</strong> to the Data Commissioner. As Head of IT, you must have incident response, logging, monitoring, forensic readiness, escalation workflows, and communication plans.</p>
                     </div>
                   </div>
                 </div>
@@ -432,7 +652,7 @@ export default function DataProtectionMasterbook() {
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Section 3 — ISO 27001 Governance</span>
                 <h3 className="text-sm font-extrabold text-slate-100">ISO 27001 — Information Security Management System (ISMS)</h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  ISO 27001 is NOT just about cybersecurity firewalls. It is a comprehensive governance framework for managing information security organization-wide, linking <strong>People, Processes, Technology, Risks, Compliance, and Continuity</strong>.
+                  ISO 27001 is the biggest executive framework. It is NOT just cybersecurity. It is a governance framework for managing information security organization-wide, scoping People, Processes, Technology, Risk, Compliance, and Continuity.
                 </p>
               </div>
 
@@ -440,21 +660,21 @@ export default function DataProtectionMasterbook() {
                 <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                   <span className="font-extrabold text-slate-200 block">1. Security Triad (CIA)</span>
                   <ul className="space-y-1 pl-4 list-disc text-slate-300">
-                    <li><strong>Confidentiality:</strong> Only validated identities access systems.</li>
-                    <li><strong>Integrity:</strong> Data remains accurate and unmodified.</li>
-                    <li><strong>Availability:</strong> Redundant infrastructure protects SLA access.</li>
+                    <li><strong>Confidentiality:</strong> Only authorized people access data.</li>
+                    <li><strong>Integrity:</strong> Data remains accurate and unchanged.</li>
+                    <li><strong>Availability:</strong> Systems remain accessible when needed.</li>
                   </ul>
                 </div>
 
                 <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                   <span className="font-extrabold text-slate-200 block">2. Risk Management</span>
-                  <p className="text-slate-400">Risk-driven controls. Identify threat likelihood, assess financial/downtime impact, treatment, and continuous reviews.</p>
-                  <p className="text-rose-400 text-[11px] font-semibold">Risks: ransomware, insider threat, fiber cut, weak passwords, stolen laptop.</p>
+                  <p className="text-slate-400">ISO 27001 is heavily risk-driven. Identify risks, assess likelihood, assess impact, implement controls, and continuously review.</p>
+                  <p className="text-rose-400 text-[11px] font-semibold">Example risks: ISP outage, ransomware, insider threats, CCTV compromise, cloud exposure, vendor compromise, stolen laptops, phishing, weak passwords.</p>
                 </div>
 
                 <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
                   <span className="font-extrabold text-slate-200 block">3. Asset & Access Control</span>
-                  <p className="text-slate-400">Formal asset logs mapping life cycle, owners, and risks. access governance, role-based access, PAM, and mandatory quarterly reviews.</p>
+                  <p className="text-slate-400">Identify what assets exist, their owners, and lifecycle status. Implement access controls such as RBAC, PAM, MFA, access reviews, onboarding/offboarding, and least privilege.</p>
                 </div>
               </div>
             </div>
@@ -477,39 +697,55 @@ export default function DataProtectionMasterbook() {
                 activeQnaLevel === "all" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              All Levels ({qnas.length})
+              All Q&As ({qnas.length})
             </button>
             <button
-              onClick={() => setActiveQnaLevel("beginner")}
+              onClick={() => setActiveQnaLevel("tier1")}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
-                activeQnaLevel === "beginner" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+                activeQnaLevel === "tier1" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              Beginner-Level
+              Tier 1 (Technical)
             </button>
             <button
-              onClick={() => setActiveQnaLevel("intermediate")}
+              onClick={() => setActiveQnaLevel("tier2")}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
-                activeQnaLevel === "intermediate" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+                activeQnaLevel === "tier2" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              Intermediate-Level
+              Tier 2 (Governance)
             </button>
             <button
-              onClick={() => setActiveQnaLevel("executive")}
+              onClick={() => setActiveQnaLevel("tier3")}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
-                activeQnaLevel === "executive" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+                activeQnaLevel === "tier3" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              Executive-Level
+              Tier 3 (Executive)
             </button>
             <button
-              onClick={() => setActiveQnaLevel("scenario")}
+              onClick={() => setActiveQnaLevel("tier4")}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
-                activeQnaLevel === "scenario" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+                activeQnaLevel === "tier4" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              Scenario-Based
+              Tier 4 (Crisis/Incidents)
+            </button>
+            <button
+              onClick={() => setActiveQnaLevel("leadership")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                activeQnaLevel === "leadership" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              Leadership Comm
+            </button>
+            <button
+              onClick={() => setActiveQnaLevel("casestudy")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${
+                activeQnaLevel === "casestudy" ? "bg-purple-500/10 text-purple-300" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              Case Study & Final
             </button>
           </div>
 
@@ -542,7 +778,7 @@ export default function DataProtectionMasterbook() {
                 >
                   <div className="flex flex-wrap gap-1.5 items-center justify-between">
                     <span className="px-2 py-0.5 rounded bg-slate-950 text-slate-400 text-[10px] font-bold uppercase tracking-wider">
-                      {item.level} · {item.framework.toUpperCase()}
+                      {item.level.toUpperCase()} · {item.framework.toUpperCase()}
                     </span>
                     <span className="text-[10px] text-slate-500 font-mono">Q-ID: {item.id}</span>
                   </div>
@@ -555,9 +791,9 @@ export default function DataProtectionMasterbook() {
                     <div className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400">
                       Strong Executive Answer:
                     </div>
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed border-l-2 border-purple-500/40 pl-4 italic">
-                      "{renderAnswerWithTooltips(item.a)}"
-                    </p>
+                    <div className="text-slate-300 text-xs sm:text-sm leading-relaxed border-l-2 border-purple-500/40 pl-4 italic space-y-2">
+                      {renderAnswerWithTooltips(item.a)}
+                    </div>
                   </div>
                 </div>
               ))
@@ -691,8 +927,10 @@ export default function DataProtectionMasterbook() {
                   Data Protection & Compliance Risk Dashboard
                 </h3>
               </div>
-              <div className={`px-3 py-1.5 rounded-xl border text-[11px] font-extrabold tracking-wide ${scoreColor} self-start`}>
-                {scoreLabel}
+              <div className={`px-3 py-1.5 rounded-xl border text-[11px] font-extrabold tracking-wide ${
+                simScore >= 90 ? "text-emerald-400 border-emerald-500/20 bg-emerald-500/[0.02]" : simScore >= 60 ? "text-amber-400 border-amber-500/20 bg-amber-500/[0.02]" : "text-rose-500 border-rose-500/20 bg-rose-500/[0.02]"
+              } self-start`}>
+                {simScore >= 90 ? "BOARDROOM DEFENSIBLE COMPLIANCE POSTURE" : simScore >= 60 ? "MODERATE REGULATORY RISK (ACTION REQUIRED)" : "CRITICAL COMPLIANCE EXPOSURE"}
               </div>
             </div>
 
@@ -702,8 +940,8 @@ export default function DataProtectionMasterbook() {
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <input
                     type="checkbox"
-                    checked={gdprAudit}
-                    onChange={(e) => setGdprAudit(e.target.checked)}
+                    checked={simGdpr}
+                    onChange={(e) => setSimGdpr(e.target.checked)}
                     className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
                   />
                   <div className="text-xs">
@@ -715,8 +953,8 @@ export default function DataProtectionMasterbook() {
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <input
                     type="checkbox"
-                    checked={kdpaRegistered}
-                    onChange={(e) => setKdpaRegistered(e.target.checked)}
+                    checked={simKdpa}
+                    onChange={(e) => setSimKdpa(e.target.checked)}
                     className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
                   />
                   <div className="text-xs">
@@ -728,8 +966,8 @@ export default function DataProtectionMasterbook() {
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <input
                     type="checkbox"
-                    checked={isoControlActive}
-                    onChange={(e) => setIsoControlActive(e.target.checked)}
+                    checked={simIso}
+                    onChange={(e) => setSimIso(e.target.checked)}
                     className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
                   />
                   <div className="text-xs">
@@ -741,8 +979,8 @@ export default function DataProtectionMasterbook() {
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <input
                     type="checkbox"
-                    checked={staffAwareness}
-                    onChange={(e) => setStaffAwareness(e.target.checked)}
+                    checked={simStaff}
+                    onChange={(e) => setSimStaff(e.target.checked)}
                     className="w-4 h-4 rounded bg-slate-900 border-slate-800 text-purple-500 focus:ring-purple-500/40 accent-purple-500"
                   />
                   <div className="text-xs">
@@ -758,15 +996,15 @@ export default function DataProtectionMasterbook() {
                   Total Compliance Score
                 </span>
                 <div className="text-4xl sm:text-5xl font-mono font-black tracking-tight text-slate-100">
-                  <span className={complianceScore > 80 ? "text-emerald-400 animate-bounce" : complianceScore > 50 ? "text-amber-400" : "text-rose-500"}>
-                    {complianceScore}
+                  <span className={simScore > 80 ? "text-emerald-400 animate-bounce" : simScore > 50 ? "text-amber-400" : "text-rose-500"}>
+                    {simScore}
                   </span>
                   <span className="text-slate-600">/100</span>
                 </div>
                 <p className="text-xs text-slate-400 max-w-xs leading-relaxed mt-2">
-                  {complianceScore >= 90
+                  {simScore >= 90
                     ? "✅ Defensible posture. Your multi-site operations are insulated from catastrophic compliance liability and fines."
-                    : complianceScore >= 60
+                    : simScore >= 60
                     ? "⚠️ Warning: Legal vulnerabilities exist. File KDPA certificates and activate least-privilege controls instantly."
                     : "🚨 Critical Risk: Unprepared status. You are heavily exposed to heavy fines, data theft, and brand damage."}
                 </p>
