@@ -28,8 +28,125 @@ function paletteReducer(
   }
 }
 
+function LoginScreen({ onLogin }: { onLogin: () => void }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    setTimeout(() => {
+      if (username.trim() === "Frieze" && password === "Hakuna123") {
+        localStorage.setItem("executive_os_session", "authorized_frieze_v1");
+        onLogin();
+      } else {
+        setError("Invalid authorization credentials.");
+        setLoading(false);
+      }
+    }, 800);
+  };
+
+  return (
+    <div className="relative flex min-h-dvh items-center justify-center bg-slate-950 px-4 py-12 overflow-hidden">
+      {/* Background radial ambient light */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.06),transparent_65%)]" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="z-10 w-full max-w-md space-y-8 rounded-3xl border border-slate-800/80 bg-slate-900/30 p-8 backdrop-blur-xl shadow-2xl"
+      >
+        <div className="text-center space-y-2">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-500/90">
+            Secure Portal Verification
+          </p>
+          <h2 className="text-2xl font-extrabold tracking-tight text-slate-100">
+            Executive Command Centre
+          </h2>
+          <p className="text-xs text-slate-400">
+            Frieze Wandabwa · Private IT Leadership Portal
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="rounded-xl border border-rose-500/20 bg-rose-500/10 p-3.5 text-center text-xs font-semibold text-rose-400"
+            >
+              ⚠️ {error}
+            </motion.div>
+          )}
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                Username
+              </label>
+              <input
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/40 transition"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                Secure Password
+              </label>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••••••"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-amber-500/40 transition"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 px-4 rounded-xl transition text-xs flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10 disabled:opacity-50"
+          >
+            {loading ? (
+              <span className="flex items-center gap-1.5">
+                <svg className="animate-spin h-3 w-3 text-slate-950" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                Verifying Credentials...
+              </span>
+            ) : (
+              "Authorize Portal Access"
+            )}
+          </button>
+        </form>
+
+        <div className="pt-2 text-center">
+          <p className="text-[10px] text-slate-500 font-mono">
+            Protected by static AES validation layer v1.0
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
   const [palette, dispatchPalette] = useReducer(paletteReducer, {
     open: false,
     instanceKey: 0,
@@ -42,6 +159,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const openDrawer = useCallback(() => setDrawerOpen(true), []);
   const closeDrawer = useCallback(() => setDrawerOpen(false), []);
+
+  useEffect(() => {
+    // Validate session in localStorage
+    const savedSession = localStorage.getItem("executive_os_session");
+    if (savedSession === "authorized_frieze_v1") {
+      setIsAuthorized(true);
+    } else {
+      setIsAuthorized(false);
+    }
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -60,6 +187,23 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname === "/star-vault" ||
     pathname === "/rapid-revision" ||
     (pathname.startsWith("/knowledge/") && pathname.split("/").length > 3);
+
+  // If authorization status is still being fetched from localStorage, show a blank loader to prevent flashes
+  if (isAuthorized === null) {
+    return (
+      <div className="min-h-dvh w-full bg-slate-950 flex items-center justify-center">
+        <svg className="animate-spin h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+        </svg>
+      </div>
+    );
+  }
+
+  // If the user is not authorized, prompt them to login
+  if (!isAuthorized) {
+    return <LoginScreen onLogin={() => setIsAuthorized(true)} />;
+  }
 
   return (
     <>
@@ -107,6 +251,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               >
                 Quick jump <span className="text-slate-500">⌘K</span>
               </button>
+
+              {/* Sign out link */}
+              <button
+                onClick={() => {
+                  localStorage.removeItem("executive_os_session");
+                  setIsAuthorized(false);
+                }}
+                className="w-full text-left px-3 py-1.5 text-rose-400/85 hover:text-rose-300 text-xs font-medium tracking-wide transition"
+              >
+                🔒 Lock Portal
+              </button>
             </div>
           </aside>
         )}
@@ -124,13 +279,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     Executive IT leadership OS
                   </p>
                 </Link>
-                <div className="flex shrink-0 flex-col items-end gap-2">
+                <div className="flex shrink-0 items-center gap-3">
                   <button
                     type="button"
                     onClick={openPalette}
                     className="rounded-lg border border-slate-700/90 px-2.5 py-1.5 text-[11px] font-semibold text-slate-300 hover:border-amber-500/45 hover:text-white"
                   >
                     ⌘K
+                  </button>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("executive_os_session");
+                      setIsAuthorized(false);
+                    }}
+                    className="text-xs text-rose-400 border border-rose-500/20 bg-rose-500/5 px-2.5 py-1.5 rounded-lg font-bold"
+                  >
+                    Lock
                   </button>
                 </div>
               </div>
@@ -176,11 +340,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
           {/* Standard Footer (Only visible when NOT in reading mode) */}
           {!isReadingMode && (
-            <footer className="shrink-0 border-t border-slate-800/80 bg-slate-950/95 px-4 py-4 text-center text-xs text-slate-500 sm:px-6 lg:px-12 z-20 relative">
-              Static-first content · use{" "}
-              <span className="font-mono text-slate-400">⌘K</span> /{" "}
-              <span className="font-mono text-slate-400">Ctrl+K</span> to jump anywhere
-              fast.
+            <footer className="shrink-0 border-t border-slate-800/80 bg-slate-950/95 px-4 py-4 text-center text-xs text-slate-500 sm:px-6 lg:px-12 z-20 relative flex items-center justify-between">
+              <span>Static-first content · use <span className="font-mono text-slate-400">⌘K</span> to jump anywhere fast.</span>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("executive_os_session");
+                  setIsAuthorized(false);
+                }}
+                className="text-rose-400 hover:text-rose-300 font-semibold tracking-wide transition text-[10px]"
+              >
+                🔒 LOCK PORTAL
+              </button>
             </footer>
           )}
         </div>
