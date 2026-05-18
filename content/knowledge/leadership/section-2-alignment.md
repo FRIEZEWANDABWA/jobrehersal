@@ -25,6 +25,8 @@ Executives care about:
 
 This chapter teaches how to think like that.
 
+![Aligning IT Strategy with Business Objectives](/executive-alignment-playbook.jpg)
+
 ## 1. WHAT “ALIGNMENT” ACTUALLY MEANS
 
 Alignment does **NOT** mean:
