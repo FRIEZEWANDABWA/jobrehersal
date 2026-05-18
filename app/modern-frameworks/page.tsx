@@ -6,9 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ExecutiveBrief, TermTooltip } from "@/components/learningComponents";
 import { 
   Shield, BookOpen, Activity, ChevronDown, ChevronRight, Check, 
-  HelpCircle, ExternalLink, RefreshCw, Cpu, Award
+  HelpCircle, ExternalLink, RefreshCw, Cpu, Award, Settings, Terminal
 } from "lucide-react";
-import { modernFrameworksData, masterFrameworkInterviewQuestion, FrameworkModel } from "./frameworksData";
+import { modernFrameworksData, masterFrameworkInterviewQuestion } from "./frameworksData";
 
 const masterbookGlossary = [
   { term: "NIST", definition: "National Institute of Standards and Technology - cybersecurity maturity and risk management framework." },
@@ -25,7 +25,16 @@ const masterbookGlossary = [
   { term: "MFA", definition: "Multi-Factor Authentication - mandatory security confirmation requiring multiple independent verification factors." },
   { term: "RBAC", definition: "Role-Based Access Control - restricting directory access privileges strictly to active job responsibilities." },
   { term: "PAM", definition: "Privileged Access Management - administrative access monitoring and credential session recording." },
-  { term: "SLA", definition: "Service Level Agreement - contractually committed service response and availability metrics." }
+  { term: "SLA", definition: "Service Level Agreement - contractually committed service response and availability metrics." },
+  { term: "OLA", definition: "Operational Level Agreement - internal support commitment between technical teams." },
+  { term: "CMDB", definition: "Configuration Management Database - tracks assets, application dependencies, and relationships." },
+  { term: "EDR", definition: "Endpoint Detection and Response - continuous endpoint monitoring and behavioral threat containment." },
+  { term: "XDR", definition: "Extended Detection and Response - cross-platform security telemetry and threat containment." },
+  { term: "CAB", definition: "Change Advisory Board - reviews business risks and approvals for system changes." },
+  { term: "RCA", definition: "Root Cause Analysis - systematic process determining why systems failures occurred." },
+  { term: "RTO", definition: "Recovery Time Objective - target time limit to restore systems after a failure." },
+  { term: "RPO", definition: "Recovery Point Objective - maximum acceptable data loss duration during an outage." },
+  { term: "BIA", definition: "Business Impact Analysis - identifying critical services and financial impact of downtime." }
 ];
 
 function renderAnswerWithTooltips(text: string) {
@@ -52,7 +61,7 @@ function renderAnswerWithTooltips(text: string) {
 
 export default function ModernFrameworksMasterbook() {
   const [activeTab, setActiveTab] = useState<"theory" | "qna" | "simulation">("theory");
-  const [selectedFrameworkId, setSelectedFrameworkId] = useState("nist");
+  const [selectedFrameworkId, setSelectedFrameworkId] = useState("nist-advanced");
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [masteredSections, setMasteredSections] = useState<Record<string, boolean>>({});
   const [searchQuery, setSearchQuery] = useState("");
@@ -84,13 +93,13 @@ export default function ModernFrameworksMasterbook() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-slate-800/80 pb-6">
         <div>
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-purple-400">
-            Executive OS · Layer 2 · Modern Governance
+            Executive OS · Layer 2 · Advanced Enterprise Governance
           </span>
           <h1 className="mt-2 text-3xl font-black tracking-tight text-slate-100 sm:text-4xl">
-            Modern Frameworks & Cyber Governance
+            Enterprise Governance & Cyber Leadership
           </h1>
           <p className="mt-2 text-sm text-slate-400 max-w-2xl">
-            Speak like a senior IT leader. Align operations with corporate risk, standardize organizational resilience, and execute boardroom-defensible cyber security controls.
+            The elite strategic space where CIOs, CISOs, and Heads of IT operate. Govern enterprise risks, lead crisis responses, justify cybersecurity budgets, and ensure operational resilience.
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:items-end">
@@ -98,7 +107,7 @@ export default function ModernFrameworksMasterbook() {
             ← Command Centre
           </Link>
           <span className="text-[10px] text-slate-500 font-mono">
-            Strategic Maturity Sandbox v2.0
+            Strategic Leadership Sandbox v2.5
           </span>
         </div>
       </div>
@@ -107,26 +116,26 @@ export default function ModernFrameworksMasterbook() {
       <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/40 via-slate-950 to-slate-950 p-6 sm:p-8 space-y-6">
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.05),transparent_50%)]" />
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-purple-400">
-          Executive Leadership Coordinates
+          Enterprise Governance & Cyber Leadership
         </span>
         <h2 className="text-base sm:text-lg font-black text-slate-100">
-          Advanced IT Leadership & Cyber Governance Masterclass
+          Strategic Executive OS Layer
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
           <div className="space-y-4">
             <p>
-              The defining difference between technical specialists and senior executive IT leadership is simple:
+              This represents the layer of corporate technology management where CIOs think, boards are briefed, regulators are satisfied, and organizational resilience is guaranteed.
             </p>
-            <div className="border-l-2 border-amber-500/40 pl-3 italic text-slate-400">
-              "Junior IT focuses on fixing systems and chasing alerts. Senior IT leadership focuses on reducing business risk, enabling business continuity, governance, resilience, compliance, and strategic alignment."
+            <div className="border-l-2 border-purple-500/40 pl-3 italic text-slate-400">
+              "An IT engineer focuses on resolving technology issues. An enterprise technology leader focuses on managing corporate risk, securing compliance, guiding budgets, and safeguarding business continuity."
             </div>
             <p>
-              By leveraging globally respected frameworks, you stop discussing simple ticket logs and begin aligning technology investments directly with business growth, board visibility, and legal defense.
+              By mastering these 10 core technology governance modules, you gain the strategic posture to direct large-scale transformations, steer steering committees, and command executive trust.
             </p>
           </div>
           <div className="p-5 rounded-2xl border border-slate-800 bg-slate-950/40 flex flex-col justify-between">
             <div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">Overall Frameworks Mastery</span>
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">Governance Mastery Index</span>
               <div className="flex items-end gap-3 mt-2">
                 <span className="text-3xl font-black text-slate-100 font-mono leading-none">{overallProgress}%</span>
                 <span className="text-[10px] font-mono text-purple-400 mb-1">{masteredCount} of {totalSections} Sections Mastered</span>
@@ -139,7 +148,7 @@ export default function ModernFrameworksMasterbook() {
               </div>
             </div>
             <p className="text-[10px] text-slate-500 leading-relaxed mt-4">
-              ✅ Marking sections as mastered saves your progress locally, simulating dynamic boardroom preparedness readiness indices.
+              ✅ Marking sections as mastered saves your progress locally, tracking your strategic boardroom preparedness index.
             </p>
           </div>
         </div>
@@ -155,7 +164,7 @@ export default function ModernFrameworksMasterbook() {
               : "border-transparent text-slate-400 hover:text-slate-200"
           }`}
         >
-          📖 Frameworks Academy (Theory)
+          📖 Leadership Academy (10 Modules)
         </button>
         <button
           onClick={() => setActiveTab("qna")}
@@ -184,8 +193,8 @@ export default function ModernFrameworksMasterbook() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Framework Left Selector Deck */}
           <div className="lg:col-span-4 space-y-3">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block px-1">Select Cyber Governance Framework</span>
-            <div className="space-y-2 bg-slate-950 p-2 rounded-2xl border border-slate-800/80">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 block px-1">Academy Syllabus Tracks</span>
+            <div className="space-y-2 bg-slate-950 p-2 rounded-2xl border border-slate-800/80 max-h-[600px] overflow-y-auto no-scrollbar">
               {modernFrameworksData.map((fw) => {
                 const isSelected = selectedFrameworkId === fw.id;
                 // Calculate individual framework progress
@@ -200,7 +209,7 @@ export default function ModernFrameworksMasterbook() {
                       setSelectedFrameworkId(fw.id);
                       setExpandedSection(null);
                     }}
-                    className={`w-full text-left p-4 rounded-xl border transition-all duration-200 flex flex-col justify-between gap-3 ${
+                    className={`w-full text-left p-3 rounded-xl border transition-all duration-200 flex flex-col justify-between gap-2 ${
                       isSelected
                         ? "bg-purple-500/10 border-purple-500/30 text-purple-300 shadow-md"
                         : "bg-transparent border-transparent hover:bg-slate-900/60 text-slate-400 hover:text-slate-200"
@@ -208,14 +217,14 @@ export default function ModernFrameworksMasterbook() {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <span className="text-xs font-black uppercase tracking-wider text-slate-200 block">
-                          {fw.name}
+                        <span className="text-xs font-black uppercase tracking-wider text-slate-200 block line-clamp-1">
+                          {fw.name.replace("MODULE ", "M")}
                         </span>
-                        <span className="text-[10px] text-slate-400 block mt-0.5">
+                        <span className="text-[9px] text-slate-500 block mt-0.5 font-mono">
                           {fw.focusArea}
                         </span>
                       </div>
-                      <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full border ${
+                      <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded-full border ${
                         fwProg === 100 
                           ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" 
                           : "bg-slate-900 border-slate-800 text-slate-400"
@@ -223,7 +232,7 @@ export default function ModernFrameworksMasterbook() {
                         {fwProg}%
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400 leading-normal line-clamp-2">
+                    <p className="text-[10px] text-slate-400 leading-normal line-clamp-1">
                       {fw.shortDesc}
                     </p>
                   </button>
@@ -237,7 +246,7 @@ export default function ModernFrameworksMasterbook() {
             {/* Framework Header Panel */}
             <div className="p-6 rounded-3xl border border-slate-800 bg-slate-900/10 space-y-4">
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">
-                Framework Focus · {selectedFramework.focusArea}
+                Module Category · {selectedFramework.focusArea}
               </span>
               <h3 className="text-xl font-black text-slate-100">{selectedFramework.name}</h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -245,14 +254,35 @@ export default function ModernFrameworksMasterbook() {
               </p>
               
               <div className="border-t border-slate-800/80 pt-4 mt-2">
-                <span className="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider block">🎯 Core Boardroom Purpose</span>
+                <span className="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider block">🎯 Core Governance Objective</span>
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic mt-1.5 pl-3 border-l-2 border-amber-500/40">
                   {selectedFramework.corePurpose}
                 </p>
               </div>
 
+              {/* Display framework custom tables if present */}
+              {selectedFramework.tables && selectedFramework.tables.map((table, tIdx) => (
+                <div key={tIdx} className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950/40 p-4 space-y-2 mt-4">
+                  {table.caption && <span className="text-[10px] font-extrabold text-purple-400 uppercase tracking-widest block">{table.caption}</span>}
+                  <table className="w-full text-xs text-left text-slate-300 border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-800 text-[10px] uppercase font-bold text-slate-500">
+                        {table.headers.map((h, hIdx) => <th key={hIdx} className="py-2.5 px-3">{h}</th>)}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {table.rows.map((row, rIdx) => (
+                        <tr key={rIdx} className="border-b border-slate-900 last:border-transparent hover:bg-slate-900/20">
+                          {row.map((cell, cIdx) => <td key={cIdx} className="py-3 px-3">{renderAnswerWithTooltips(cell)}</td>)}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+
               {/* Progress metric bar for current framework */}
-              <div className="flex items-center justify-between gap-4 pt-2 border-t border-slate-800/60">
+              <div className="flex items-center justify-between gap-4 pt-4 border-t border-slate-800/60">
                 <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest">Mastery Status</span>
                 <div className="flex items-center gap-3 flex-1 max-w-xs">
                   <div className="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800">
@@ -323,14 +353,14 @@ export default function ModernFrameworksMasterbook() {
                           className="pt-4 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-4 mt-3"
                         >
                           <div>
-                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block">Executive Definition</span>
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block">Executive Guidance</span>
                             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mt-1">
                               {renderAnswerWithTooltips(section.definition)}
                             </p>
                           </div>
 
                           <div className="space-y-2.5">
-                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block">Practical Technical Implementations</span>
+                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block">Strategic Checklist Coordinates</span>
                             {section.bullets.map((bullet, idx) => (
                               <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed flex items-start gap-2 py-0.5">
                                 <span className="text-purple-400 mt-1 flex-shrink-0">•</span>
@@ -384,10 +414,10 @@ export default function ModernFrameworksMasterbook() {
                 >
                   <div className="p-5 space-y-4">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-[9px] font-bold px-2 py-0.5 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono uppercase tracking-wider">
-                        {qna.fwName} Q&A
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono uppercase tracking-wider line-clamp-1 max-w-[200px]">
+                        {qna.fwName}
                       </span>
-                      <span className="text-[10px] text-slate-500 flex items-center gap-1 font-semibold">
+                      <span className="text-[10px] text-slate-500 flex items-center gap-1 font-semibold flex-shrink-0">
                         <HelpCircle className="w-3.5 h-3.5" />
                         Active Recall
                       </span>
@@ -437,6 +467,7 @@ export default function ModernFrameworksMasterbook() {
       {/* ─── TAB CONTENT: C-LEVEL BOARDROOM SIMULATION ─── */}
       {activeTab === "simulation" && (
         <div className="max-w-3xl mx-auto space-y-6">
+          {/* Main Simulation Panel */}
           <div className="p-6 rounded-3xl border border-amber-500/15 bg-gradient-to-br from-amber-500/[0.02] to-slate-950 p-6 sm:p-8 space-y-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-400">
               👑 ELITE SIMULATION LAB
@@ -507,6 +538,37 @@ export default function ModernFrameworksMasterbook() {
               <RefreshCw className={`w-4 h-4 ${revealedSimulation ? "rotate-180" : ""} transition-transform duration-300`} />
               <span>{revealedSimulation ? "Hide Elite Response" : "Reveal Elite Executive Answer"}</span>
             </button>
+          </div>
+
+          {/* Interactive Translation Matrix Card */}
+          <div className="p-6 rounded-3xl border border-slate-800 bg-slate-900/10 space-y-4">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400">
+              💬 Boardroom Conversational Exercises
+            </span>
+            <h4 className="text-base font-extrabold text-slate-100">Practice Boardroom Translations</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Below are three typical technological situations. Practice converting the engineering description into executive leadership language to command boardroom authority.
+            </p>
+
+            <div className="space-y-4 pt-2">
+              <div className="p-4 rounded-2xl border border-slate-800 bg-slate-950/40 space-y-2">
+                <span className="text-[9px] font-bold text-rose-400 uppercase tracking-widest">Situation 1: Infrastructure Loss</span>
+                <p className="text-xs text-slate-400"><strong>Engineering description:</strong> "The hypervisor cluster lost heartbeat connectivity."</p>
+                <p className="text-xs text-emerald-400 italic"><strong>Boardroom translation:</strong> "We experienced infrastructure instability affecting service availability, and recovery procedures were initiated immediately to minimize operational disruption."</p>
+              </div>
+
+              <div className="p-4 rounded-2xl border border-slate-800 bg-slate-950/40 space-y-2">
+                <span className="text-[9px] font-bold text-rose-400 uppercase tracking-widest">Situation 2: Network Outage</span>
+                <p className="text-xs text-slate-400"><strong>Engineering description:</strong> "The core switch had spanning-tree loop issues and packets were dropping."</p>
+                <p className="text-xs text-emerald-400 italic"><strong>Boardroom translation:</strong> "We experienced network instability affecting operational availability, but containment procedures minimized broader business disruption."</p>
+              </div>
+
+              <div className="p-4 rounded-2xl border border-slate-800 bg-slate-950/40 space-y-2">
+                <span className="text-[9px] font-bold text-rose-400 uppercase tracking-widest">Situation 3: Systems Update Outage</span>
+                <p className="text-xs text-slate-400"><strong>Engineering description:</strong> "I patched the database schema with Nessus scripts."</p>
+                <p className="text-xs text-emerald-400 italic"><strong>Boardroom translation:</strong> "We executed risk-prioritized vulnerability remediation across core application pools to protect compliance and transactional integrity."</p>
+              </div>
+            </div>
           </div>
         </div>
       )}
