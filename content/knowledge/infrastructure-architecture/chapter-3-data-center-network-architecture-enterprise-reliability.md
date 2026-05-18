@@ -12,6 +12,8 @@ It is: **Can you design environments where failure does not stop the business?**
 
 This chapter is one of the strongest scoring areas.
 
+![Data Center Strategy, Network Architecture & Enterprise Reliability](/executive-datacenter-network.jpg)
+
 ## PART 1 — WHAT DATA CENTER STRATEGY REALLY MEANS
 
 Most people think “data center” means servers + racks. **Too small.**

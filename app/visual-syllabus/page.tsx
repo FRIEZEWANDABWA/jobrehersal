@@ -396,6 +396,36 @@ const visualChapters = [
       "Allowing license sprawl, shadowed SaaS tools, or duplicate platforms to exist without active portfolio cost reviews"
     ],
     metrics: ["Cloud Spend vs Budget Variance", "Digital Workplace Adoption Rate %", "License Optimization Index", "Operational Agility Velocity"]
+  },
+  {
+    chapterNumber: "CHAPTER 14",
+    title: "Data Center Strategy, Network Architecture & Enterprise Reliability",
+    eyebrow: "Book 2 · Section A · Enterprise Architecture & Scale",
+    imageSrc: "/executive-datacenter-network.jpg",
+    imageAlt: "Data Center Strategy, Network Architecture & Enterprise Reliability (Design, Protect, Monitor, Recover, Evolve)",
+    readHref: "/knowledge/infrastructure-architecture/chapter-3-data-center-network-architecture-enterprise-reliability",
+    description:
+      "Design for uptime, protect revenue, and build deep trust. Master the five-stage reliability framework, navigate core principles of enterprise network design, and prevent physical infrastructure risks.",
+    principles: [
+      {
+        label: "Operational Survival Design",
+        value: "Data center strategy is not server placement—it is operational survival design. Determine where critical business operations live and how they survive catastrophic failures."
+      },
+      {
+        label: "The Reliability Spine",
+        value: "Govern enterprise reliability through five continuous stages: DESIGN (eliminating single points of failure) → PROTECT (dual power paths and ISPs) → MONITOR (network and environmental sensors) → RECOVER (tested DR plans) → EVOLVE (scalability for future branch expansions)."
+      },
+      {
+        label: "Network as Business Strategy",
+        value: "We protect customer operations through reliable connectivity. Leverage the core pillars of enterprise network design: Redundancy, Segmentation, Centralized Visibility, Standardization, and Documentation."
+      }
+    ],
+    traps: [
+      "Failing to account for physical infrastructure risks (cooling failures, power instability, rack/room access) in data center operations",
+      "Treating network design as technical config instead of continuity engineering, leading to a single point of failure in the switching core",
+      "Neglecting capacity and performance engineering, causing embarrassing slowdowns during peak and seasonal usage spikes"
+    ],
+    metrics: ["Core Network Uptime %", "MTTR (Mean Time to Recover)", "MTTD (Mean Time to Detect)", "SLA Compliance %", "Capacity Utilization %"]
   }
 ];
 
