@@ -116,6 +116,7 @@ export const mainNav = [
   { href: "/knowledge", label: "Knowledge Hub" },
   { href: "/data-protection", label: "Data Protection" },
   { href: "/modern-frameworks", label: "Modern Frameworks" },
+  { href: "/visual-syllabus", label: "Visual Syllabus" },
   { href: "/budget", label: "Budget" },
   { href: "/star-vault", label: "STAR Vault" },
   { href: "/executive-dashboard", label: "Executive dashboard" },

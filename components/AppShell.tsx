@@ -204,6 +204,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname === "/budget" ||
     pathname === "/data-protection" ||
     pathname === "/modern-frameworks" ||
+    pathname === "/visual-syllabus" ||
     pathname === "/star-vault" ||
     pathname === "/rapid-revision" ||
     (pathname.startsWith("/knowledge/") && pathname.split("/").length > 3);
