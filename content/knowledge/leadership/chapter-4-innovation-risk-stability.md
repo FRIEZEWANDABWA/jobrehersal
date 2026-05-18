@@ -31,6 +31,8 @@ That is not leadership. That is **expensive enthusiasm**.
 
 This chapter teaches **executive discipline**.
 
+![Balancing Innovation, Cost, Risk & Operational Stability](/executive-innovation-risk-stability.jpg)
+
 ## PART 1 — THE REAL QUESTION BEHIND INNOVATION
 
 Executives are not asking: “Can you innovate?”
