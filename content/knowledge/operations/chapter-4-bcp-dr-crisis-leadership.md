@@ -30,6 +30,8 @@ This chapter is about **protecting the business when failure becomes real.**
 
 That is executive leadership.
 
+![Business Continuity, Disaster Recovery (BCP/DR) & Crisis Leadership](/executive-bcp-dr.jpg)
+
 ## PART 1 — BUSINESS CONTINUITY VS DISASTER RECOVERY
 
 This is one of the most common **senior interview traps**. You must answer it cleanly.

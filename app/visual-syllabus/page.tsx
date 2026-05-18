@@ -306,6 +306,36 @@ const visualChapters = [
       "Failing to optimize license hygiene and shadow spend, leading to massive financial duplication"
     ],
     metrics: ["Vendor SLA Compliance %", "Vendor Consolidated Savings", "Contract Renewal Success Rate", "Shadow IT Spend %"]
+  },
+  {
+    chapterNumber: "CHAPTER 11",
+    title: "Business Continuity, Disaster Recovery & Crisis Leadership",
+    eyebrow: "Book 1 · Section D · Operations & Service Delivery Foundations",
+    imageSrc: "/executive-bcp-dr.jpg",
+    imageAlt: "Business Continuity, Disaster Recovery (BCP/DR) & Crisis Leadership (Prepare, Protect, Respond, Recover, Learn)",
+    readHref: "/knowledge/operations/chapter-4-bcp-dr-crisis-leadership",
+    description:
+      "What happens when everything goes wrong? Learn to lead through core outages, security incidents, and vendor collapse. Master the 3-2-1 backup strategy, justify critical resilience investments, and protect business continuity.",
+    principles: [
+      {
+        label: "Prepare for Failure",
+        value: "Resilience is not avoiding failure—it is preparing, responding, and improving every time. Plan for worst-case scenarios cleanly: PREPARE → PROTECT → RESPOND → RECOVER → LEARN."
+      },
+      {
+        label: "RTO vs RPO Metrics",
+        value: "Govern data protection precisely: Recovery Time Objective (RTO) dictates how fast a service must return (time target), while Recovery Point Objective (RPO) dictates how much data loss is acceptable (data tolerance)."
+      },
+      {
+        label: "The 3-2-1 Backup Rule",
+        value: "Protect critical data using a bulletproof rule: maintain 3 copies of data (original + 2 backups) on 2 different storage types (e.g. disk + cloud) with at least 1 copy offsite. Remember: a backup is useless if restore is untested."
+      }
+    ],
+    traps: [
+      "Confusing BCP (keeping business operating during a crisis) with DR (restoring systems afterward)",
+      "Maintaining tested backup schedules but failing to run fully isolated restore and failover simulations",
+      "Panicking or hiding information from executives and customers during outages instead of borrowing calm and communicating clearly"
+    ],
+    metrics: ["RTO Compliance %", "RPO Max Data Gap", "Restore Validation Rate %", "Simulated DR Table-Top NPS"]
   }
 ];
 
