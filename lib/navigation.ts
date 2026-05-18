@@ -109,12 +109,12 @@ export const knowledgeSections: {
     description: "Teams, talent, and operating cadence.",
   },
 ];
-
 export const mainNav = [
   { href: "/", label: "Command Centre" },
   { href: "/search", label: "Search" },
   { href: "/knowledge", label: "Knowledge Hub" },
   { href: "/data-protection", label: "Data Protection" },
+  { href: "/modern-frameworks", label: "Modern Frameworks" },
   { href: "/budget", label: "Budget" },
   { href: "/star-vault", label: "STAR Vault" },
   { href: "/interview-bank", label: "Interview Bank" },

@@ -193,10 +193,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const isReadingMode =
     pathname === "/budget" ||
     pathname === "/data-protection" ||
+    pathname === "/modern-frameworks" ||
     pathname === "/star-vault" ||
     pathname === "/rapid-revision" ||
     (pathname.startsWith("/knowledge/") && pathname.split("/").length > 3);
-
   // If authorization status is still being fetched from localStorage, show a blank loader to prevent flashes
   if (isAuthorized === null) {
     return (

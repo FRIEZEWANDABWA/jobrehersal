@@ -63,9 +63,13 @@ const dataProtection = [
     href: "/data-protection",
     layer: "Layer 1 · Compliance",
   },
+  {
+    title: "Modern Frameworks",
+    description: "NIST CSF, CIS Controls, ITIL, COBIT, Zero Trust, and SOC/SIEM—advanced cyber maturity, stable IT operations, and IT governance.",
+    href: "/modern-frameworks",
+    layer: "Layer 2 · Governance",
+  },
 ];
-
-
 const interviewRehearsal = [
   {
     title: "Mock interview",
