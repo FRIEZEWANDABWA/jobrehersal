@@ -426,6 +426,36 @@ const visualChapters = [
       "Neglecting capacity and performance engineering, causing embarrassing slowdowns during peak and seasonal usage spikes"
     ],
     metrics: ["Core Network Uptime %", "MTTR (Mean Time to Recover)", "MTTD (Mean Time to Detect)", "SLA Compliance %", "Capacity Utilization %"]
+  },
+  {
+    chapterNumber: "CHAPTER 15",
+    title: "Infrastructure Transformation, Large-Scale Migration & Enterprise Modernization",
+    eyebrow: "Book 2 · Section A · Enterprise Architecture & Scale",
+    imageSrc: "/executive-infrastructure-transformation.jpg",
+    imageAlt: "Infrastructure Transformation, Large-Scale Migration & Enterprise Modernization (Assess, Simplify, Modernize, Adopt, Govern)",
+    readHref: "/knowledge/infrastructure-architecture/chapter-4-infrastructure-transformation-migration-modernization",
+    description:
+      "Redign operations, reduce risks, and accelerate organizational growth. Master the five-stage transformation framework, manage technical debt as executive risk, and measure post-transformation success accurately.",
+    principles: [
+      {
+        label: "Operational Redesign Strategy",
+        value: "Real transformation is not a technical refresh—it is operational redesign. It means changing how the business operates through centralized, automated, and standardized architectures."
+      },
+      {
+        label: "The Transformation Spine",
+        value: "Govern complex migrations through five key milestones: ASSESS (understanding what is broken and why) → SIMPLIFY (removing duplicate vendors/platforms) → MODERNIZE (delivering cloud & networks) → ADOPT (training & alignment) → GOVERN (standards & SLA discipline)."
+      },
+      {
+        label: "Technical Debt as Risk",
+        value: "Frame technical debt not as an inconvenience, but as accumulated operational risk. Highlight unsupported hardware, undocumented dependencies, and fragile architectures as business exposure."
+      }
+    ],
+    traps: [
+      "Initiating expensive modernization migrations to chase technology trends instead of addressing clear business pain points and costs of inaction",
+      "Neglecting change fatigue management, overloading engineering teams, and failing to secure user adoption for the new operating model",
+      "Conducting major migrations without establishing post-transformation success measurements, leading to activity without real business outcomes"
+    ],
+    metrics: ["Technical Debt Resolution %", "Incident Frequency Post-Migration", "User Onboarding Acceleration", "Capital Expenditure (CapEx) Optimization"]
   }
 ];
 

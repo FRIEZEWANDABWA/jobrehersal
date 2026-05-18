@@ -10,6 +10,8 @@ You are hired to **modernize, simplify, scale, reduce operational risk, improve 
 
 This chapter is about **transformation leadership without operational chaos** — one of the strongest executive signals.
 
+![Infrastructure Transformation, Large-Scale Migration & Enterprise Modernization](/executive-infrastructure-transformation.jpg)
+
 ## PART 1 — WHAT INFRASTRUCTURE TRANSFORMATION REALLY MEANS
 
 Most candidates think transformation means replacing hardware, upgrading systems, moving to cloud. **Too small.**
