@@ -28,6 +28,8 @@ This chapter is about:
 
 This is where you sound **ahead of the market** — with discipline.
 
+![Emerging Technologies, AI & Future-Ready IT Leadership](/executive-emerging-tech-ai.jpg)
+
 ## PART 1 — THE REAL ROLE OF AI IN IT LEADERSHIP
 
 Most people think AI means chatbots, ChatGPT, or “automation tools.” **Too small.**

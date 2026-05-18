@@ -126,6 +126,36 @@ const visualChapters = [
       "Attempting to automate or optimize an unstable, chaotic IT infrastructure setup"
     ],
     metrics: ["Innovation ROI", "TCO (Total Cost of Ownership)", "Change Adoption Rate %", "Security Posture Drift"]
+  },
+  {
+    chapterNumber: "CHAPTER 5",
+    title: "Emerging Tech, AI & Future-Ready Leadership",
+    eyebrow: "Book 1 · Section A · Core Foundations",
+    imageSrc: "/executive-emerging-tech-ai.jpg",
+    imageAlt: "Emerging Technologies, AI & Future-Ready IT Leadership (Problem, Data, Control, Value, Scale)",
+    readHref: "/knowledge/leadership/chapter-5-emerging-tech-ai-leadership",
+    description:
+      "Become an unforgettable tech leader by understanding how to deploy AI, advanced automation, and emerging technologies responsibly for strategic business advantage. Focus on operational intelligence, not trend-chasing.",
+    principles: [
+      {
+        label: "AI as Operational Intelligence",
+        value: "AI is not the goal—it is a strategic enabler for better decisions, faster operations, and reduced operational/reputational risk."
+      },
+      {
+        label: "The AI Adoption Framework",
+        value: "Every AI proposal must follow: PROBLEM (real business pain) → DATA (clean, reliable, owned) → CONTROL (governance/oversight) → VALUE (measurable KPI) → SCALE (sustainability)."
+      },
+      {
+        label: "Responsible AI Governance",
+        value: "Mitigate emerging tech risks through human oversight, audit trails, model explainability, strict security/data boundaries, and compliance with local/global frameworks (e.g. GDPR, DPA)."
+      }
+    ],
+    traps: [
+      "Acting like a 'hype merchant' promising AI will solve all problems, or an outdated manager afraid of change",
+      "Deploying AI models on top of poor, unstandardized, or dirty data (creates expensive guessing)",
+      "Adopting 'black box' AI tools where the recommendation pathway cannot be audited or explained to the board"
+    ],
+    metrics: ["AI Model Accuracy %", "Incident MTTR Reduction", "Support Ticket Self-Service %", "Compliance Audit Score"]
   }
 ];
 
