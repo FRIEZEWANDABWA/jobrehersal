@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ZoomableImage } from "@/components/ZoomableImage";
 
 export type SimpleDocHeading = {
   id: string;
@@ -166,15 +167,7 @@ function parsedBlockToNode(
         </p>
       );
     case "img":
-      return (
-        <div key={key} className="my-6 overflow-hidden rounded-xl border border-slate-800 bg-slate-950/60 p-2">
-          <img
-            src={b.src}
-            alt={b.alt}
-            className="w-full h-auto object-contain rounded-lg"
-          />
-        </div>
-      );
+      return <ZoomableImage key={key} src={b.src} alt={b.alt} />;
     default:
       return null;
   }

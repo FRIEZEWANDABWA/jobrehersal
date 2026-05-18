@@ -20,6 +20,8 @@ Head of IT interviews are not testing whether you know technology. They are test
 
 Technical knowledge does not automatically create executive judgment. This chapter builds the frameworks that close that gap.
 
+![IT Roadmaps, Prioritization & Executive Decision-Making](/executive-roadmaps-prioritization.jpg)
+
 ## PART 1 — WHAT AN IT ROADMAP REALLY IS
 
 Most candidates describe a roadmap as “a list of projects planned for the year.” That is weak.
