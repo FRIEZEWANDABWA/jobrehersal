@@ -699,6 +699,300 @@ export const kdpaSyllabus: SyllabusSection[] = [
   }
 ];
 
+export const frameworksSyllabus: SyllabusSection[] = [
+  {
+    id: "fw-sec-1",
+    title: "Section 1 — Framework Fundamentals",
+    definition: "A framework is a structured governance model used to standardize operational processes, security controls, compliance requirements, and organizational governance.",
+    bullets: [
+      "What is a Framework?: A structured governance model that helps organizations reduce operational risk, improve consistency, strengthen compliance, improve audit readiness, and align operations with strategic objectives.",
+      "Difference Between Frameworks, Policies & Procedures: Framework (Strategic governance model), Policy (Organizational rule), Standard (Technical requirement), Procedure (Step-by-step operational process), Guideline (Recommended practice).",
+      "Why Frameworks Matter: Governance standardization, risk reduction, operational maturity, regulatory compliance, audit readiness, executive accountability, and business continuity."
+    ]
+  },
+  {
+    id: "fw-sec-2",
+    title: "Section 2 — Enterprise Governance Framework Ecosystem",
+    definition: "Understanding the diverse global framework ecosystem allows organizations to layer security and compliance controls without creating operational friction.",
+    bullets: [
+      "Ecosystem Mapping - GDPR: Privacy & personal data protection.",
+      "Ecosystem Mapping - Kenya DPA: Local legal compliance.",
+      "Ecosystem Mapping - ISO 27001: Information security governance.",
+      "Ecosystem Mapping - NIST CSF: Cybersecurity maturity.",
+      "Ecosystem Mapping - CIS Controls: Technical hardening.",
+      "Ecosystem Mapping - COBIT: Enterprise IT governance.",
+      "Ecosystem Mapping - ITIL: Service management governance.",
+      "How Frameworks Work Together - GDPR: Defines privacy obligations and personal data handling rules.",
+      "How Frameworks Work Together - ISO 27001: Provides governance structures and operational security controls.",
+      "How Frameworks Work Together - NIST: Improves operational cybersecurity maturity.",
+      "How Frameworks Work Together - CIS Controls: Provides technical security hardening best practices.",
+      "How Frameworks Work Together - COBIT: Aligns IT governance with organizational strategy.",
+      "How Frameworks Work Together - ITIL: Improves service management and operational consistency."
+    ]
+  },
+  {
+    id: "fw-sec-3",
+    title: "Section 3 — Governance Maturity Models",
+    definition: "Measuring security maturity enables leadership to gauge current operational effectiveness and plot a clear path toward optimized risk mitigation.",
+    bullets: [
+      "Maturity Levels: Level 1 (Reactive), Level 2 (Basic), Level 3 (Defined), Level 4 (Managed), Level 5 (Optimized).",
+      "Governance Maturity Areas: Policy maturity, access governance maturity, incident response maturity, backup maturity, DR maturity, vendor governance maturity, audit maturity, monitoring maturity.",
+      "Enterprise Maturity Indicators - Access Control: MFA + PAM + Quarterly Reviews.",
+      "Enterprise Maturity Indicators - Monitoring: SIEM + SOC visibility.",
+      "Enterprise Maturity Indicators - DR: Tested quarterly.",
+      "Enterprise Maturity Indicators - Governance: Monthly executive reporting.",
+      "Enterprise Maturity Indicators - Vendor Management: Active security assessments."
+    ]
+  },
+  {
+    id: "fw-sec-4",
+    title: "Section 4 — Risk Management Frameworks",
+    definition: "Enterprise risk management maps operational, cyber, financial, and compliance exposures onto standardized boards for executive treatment.",
+    bullets: [
+      "Enterprise Risk Types: Cyber risk, operational risk, compliance risk, vendor risk, reputational risk, financial risk, business continuity risk.",
+      "Risk Assessment Methodologies: Qualitative, Quantitative, and Hybrid.",
+      "Risk Treatment Models: Mitigate, Avoid, Transfer, and Accept.",
+      "Risk Matrix: Likelihood vs Impact risk levels (e.g. High Likelihood + High Impact = Critical, High Likelihood + Medium Impact = High, Medium Likelihood + Medium Impact = Medium)."
+    ]
+  },
+  {
+    id: "fw-sec-5",
+    title: "Section 5 — Zero Trust Framework",
+    definition: "Zero Trust shifts the security paradigm from absolute perimeter trust to strict, continuous identity-based verification for all connections.",
+    bullets: [
+      "Core Zero Trust Principles: 'Never trust, always verify', Identity-first security, Least privilege access, Device trust validation, Continuous monitoring, Microsegmentation, and Conditional access.",
+      "Enterprise Zero Trust Implementation: Enforcing MFA, PAM/PIM, conditional access rules, device compliance checks, VPN governance, network segmentation, and cloud access governance."
+    ]
+  },
+  {
+    id: "fw-sec-6",
+    title: "Section 6 — NIST Cybersecurity Framework",
+    definition: "The NIST CSF provides a modular, risk-centric methodology to govern corporate cyber strategies throughout five core functions.",
+    bullets: [
+      "NIST Core Functions - Identify: Asset visibility (e.g. asset inventory).",
+      "NIST Core Functions - Protect: Security controls (e.g. MFA).",
+      "NIST Core Functions - Detect: Monitoring (e.g. SIEM).",
+      "NIST Core Functions - Respond: Incident response (e.g. IR procedures).",
+      "NIST Core Functions - Recover: DR & continuity (e.g. Veeam recovery)."
+    ]
+  },
+  {
+    id: "fw-sec-7",
+    title: "Section 7 — CIS Controls",
+    definition: "The Center for Internet Security (CIS) Controls represent highly prioritized, technical actions to defend systems against common cyber attacks.",
+    bullets: [
+      "Critical CIS Controls: Asset inventory, secure configurations, vulnerability management, MFA, logging & monitoring, email security, backup governance, and application control."
+    ]
+  },
+  {
+    id: "fw-sec-8",
+    title: "Section 8 — COBIT Governance Framework",
+    definition: "COBIT bridges the gap between technology silos and business strategy, framing IT governance within corporate value delivery.",
+    bullets: [
+      "COBIT Governance Areas: Strategic alignment, performance management, resource optimization, risk governance, compliance governance, and value delivery."
+    ]
+  },
+  {
+    id: "fw-sec-9",
+    title: "Section 9 — ITIL Service Management",
+    definition: "ITIL standardizes service delivery lifecycle phases to align IT services with changing organizational business requirements.",
+    bullets: [
+      "ITIL Core Areas: Incident management, problem management, change management, SLA governance, service desk governance, and configuration management."
+    ]
+  },
+  {
+    id: "fw-sec-10",
+    title: "Section 10 — Framework Mapping Matrix",
+    definition: "A technical mapping matrix demonstrating security requirement coverages across multiple international frameworks.",
+    bullets: [
+      "MFA Requirement: Mapped as ✔ in GDPR, ✔ in ISO 27001, ✔ in NIST, and ✔ in CIS.",
+      "Encryption Requirement: Mapped as ✔ in GDPR, ✔ in ISO 27001, ✔ in NIST, and ✔ in CIS.",
+      "Incident Response Requirement: Mapped as ✔ in GDPR, ✔ in ISO 27001, ✔ in NIST, and ✔ in CIS.",
+      "Logging Requirement: Mapped as ✔ in GDPR, ✔ in ISO 27001, ✔ in NIST, and ✔ in CIS.",
+      "Backups Requirement: Mapped as ✔ in GDPR, ✔ in ISO 27001, ✔ in NIST, and ✔ in CIS."
+    ]
+  }
+];
+
+export const governanceSyllabus: SyllabusSection[] = [
+  {
+    id: "gov-sec-1",
+    title: "Section 1 — Enterprise Governance Fundamentals",
+    definition: "Governance is the structured process of ensuring organizational operations align with business objectives, compliance requirements, security controls, and risk management principles.",
+    bullets: [
+      "Governance vs Management: Governance handles strategic oversight, accountability, and risk visibility; Management focuses on daily operations, execution, and task completion."
+    ]
+  },
+  {
+    id: "gov-sec-2",
+    title: "Section 2 — Governance Committees",
+    definition: "Governing committees form the administrative backbone of enterprise control, guaranteeing proper checks and balances.",
+    bullets: [
+      "Governance Committees: Risk Committee, Security Committee, CAB (Change Advisory Board), Audit Committee, and Vendor Governance Board.",
+      "Governance Meeting Structure: Monthly governance reviews, quarterly risk reviews, compliance reviews, incident review meetings, and vendor performance reviews."
+    ]
+  },
+  {
+    id: "gov-sec-3",
+    title: "Section 3 — Policy Governance",
+    definition: "Policies serve as the foundation of organization compliance, defining the rules and standards expected of all employees.",
+    bullets: [
+      "Policy Lifecycle: Creation, review, approval, publication, and enforcement cycle.",
+      "Required Policies: Password policy, access control policy, backup policy, incident response policy, DR policy, vendor policy, and acceptable use policy."
+    ]
+  },
+  {
+    id: "gov-sec-4",
+    title: "Section 4 — Risk Governance",
+    definition: "Risk governance ensures corporate risks are systematically discovered, assessed, scored, owned, and escalated to leadership.",
+    bullets: [
+      "Risk Governance Activities: Risk identification, risk scoring, risk ownership, risk escalation, and executive reporting.",
+      "Risk Registers Structure: Must include risk description, impact score, likelihood, clear owner, mitigation plan, and review status."
+    ]
+  },
+  {
+    id: "gov-sec-5",
+    title: "Section 5 — Vendor Governance",
+    definition: "Third-party vendor governance mitigates supply-chain risks through strict assessments, SLAs, and regular performance reviews.",
+    bullets: [
+      "Vendor Governance Areas: Vendor onboarding, security assessments, SLA governance, performance reviews, contract governance, and third-party audits.",
+      "Vendor Risk Indicators: Delayed support, weak MFA, poor patching, compliance gaps, and shared credentials."
+    ]
+  },
+  {
+    id: "gov-sec-6",
+    title: "Section 6 — Compliance Governance",
+    definition: "Maintaining compliance requires a continuous schedule of audits, evidence collection, and proactive remediation of gaps.",
+    bullets: [
+      "Compliance Activities: Internal audits, external audits, evidence gathering, remediation tracking, and regulatory reporting."
+    ]
+  },
+  {
+    id: "gov-sec-7",
+    title: "Section 7 — Security Governance",
+    definition: "Aligning technical cybersecurity controls with corporate governance requirements guarantees business operations remain resilient.",
+    bullets: [
+      "Security Governance Areas: Access governance, SOC governance, monitoring governance, DR governance, backup governance, and incident governance."
+    ]
+  },
+  {
+    id: "gov-sec-8",
+    title: "Section 8 — Governance Metrics & KPIs",
+    definition: "Objective metrics and Key Performance Indicators (KPIs) provide quantitative measurements of security posture and governance health.",
+    bullets: [
+      "Security KPIs: MFA coverage, patch compliance, backup success rate, incident response time, and SLA compliance.",
+      "KRIs (Key Risk Indicators): Failed logins, critical vulnerabilities, vendor exposure, and privileged account risk."
+    ]
+  },
+  {
+    id: "gov-sec-9",
+    title: "Section 9 — Governance Reporting",
+    definition: "C-suite reporting translates dense technical telemetry into high-level, business-impact summaries for boardroom consumption.",
+    bullets: [
+      "Reporting Areas: Executive summaries, risk heatmaps, KPI dashboards, compliance dashboards, and vendor scorecards."
+    ]
+  },
+  {
+    id: "gov-sec-10",
+    title: "Section 10 — Governance Failure Case Studies",
+    definition: "Analyzing real-world governance collapses provides critical lessons to prevent similar catastrophic exposures in your enterprise.",
+    bullets: [
+      "Equifax: Failed vulnerability scanning, poor asset logs, expired certificates blocking SIEM. Lessons: enforce mandatory patch windows, track software libraries.",
+      "Uber: Cover-up of cloud credential leaks in unencrypted GitHub repository, paid off as bug bounty. Lessons: mandate secrets-scanning, absolute transparency.",
+      "Colonial Pipeline: Weak credential lifecycle, orphan VPN account with no MFA. Lessons: enforce MFA globally, revoke orphan accounts.",
+      "MOVEit breach: SQL injection vulnerability on secure transfer appliance. Lessons: deploy input validation, enforce column-level encryption."
+    ]
+  }
+];
+
+export const leadershipSyllabus: SyllabusSection[] = [
+  {
+    id: "ldr-sec-1",
+    title: "Section 1 — Executive Leadership Mindset",
+    definition: "Technology executives must adopt a business-aligned, risk-based operational mindset to navigate boardroom expectations successfully.",
+    bullets: [
+      "Executive Thinking Areas: Strategic thinking, operational resilience, business alignment, risk-based thinking, and decision-making under pressure."
+    ]
+  },
+  {
+    id: "ldr-sec-2",
+    title: "Section 2 — Executive Communication",
+    definition: "Translating granular technical complexity into simplified, business-impact board communications is a core leadership capability.",
+    bullets: [
+      "Communication Areas: Boardroom communication, executive summaries, crisis communication, stakeholder engagement, and simplifying technical concepts."
+    ]
+  },
+  {
+    id: "ldr-sec-3",
+    title: "Section 3 — Decision-Making Frameworks",
+    definition: "Structured decision-making frameworks ensure technical choices are prioritized based on cost, benefits, and overall risk levels.",
+    bullets: [
+      "Decision Models: Risk-based decisions, cost-benefit analysis, governance-driven prioritization, and crisis decision-making."
+    ]
+  },
+  {
+    id: "ldr-sec-4",
+    title: "Section 4 — Leadership During Incidents",
+    definition: "Remaining calm and managing communications cleanly during security crises stabilizes operations and reassures stakeholders.",
+    bullets: [
+      "Incident Leadership Areas: Staying calm, executive escalation, recovery coordination, communication cadence, and stakeholder reassurance."
+    ]
+  },
+  {
+    id: "ldr-sec-5",
+    title: "Section 5 — Strategic ICT Leadership",
+    definition: "Strategic IT leadership drives digital transformations and manages scalable enterprise architectures to accelerate growth.",
+    bullets: [
+      "Strategic Areas: Digital transformation, operational optimization, governance maturity, enterprise scalability, and cloud strategy."
+    ]
+  },
+  {
+    id: "ldr-sec-6",
+    title: "Section 6 — Financial Leadership",
+    definition: "Managing IT budgets, ROI metrics, and vendor negotiations requires deep commercial acumen and financial stewardship.",
+    bullets: [
+      "Financial Governance Areas: Budgeting, ROI, TCO, cost optimization, vendor negotiation, and risk-based budgeting."
+    ]
+  },
+  {
+    id: "ldr-sec-7",
+    title: "Section 7 — People Leadership",
+    definition: "Building, mentoring, and leading high-performing, accountable security teams drives long-term operational resilience.",
+    bullets: [
+      "Leadership Areas: Mentorship, delegation, accountability, team management, and conflict management."
+    ]
+  },
+  {
+    id: "ldr-sec-8",
+    title: "Section 8 — Executive Presence",
+    definition: "Projecting calm confidence, taking radical ownership, and demonstrating accountability builds institutional trust.",
+    bullets: [
+      "Executive Presence Areas: Calm communication, ownership mindset, confidence under pressure, accountability, and strategic positioning."
+    ]
+  },
+  {
+    id: "ldr-sec-9",
+    title: "Section 9 — Boardroom Reporting",
+    definition: "Creating high-fidelity, visual risk dashboards and compliance reports ensures the board remains fully aware of security posture.",
+    bullets: [
+      "Reporting Areas: KPI dashboards, risk reporting, governance reporting, compliance updates, and executive presentations."
+    ]
+  },
+  {
+    id: "ldr-sec-10",
+    title: "Section 10 — Leadership Simulation Labs",
+    definition: "Simulated crisis scenarios designed to test executive decision-making, escalations, communications, and recoveries.",
+    bullets: [
+      "Ransomware during board meeting: Containment, VLAN shutdown, offline Veeam recovery, and ODPC reporting.",
+      "Executive compromise: Revoking active sessions, geofencing tenant portals, and auditing mailbox forwarders.",
+      "DR failure: Activating alternate routing, managing stakeholder communication, and executing restore runbooks.",
+      "Regulator investigation: Aligning with legal counsel, compiling DPIAs, and preparing evidence packages.",
+      "Major ISP outage: Automated failover validation, switching WAN circuits, and SLA review.",
+      "Media escalation: Managing disclosure statements, coordinating public relations, and ensuring transparency."
+    ]
+  }
+];
+
 export const caseStudies: CaseStudy[] = [
   {
     id: "case-equifax",
@@ -745,6 +1039,39 @@ export const caseStudies: CaseStudy[] = [
     whatToDoDifferently: "Limit stored data retention times on gateways to 24 hours, enforce column-level file encryption, and execute regular penetration testing on file transfer pipelines."
   },
   {
+    id: "case-solarwinds",
+    title: "SolarWinds Orion Supply Chain Breach (2020)",
+    whatHappened: "State-sponsored actors hijacked the software build system of SolarWinds Orion, injecting a malicious backdoor (SUNBURST) into official updates pushed to 18,000 customers including federal agencies.",
+    rootCause: "Attackers compromised the internal development and build pipelines of SolarWinds, inserting malicious code during the compilation phase.",
+    governanceFailure: "Inadequate third-party software supply chain risk management, and failing to verify the integrity of distributed code binaries before delivery.",
+    technicalFailure: "Development servers had weak isolation, allowing attackers to access internal build agents. Default FTP passwords (solarwinds123) leaked on public forums.",
+    regulatoryImpact: "Massive global investigations, standard-setting changes in federal software procurement, severe stock price decline, and SEC civil actions against leadership.",
+    lessonsLearned: "Trusting vendor updates blindly is no longer safe. Organizations require multi-signature build controls, isolated compiler systems, and continuous binary verification.",
+    whatToDoDifferently: "Implement code-signing pipelines with hardware tokens, segment development environments from commercial networks, audit third-party dependency loops, and enforce secrets-scanning."
+  },
+  {
+    id: "case-marriott",
+    title: "Marriott Starwood Guest Database Breach (2018)",
+    whatHappened: "A massive, long-running breach compromised the reservation database of the Starwood hotel chain, exposing passport numbers, credit cards, and travel details of 500 million guests.",
+    rootCause: "An active compromise inside the Starwood network that remained undetected for over four years, spanning across Marriott's acquisition of the chain.",
+    governanceFailure: "Deficient cybersecurity due diligence during corporate mergers and acquisitions. Marriott inherited an active compromised network without running deep forensic integrity checks.",
+    technicalFailure: "Inadequate database encryption key segregation. Attackers compromised credentials that had access to both encrypted files and the decryption keys on the same host.",
+    regulatoryImpact: "Marriott was fined £18.4 million by the UK ICO under GDPR, and faced hundreds of millions in class-action lawsuits and audit remediation costs.",
+    lessonsLearned: "Acquisitions carry severe cyber risks. Due diligence must include independent, deep network threat hunting and complete database isolation before system integrations.",
+    whatToDoDifferently: "Isolate all inherited legacy database systems, enforce strict key-management hierarchies using hardware security modules (HSMs), and mandate threat hunting before network merging."
+  },
+  {
+    id: "case-cloudflare",
+    title: "Cloudflare Okta Integration Incident (2023)",
+    whatHappened: "State-sponsored actors accessed Cloudflare's internal Atlassian suites using stolen Okta access credentials, attempting to move laterally into production systems.",
+    rootCause: "Okta support portals were breached, allowing attackers to hijack administrative session tokens to access Cloudflare's authenticated corporate environments.",
+    governanceFailure: "Failure to verify Okta session token rotation constraints, and delayed revocation of service account keys during a vendor security incident.",
+    technicalFailure: "Service tokens were configured with excessive lifetimes. Lack of real-time monitoring on API-driven administrative token activities.",
+    regulatoryImpact: "Sparks massive global review of SaaS credential security, triggering immediate security reviews of all integrated Okta customers.",
+    lessonsLearned: "SaaS providers are highly targeted avenues of entry. Token and service credentials must have extremely short lifetimes and be rotated instantly upon any vendor incident.",
+    whatToDoDifferently: "Enforce short-lived OAuth session tokens, implement active session monitoring alerts for administrative API calls, and audit vendor access scopes quarterly."
+  },
+  {
     id: "case-cloud",
     title: "Cloud Misconfiguration Leak (Real Incident)",
     whatHappened: "A major enterprise misconfigured an AWS S3 storage bucket, leaving over 10 million client transaction records completely public to the web with no login required.",
@@ -776,5 +1103,16 @@ export const caseStudies: CaseStudy[] = [
     regulatoryImpact: "Fined under GDPR for failing to protect customer lists, faced severe commercial losses as records were shared with competitors.",
     lessonsLearned: "Resigning staff must have their system permissions immediately curtailed. Endpoints must restrict data movements to protect intellectual property.",
     whatToDoDifferently: "Implement Endpoint DLP to block USB copying, restrict Bulk CRM exports, set automated alerts for large downloads, and instantly restrict access during offboarding."
+  },
+  {
+    id: "case-saas-compromise",
+    title: "SaaS CRM Billing Account Hijacking (Real Incident)",
+    whatHappened: "Attackers hijacked an enterprise CRM administrative account, altering direct billing information to divert client invoice payments to an offshore bank account.",
+    rootCause: "A manager's credential was compromised via a session-hijacking infostealer malware, letting attackers bypass MFA using active cookies.",
+    governanceFailure: "Lack of oversight on changes to sensitive financial data routing, and failing to verify the device health of admin connections.",
+    technicalFailure: "No restriction on session lifetimes. Absence of automated IP geofencing blocks for corporate billing profile updates.",
+    regulatoryImpact: "Direct loss of client payments, severe legal disputes regarding billing integrity, and massive audits on SaaS permissions.",
+    lessonsLearned: "Financial parameter changes require dual-custody verification. Session hijackings can only be defeated by device checks and strict geofencing restrictions.",
+    whatToDoDifferently: "Enforce dual-authorization for any bank detail changes, implement active device certificate checks, and restrict SaaS administration to corporately managed IP networks."
   }
 ];

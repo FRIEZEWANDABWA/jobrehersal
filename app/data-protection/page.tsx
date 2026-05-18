@@ -5,9 +5,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExecutiveBrief, ActiveRecallQuiz, TermTooltip } from "@/components/learningComponents";
 import { Shield, BookOpen, UserCheck, Activity, Award, FileText, CheckCircle, AlertTriangle, AlertCircle, ChevronDown, ChevronRight, Check } from "lucide-react";
-import { gdprSyllabus, isoSyllabus, kdpaSyllabus, caseStudies } from "./syllabusData";
+import { gdprSyllabus, isoSyllabus, kdpaSyllabus, frameworksSyllabus, governanceSyllabus, leadershipSyllabus, caseStudies } from "./syllabusData";
 
-// Boardroom Terms Glossary definitions for inline hover tooltips
 const masterbookGlossary = [
   { term: "GDPR", definition: "General Data Protection Regulation - the European Union's comprehensive data privacy and compliance framework." },
   { term: "KDPA", definition: "Kenya Data Protection Act - Kenyan national legislation establishing legal frameworks for personal data protection." },
@@ -171,13 +170,11 @@ function ComplianceDashboard() {
     </div>
   );
 }
-
 export default function DataProtectionMasterbook() {
   const [activeSystem, setActiveSystem] = useState<"learning" | "interview" | "operational" | "governance" | "executive">("learning");
-  const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso" | "cases">("gdpr");
+  const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso" | "frameworks" | "governance_module" | "leadership_module" | "cases">("gdpr");
   const [activeQnaLevel, setActiveQnaLevel] = useState<"all" | "gdpr_kdpa" | "tier1" | "tier2" | "tier3" | "tier4" | "leadership" | "casestudy">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  
   // Learning Syllabus UI States
   const [expandedModule, setExpandedModule] = useState<string | null>(null);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
@@ -643,6 +640,42 @@ export default function DataProtectionMasterbook() {
             </button>
             <button
               onClick={() => {
+                setActiveFramework("frameworks");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
+                activeFramework === "frameworks" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              Frameworks Master Module
+            </button>
+            <button
+              onClick={() => {
+                setActiveFramework("governance_module");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
+                activeFramework === "governance_module" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              Governance Master Module
+            </button>
+            <button
+              onClick={() => {
+                setActiveFramework("leadership_module");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
+                activeFramework === "leadership_module" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              Executive Leadership Master Module
+            </button>
+            <button
+              onClick={() => {
                 setActiveFramework("cases");
                 setExpandedModule(null);
                 setExpandedSection(null);
@@ -664,6 +697,9 @@ export default function DataProtectionMasterbook() {
                   {activeFramework === "gdpr" && "GDPR Master Syllabus Progress"}
                   {activeFramework === "kdpa" && "Kenya DPA Syllabus Progress"}
                   {activeFramework === "iso" && "ISO 27001 ISMS Syllabus Progress"}
+                  {activeFramework === "frameworks" && "Frameworks Master Syllabus Progress"}
+                  {activeFramework === "governance_module" && "Governance Master Syllabus Progress"}
+                  {activeFramework === "leadership_module" && "Executive Leadership Master Syllabus Progress"}
                 </span>
               </div>
               <div className="flex items-center gap-4 flex-1 max-w-md">
@@ -676,7 +712,15 @@ export default function DataProtectionMasterbook() {
                           ? gdprSyllabus.flatMap(m => m.sections).length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("gdpr-")).length / gdprSyllabus.flatMap(m => m.sections).length) * 100 : 0
                           : activeFramework === "kdpa"
                           ? kdpaSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("kdpa-")).length / kdpaSyllabus.length) * 100 : 0
-                          : isoSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("iso-")).length / isoSyllabus.length) * 100 : 0
+                          : activeFramework === "iso"
+                          ? isoSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("iso-")).length / isoSyllabus.length) * 100 : 0
+                          : activeFramework === "frameworks"
+                          ? frameworksSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("fw-")).length / frameworksSyllabus.length) * 100 : 0
+                          : activeFramework === "governance_module"
+                          ? governanceSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("gov-")).length / governanceSyllabus.length) * 100 : 0
+                          : activeFramework === "leadership_module"
+                          ? leadershipSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("ldr-")).length / leadershipSyllabus.length) * 100 : 0
+                          : 0
                       }%`
                     }}
                   />
@@ -685,6 +729,9 @@ export default function DataProtectionMasterbook() {
                   {activeFramework === "gdpr" && `${Object.keys(masteredSections).filter(k => k.startsWith("gdpr-")).length}/${gdprSyllabus.flatMap(m => m.sections).length}`}
                   {activeFramework === "kdpa" && `${Object.keys(masteredSections).filter(k => k.startsWith("kdpa-")).length}/${kdpaSyllabus.length}`}
                   {activeFramework === "iso" && `${Object.keys(masteredSections).filter(k => k.startsWith("iso-")).length}/${isoSyllabus.length}`}
+                  {activeFramework === "frameworks" && `${Object.keys(masteredSections).filter(k => k.startsWith("fw-")).length}/${frameworksSyllabus.length}`}
+                  {activeFramework === "governance_module" && `${Object.keys(masteredSections).filter(k => k.startsWith("gov-")).length}/${governanceSyllabus.length}`}
+                  {activeFramework === "leadership_module" && `${Object.keys(masteredSections).filter(k => k.startsWith("ldr-")).length}/${leadershipSyllabus.length}`}
                 </span>
               </div>
             </div>
@@ -953,6 +1000,237 @@ export default function DataProtectionMasterbook() {
                           isMastered
                             ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
                             : "bg-slate-905 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        {isMastered ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Mastered</span>
+                          </>
+                        ) : (
+                          <span>Mark Mastered</span>
+                        )}
+                      </button>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isSecExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pt-4 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-2 mt-3"
+                        >
+                          {section.bullets.map((bullet, idx) => (
+                            <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed py-1">
+                              {renderAnswerWithTooltips(bullet)}
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* FRAMEWORKS MASTER MODULE VIEWER */}
+          {activeFramework === "frameworks" && (
+            <div className="space-y-4">
+              <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">🏛️ Section 4 — Frameworks Master Module</span>
+                <h3 className="text-sm font-extrabold text-slate-100">Executive Governance Framework Architecture</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  This module bridges compliance, cybersecurity, governance, operations, and executive leadership. Learn how governance frameworks work, how enterprise organizations structure governance, how security maturity is measured, and how executive technology governance aligns with business operations.
+                </p>
+              </div>
+
+              {frameworksSyllabus.map((section) => {
+                const isSecExpanded = expandedSection === section.id;
+                const isMastered = !!masteredSections[section.id];
+                return (
+                  <div
+                    key={section.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300 p-4 sm:p-5"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <button
+                        onClick={() => setExpandedSection(isSecExpanded ? null : section.id)}
+                        className="flex-1 flex items-start gap-2.5 text-left group"
+                      >
+                        {isSecExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                        )}
+                        <div>
+                          <span className="text-xs sm:text-sm font-extrabold text-slate-200 group-hover:text-slate-100 transition block">
+                            {section.title}
+                          </span>
+                          <p className="text-xs text-slate-400 leading-relaxed mt-1">{section.definition}</p>
+                        </div>
+                      </button>
+                      <button
+                        onClick={() => setMasteredSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                        className={`px-3 py-1.5 rounded-xl border text-[10px] font-extrabold uppercase tracking-wider transition flex items-center gap-1.5 flex-shrink-0 ${
+                          isMastered
+                            ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
+                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        {isMastered ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Mastered</span>
+                          </>
+                        ) : (
+                          <span>Mark Mastered</span>
+                        )}
+                      </button>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isSecExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pt-4 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-2 mt-3"
+                        >
+                          {section.bullets.map((bullet, idx) => (
+                            <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed py-1">
+                              {renderAnswerWithTooltips(bullet)}
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* GOVERNANCE MASTER MODULE VIEWER */}
+          {activeFramework === "governance_module" && (
+            <div className="space-y-4">
+              <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">⚙️ Section 5 — Governance Master Module</span>
+                <h3 className="text-sm font-extrabold text-slate-100">Enterprise Governance Operating System</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Establish a bulletproof corporate governance layer across your enterprise. Master governing committees, policy lifecycle systems, risk registries, high-impact C-suite metrics, vendor SLA scorecards, and regulatory audit cycles.
+                </p>
+              </div>
+
+              {governanceSyllabus.map((section) => {
+                const isSecExpanded = expandedSection === section.id;
+                const isMastered = !!masteredSections[section.id];
+                return (
+                  <div
+                    key={section.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300 p-4 sm:p-5"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <button
+                        onClick={() => setExpandedSection(isSecExpanded ? null : section.id)}
+                        className="flex-1 flex items-start gap-2.5 text-left group"
+                      >
+                        {isSecExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                        )}
+                        <div>
+                          <span className="text-xs sm:text-sm font-extrabold text-slate-200 group-hover:text-slate-100 transition block">
+                            {section.title}
+                          </span>
+                          <p className="text-xs text-slate-400 leading-relaxed mt-1">{section.definition}</p>
+                        </div>
+                      </button>
+                      <button
+                        onClick={() => setMasteredSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                        className={`px-3 py-1.5 rounded-xl border text-[10px] font-extrabold uppercase tracking-wider transition flex items-center gap-1.5 flex-shrink-0 ${
+                          isMastered
+                            ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
+                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        {isMastered ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Mastered</span>
+                          </>
+                        ) : (
+                          <span>Mark Mastered</span>
+                        )}
+                      </button>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isSecExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pt-4 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-2 mt-3"
+                        >
+                          {section.bullets.map((bullet, idx) => (
+                            <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed py-1">
+                              {renderAnswerWithTooltips(bullet)}
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* EXECUTIVE LEADERSHIP MASTER MODULE VIEWER */}
+          {activeFramework === "leadership_module" && (
+            <div className="space-y-4">
+              <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">👑 Section 6 — Executive Leadership Master Module</span>
+                <h3 className="text-sm font-extrabold text-slate-100">Executive Leadership Operating System</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Bridge technology operations with executive commercial success. Learn how to think like a C-level technology strategist, present defensible risk dashboards in the boardroom, negotiate corporate-wide software contracts, manage capital budgets, and confidently command crisis responses.
+                </p>
+              </div>
+
+              {leadershipSyllabus.map((section) => {
+                const isSecExpanded = expandedSection === section.id;
+                const isMastered = !!masteredSections[section.id];
+                return (
+                  <div
+                    key={section.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300 p-4 sm:p-5"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <button
+                        onClick={() => setExpandedSection(isSecExpanded ? null : section.id)}
+                        className="flex-1 flex items-start gap-2.5 text-left group"
+                      >
+                        {isSecExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                        )}
+                        <div>
+                          <span className="text-xs sm:text-sm font-extrabold text-slate-200 group-hover:text-slate-100 transition block">
+                            {section.title}
+                          </span>
+                          <p className="text-xs text-slate-400 leading-relaxed mt-1">{section.definition}</p>
+                        </div>
+                      </button>
+                      <button
+                        onClick={() => setMasteredSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                        className={`px-3 py-1.5 rounded-xl border text-[10px] font-extrabold uppercase tracking-wider transition flex items-center gap-1.5 flex-shrink-0 ${
+                          isMastered
+                            ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
+                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-300"
                         }`}
                       >
                         {isMastered ? (
