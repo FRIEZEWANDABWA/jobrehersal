@@ -14,6 +14,8 @@ Executives are asking: **Can this person modernize the business without creating
 
 This chapter is critical.
 
+![Cloud Strategy, Modern Workplace & Digital Transformation Leadership](/executive-cloud-strategy.jpg)
+
 ## PART 1 — WHAT CLOUD STRATEGY REALLY MEANS
 
 Most candidates answer: “Cloud helps scalability.” **Too shallow.**

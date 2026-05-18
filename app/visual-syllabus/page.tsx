@@ -366,6 +366,36 @@ const visualChapters = [
       "Failing to establish centralized visibility and dashboards, leading to reactive leadership based on user complaints"
     ],
     metrics: ["System Stability Index %", "Centralization / Standardization Rate", "Annual CapEx Optimization", "Capacity Headroom Forecast"]
+  },
+  {
+    chapterNumber: "CHAPTER 13",
+    title: "Cloud Strategy, Modern Workplace & Digital Transformation Leadership",
+    eyebrow: "Book 2 · Section A · Enterprise Architecture & Scale",
+    imageSrc: "/executive-cloud-strategy.jpg",
+    imageAlt: "Cloud Strategy, Modern Workplace & Digital Transformation Leadership (Value, Risk, Control, Cost, Adoption)",
+    readHref: "/knowledge/infrastructure-architecture/chapter-2-cloud-strategy-modern-workplace-digital-transformation",
+    description:
+      "Modernize with purpose, govern with discipline, and deliver real business value. Master the five-stage cloud framework, secure the digital workplace platform, and lead organizational change against resistance.",
+    principles: [
+      {
+        label: "Cloud Architecture Strategy",
+        value: "Cloud is not a simple technical upgrade—it is architecture strategy. Decide where technology lives based strictly on business goals, agility, and risk profiles."
+      },
+      {
+        label: "The Cloud Governance Spine",
+        value: "Govern cloud environments through five strategic checkpoints: VALUE (migrating for value, not trend) → RISK (preventing vendor lock-in & exposure) → CONTROL (never assuming the vendor owns governance) → COST (portfolio cost hygiene) → ADOPTION (leveraging active user enablement)."
+      },
+      {
+        label: "Digital Transformation & Change",
+        value: "Transformation is not buying new software; it is changing how the business operates. Handle user resistance humanly: explain WHY, INVOLVE stakeholders, SUPPORT users, and deliver QUICK WINS."
+      }
+    ],
+    traps: [
+      "Assuming the cloud vendor is responsible for security and visibility, instead of maintaining strict tenant and privilege governance",
+      "Treating Microsoft 365 as email/Teams alone, instead of leveraging it as a comprehensive digital workplace platform",
+      "Allowing license sprawl, shadowed SaaS tools, or duplicate platforms to exist without active portfolio cost reviews"
+    ],
+    metrics: ["Cloud Spend vs Budget Variance", "Digital Workplace Adoption Rate %", "License Optimization Index", "Operational Agility Velocity"]
   }
 ];
 
