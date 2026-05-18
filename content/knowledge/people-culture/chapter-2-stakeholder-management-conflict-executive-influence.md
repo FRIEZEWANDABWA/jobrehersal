@@ -18,6 +18,8 @@ Many strong technical candidates fail here because they still think **authority 
 
 This chapter is about **influence, trust, negotiation, difficult conversations, stakeholder confidence, and decision alignment.** It is a massive scoring area.
 
+![Stakeholder Management, Conflict Resolution & Executive Influence](/executive-stakeholder-influence.jpg)
+
 ## PART 1 — WHAT STAKEHOLDER MANAGEMENT REALLY MEANS
 
 Most people think stakeholder management means replying to emails, attending meetings, giving updates. **Too weak.**

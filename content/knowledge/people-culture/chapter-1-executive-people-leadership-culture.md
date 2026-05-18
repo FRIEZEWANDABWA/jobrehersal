@@ -22,6 +22,8 @@ Why? They still answer like **“I solve problems”** instead of **“I build e
 
 That difference is everything.
 
+![Executive People Leadership, Team Performance & Culture Building](/executive-people-leadership-culture.jpg)
+
 ## PART 1 — WHAT PEOPLE LEADERSHIP REALLY MEANS
 
 Most people think leadership means giving instructions, checking work, enforcing discipline. **Too small.**

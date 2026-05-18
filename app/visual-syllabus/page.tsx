@@ -186,6 +186,66 @@ const visualChapters = [
       "Criticizing previous employers or presenting your professional history as a list of job titles instead of strategic outcomes"
     ],
     metrics: ["Incident Outage MTTR", "SLA Incident Containment %", "Business Ownership Index", "Change Leadership NPS Score"]
+  },
+  {
+    chapterNumber: "CHAPTER 7",
+    title: "Executive People Leadership & Culture Building",
+    eyebrow: "Book 1 · Section C · People & Culture Foundations",
+    imageSrc: "/executive-people-leadership-culture.jpg",
+    imageAlt: "Executive People Leadership, Team Performance & Culture Building (Clarity, Ownership, Support, Accountability, Growth)",
+    readHref: "/knowledge/people-culture/chapter-1-executive-people-leadership-culture",
+    description:
+      "Transition from being a problem solver to building high-performance environments. Learn to delegate outcome custody, sustain healthy team motivation under pressure, and manage conflict using objective interests instead of personal positions.",
+    principles: [
+      {
+        label: "The People Multiplication Formula",
+        value: "Senior leadership success is no longer determined by individual output—it is measured by what your team can consistently deliver with absolute clarity and ownership without you."
+      },
+      {
+        label: "Clarity-First Accountability",
+        value: "Build performance structures sequentially: CLARITY (success criteria/SLAs) → OWNERSHIP (delegated outcomes) → SUPPORT (coaching/mentoring) → ACCOUNTABILITY (dashboards/reviews) → GROWTH (future leaders)."
+      },
+      {
+        label: "High-Performance Culture",
+        value: "Differentiate between skill gaps, attitude concerns, or personal issues cleanly using: UNDERSTAND → CLARIFY (no vague feedback) → SUPPORT (fair resources) → MEASURE → DECIDE."
+      }
+    ],
+    traps: [
+      "Failing to delegate full outcome responsibility, leading to micromanagement bottlenecks",
+      "Demanding accountability without first providing visible, measurable success clarity",
+      "Managing team conflicts emotionally or personally instead of reframing around shared business outcomes"
+    ],
+    metrics: ["Team Delivery Velocity", "SLA Fulfillment Rate %", "Leadership Mentorship Index", "Retention Score Under Pressure"]
+  },
+  {
+    chapterNumber: "CHAPTER 8",
+    title: "Stakeholder Management & Executive Influence",
+    eyebrow: "Book 1 · Section C · People & Culture Foundations",
+    imageSrc: "/executive-stakeholder-influence.jpg",
+    imageAlt: "Stakeholder Management, Conflict Resolution & Executive Influence (Understand, Align, Communicate, Negotiate, Sustain)",
+    readHref: "/knowledge/people-culture/chapter-2-stakeholder-management-conflict-executive-influence",
+    description:
+      "Real executive leadership is alignment without control. Master the art of leading without formal authority, translating technology initiatives into business outcomes, and building ironclad board trust during difficult pushbacks.",
+    principles: [
+      {
+        label: "Alignment Without Control",
+        value: "Head of IT success depends heavily on Finance, Operations, HR, and vendors. Your capability to influence stakeholders without formal authority determines your survival rate."
+      },
+      {
+        label: "The C-Suite Translation Bridge",
+        value: "Do not sell technical capabilities. Frame every proposal in business outcomes aligned to the stakeholder's goals: UNDERSTAND their metrics → ALIGN priorities → COMMUNICATE in business value → NEGOTIATE interests → SUSTAIN trust."
+      },
+      {
+        label: "Defending IT Strategy",
+        value: "Never pitch a tool or firewall. Pitch the resolution of a critical business vulnerability: PROBLEM → EXPOSURE (impact/cost of inaction) → OPTIONS → RECOMMENDATION → VALUE."
+      }
+    ],
+    traps: [
+      "Treating all stakeholders identical instead of translating metrics specifically for Finance (ROI/TCO) or Operations (Uptime)",
+      "Getting trapped in positions during priority conflicts instead of negotiating based on shared business interests",
+      "Allowing vocal stakeholders to hijack IT prioritization instead of using an objective scoring framework"
+    ],
+    metrics: ["Stakeholder Trust Index", "Influence Conversion Rate %", "Steering Priority Consensus", "Executive Influence Score"]
   }
 ];
 
