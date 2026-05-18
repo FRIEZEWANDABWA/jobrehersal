@@ -27,6 +27,8 @@ It is about **designing environments where failure does not stop the business.**
 
 That is **executive operations leadership**.
 
+![High Availability, Service Reliability & Operational Excellence](/executive-service-reliability.jpg)
+
 ## PART 1 — WHAT HIGH AVAILABILITY REALLY MEANS
 
 Most people answer: “High availability means uptime.” **Too weak.**

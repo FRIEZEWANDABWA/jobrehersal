@@ -246,6 +246,66 @@ const visualChapters = [
       "Allowing vocal stakeholders to hijack IT prioritization instead of using an objective scoring framework"
     ],
     metrics: ["Stakeholder Trust Index", "Influence Conversion Rate %", "Steering Priority Consensus", "Executive Influence Score"]
+  },
+  {
+    chapterNumber: "CHAPTER 9",
+    title: "High Availability, Service Reliability & Operational Excellence",
+    eyebrow: "Book 1 · Section D · Operations & Service Delivery Foundations",
+    imageSrc: "/executive-service-reliability.jpg",
+    imageAlt: "High Availability, Service Reliability & Operational Excellence (Prevent, Detect, Respond, Recover, Improve)",
+    readHref: "/knowledge/operations/chapter-1-availability-reliability",
+    description:
+      "Uptime and resilience are your ultimate battlefield. Transition from reactive troubleshooting to designing high-availability architectures where failure is isolated, and incidents are resolved through an ironclad war room structure.",
+    principles: [
+      {
+        label: "Operational Resilience",
+        value: "High availability is not the absence of failures—it is business continuity despite failure. If a core system fails, the business must not stop."
+      },
+      {
+        label: "The Reliability Spine",
+        value: "Govern operational uptime sequentially: PREVENT (redundancy/standardization) → DETECT (centralized dashboards/baselines) → RESPOND (triage/early escalation) → RECOVER (failover/validate) → IMPROVE (Root Cause Analysis/post-mortem)."
+      },
+      {
+        label: "BCP vs Disaster Recovery",
+        value: "Differentiate these clearly: Business Continuity Plan (BCP) is how the business continues operating during a disruption (workarounds/manual fallback), while Disaster Recovery (DR) is how systems return to full health afterwards."
+      }
+    ],
+    traps: [
+      "Failing to implement proactive monitoring, depending instead on user complaints to detect outages",
+      "Treating major incidents without a structured war room model, leading to command confusion during a crisis",
+      "Resolving outages without conducting formal, non-blame Root Cause Analysis (RCA) to prevent repeat failure patterns"
+    ],
+    metrics: ["Uptime % (99.9%+)", "MTTR (Mean Time to Resolve)", "MTTD (Mean Time to Detect)", "SLA Compliance %", "Repeat Incident Rate"]
+  },
+  {
+    chapterNumber: "CHAPTER 10",
+    title: "Vendor Management, SLA Control & Governance",
+    eyebrow: "Book 1 · Section D · Operations & Service Delivery Foundations",
+    imageSrc: "/executive-vendor-sla-governance.jpg",
+    imageAlt: "Vendor Management, SLA Control & Third-Party Governance (Select, Define, Monitor, Escalate, Optimize, Exit)",
+    readHref: "/knowledge/operations/chapter-3-vendor-sla-governance",
+    description:
+      "Executives do not care if failure came from your ISP, security partner, or cloud provider—they care about why the business was exposed. Master the art of managing ecosystems, drafting bulletproof SLAs, and optimizing vendor spend.",
+    principles: [
+      {
+        label: "Ecosystem Ownership",
+        value: "Never excuse IT failure with 'the vendor delayed'. Vendor outcomes are still your IT outcomes. You own the ecosystem, and you own the results."
+      },
+      {
+        label: "The Vendor Lifecycle Spine",
+        value: "Manage third-party relationships through a strict governance pipeline: SELECT (capability/compliance/financials) → DEFINE (Bulletproof SLAs/penalties) → MONITOR (dashboards/audits) → ESCALATE (structured commercial pressure) → OPTIMIZE (consolidation/license hygiene) → EXIT (strategic transition planning)."
+      },
+      {
+        label: "BATNA & Lock-In Mitigation",
+        value: "Single-vendor dependencies represent strategic business risk. Mitigate this early with contract exit protections, active documentation, and structured knowledge transfers."
+      }
+    ],
+    traps: [
+      "Drafting vague SLAs without explicit response times, resolution milestones, or penalty/service credit structures",
+      "Engaging vendors only during outages instead of holding monthly performance dashboard reviews",
+      "Failing to optimize license hygiene and shadow spend, leading to massive financial duplication"
+    ],
+    metrics: ["Vendor SLA Compliance %", "Vendor Consolidated Savings", "Contract Renewal Success Rate", "Shadow IT Spend %"]
   }
 ];
 

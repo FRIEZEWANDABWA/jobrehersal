@@ -24,6 +24,8 @@ That is **your** responsibility.
 
 At senior level, you do not only manage systems — **you manage ecosystems.**
 
+![Vendor Management, SLA Control & Third-Party Governance](/executive-vendor-sla-governance.jpg)
+
 ## PART 1 — WHAT VENDOR MANAGEMENT REALLY IS
 
 Most people think vendor management means renewing contracts, paying invoices, calling suppliers. **Too small.**
