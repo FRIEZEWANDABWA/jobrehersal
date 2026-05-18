@@ -336,6 +336,36 @@ const visualChapters = [
       "Panicking or hiding information from executives and customers during outages instead of borrowing calm and communicating clearly"
     ],
     metrics: ["RTO Compliance %", "RPO Max Data Gap", "Restore Validation Rate %", "Simulated DR Table-Top NPS"]
+  },
+  {
+    chapterNumber: "CHAPTER 12",
+    title: "Executive Infrastructure Thinking, Scale & Reliability",
+    eyebrow: "Book 2 · Section A · Enterprise Architecture & Scale",
+    imageSrc: "/executive-infrastructure-thinking.jpg",
+    imageAlt: "Executive Infrastructure Thinking, Scale & Reliability (Stability, Standardization, Scalability, Visibility, Resilience)",
+    readHref: "/knowledge/infrastructure-architecture/chapter-1-executive-infrastructure-thinking-scale-reliability",
+    description:
+      "Transition from managing equipment to leading infrastructure as a critical business capability. Master the five-stage infrastructure framework, navigate cloud vs. on-prem vs. hybrid decisions, and govern capacity proactively.",
+    principles: [
+      {
+        label: "Operational Foundation",
+        value: "Infrastructure is the operational foundation that allows the business to function, grow, and survive failure. It is business continuity made visible."
+      },
+      {
+        label: "The Scale Framework",
+        value: "Govern infrastructure maturity through the five core stages: STABILITY (outage elimination) → STANDARDIZATION (consistent template-driven rules) → SCALABILITY (growth-ready architecture) → VISIBILITY (proactive dashboards) → RESILIENCE (survival-by-design)."
+      },
+      {
+        label: "Enterprise Architecture Thinking",
+        value: "Design systems as a unified whole rather than disjointed technical purchases. Frame infrastructure decisions based on long-term business goals, scalability, and 5-year strategic fit."
+      }
+    ],
+    traps: [
+      "Choosing cloud, hybrid, or on-premises architecture based on marketing trends rather than objective business risk and latency constraints",
+      "Treating infrastructure lifecycle passively, waiting for hardware or support contract failures before initiating refreshes",
+      "Failing to establish centralized visibility and dashboards, leading to reactive leadership based on user complaints"
+    ],
+    metrics: ["System Stability Index %", "Centralization / Standardization Rate", "Annual CapEx Optimization", "Capacity Headroom Forecast"]
   }
 ];
 

@@ -14,6 +14,8 @@ Executives are asking: **Can this person build environments that scale without b
 
 This chapter is foundational.
 
+![Executive Infrastructure Thinking, Scale & Reliability](/executive-infrastructure-thinking.jpg)
+
 ## PART 1 — WHAT INFRASTRUCTURE REALLY MEANS AT EXECUTIVE LEVEL
 
 Most candidates answer infrastructure like: “Networks, servers, and support systems.” **Too junior.**
