@@ -15,9 +15,53 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  
+  // Real source image natural dimensions
+  const [naturalSize, setNaturalSize] = useState({ width: 0, height: 0 });
+  // Dynamic layout fit dimensions inside viewport
+  const [fitSize, setFitSize] = useState({ width: 0, height: 0 });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  // Calculate fitsize based on container bounds and natural aspect ratio
+  const calculateFitSize = () => {
+    const container = containerRef.current;
+    if (!container || naturalSize.width === 0) return;
+
+    // Use viewport bounds minus generous padding
+    const containerW = container.clientWidth - 48;
+    const containerH = container.clientHeight - 48;
+
+    const naturalAspect = naturalSize.width / naturalSize.height;
+    const containerAspect = containerW / containerH;
+
+    let width = 0;
+    let height = 0;
+
+    if (naturalAspect > containerAspect) {
+      // Width constrained
+      width = Math.min(containerW, naturalSize.width);
+      height = width / naturalAspect;
+    } else {
+      // Height constrained
+      height = Math.min(containerH, naturalSize.height);
+      width = height * naturalAspect;
+    }
+
+    setFitSize({ width, height });
+  };
+
+  // Recalculate fit layout on resize or when natural size becomes available
+  useEffect(() => {
+    if (isOpen && naturalSize.width > 0) {
+      calculateFitSize();
+      window.addEventListener("resize", calculateFitSize);
+    }
+    return () => {
+      window.removeEventListener("resize", calculateFitSize);
+    };
+  }, [isOpen, naturalSize]);
 
   // Reset zoom settings when closed
   useEffect(() => {
@@ -28,7 +72,7 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
   }, [isOpen]);
 
   const handleZoomIn = () => {
-    setScale((prev) => Math.min(prev + 0.5, 5));
+    setScale((prev) => Math.min(prev + 0.5, 8));
   };
 
   const handleZoomOut = () => {
@@ -50,7 +94,7 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
     e.preventDefault();
     const delta = -e.deltaY * 0.005;
     setScale((prev) => {
-      const next = Math.min(Math.max(prev + delta, 1), 5);
+      const next = Math.min(Math.max(prev + delta, 1), 8);
       if (next === 1) {
         setOffset({ x: 0, y: 0 });
       }
@@ -69,12 +113,12 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
     const newX = e.clientX - dragStart.x;
     const newY = e.clientY - dragStart.y;
 
-    // Bounds checking to keep image reasonably centered / in viewport
+    // Boundary constraints to keep the zoomed image panned within reasonable view limits
     const container = containerRef.current;
-    const img = imgRef.current;
-    if (container && img) {
-      const maxW = (img.clientWidth * scale - container.clientWidth) / 2;
-      const maxH = (img.clientHeight * scale - container.clientHeight) / 2;
+    if (container && fitSize.width > 0) {
+      const maxW = (fitSize.width * scale - container.clientWidth) / 2 + 100;
+      const maxH = (fitSize.height * scale - container.clientHeight) / 2 + 100;
+      
       const boundedX = Math.max(Math.min(newX, Math.max(maxW, 0)), -Math.max(maxW, 0));
       const boundedY = Math.max(Math.min(newY, Math.max(maxH, 0)), -Math.max(maxH, 0));
       setOffset({ x: boundedX, y: boundedY });
@@ -91,8 +135,16 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
     if (scale > 1) {
       handleReset();
     } else {
-      setScale(2);
+      setScale(2.5); // Set a good base zoom factor to instantly read details
     }
+  };
+
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    setNaturalSize({
+      width: img.naturalWidth,
+      height: img.naturalHeight,
+    });
   };
 
   // Close modal on Escape key press
@@ -121,6 +173,7 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
           src={src}
           alt={alt}
           className="w-full h-auto object-contain rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
+          style={{ imageRendering: "auto" }}
         />
         {/* Subtle magnifying glass overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-slate-950/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -164,7 +217,7 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
                   </span>
                   <button
                     onClick={handleZoomIn}
-                    disabled={scale >= 5}
+                    disabled={scale >= 8}
                     className="rounded p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-100 disabled:opacity-40"
                     title="Zoom In"
                   >
@@ -205,30 +258,28 @@ export function ZoomableImage({ src, alt }: ZoomableImageProps) {
                 </div>
               )}
 
-              <motion.div
-                style={{
-                  x: offset.x,
-                  y: offset.y,
-                  scale: scale,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="max-w-full max-h-full flex items-center justify-center"
-              >
+              {/* Renders the high-resolution source file at natural aspect-ratio fit */}
+              <div className="relative flex items-center justify-center max-w-full max-h-full">
                 <img
                   ref={imgRef}
                   src={src}
                   alt={alt}
+                  onLoad={handleImageLoad}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onDoubleClick={handleDoubleClick}
-                  className="max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain rounded shadow-2xl pointer-events-auto select-none"
                   style={{
-                    willChange: "transform",
-                    imageRendering: "auto"
+                    // Forces layout-level dynamic rasterization from source image to preserve razor-sharp details
+                    width: fitSize.width > 0 ? `${fitSize.width * scale}px` : "auto",
+                    height: fitSize.height > 0 ? `${fitSize.height * scale}px` : "auto",
+                    transform: `translate(${offset.x}px, ${offset.y}px)`,
+                    willChange: "width, height, transform",
+                    imageRendering: "auto",
                   }}
+                  className="rounded shadow-2xl pointer-events-auto select-none max-w-none max-h-none transition-all duration-75"
                   draggable={false}
                 />
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}
