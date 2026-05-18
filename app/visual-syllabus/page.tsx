@@ -456,6 +456,36 @@ const visualChapters = [
       "Conducting major migrations without establishing post-transformation success measurements, leading to activity without real business outcomes"
     ],
     metrics: ["Technical Debt Resolution %", "Incident Frequency Post-Migration", "User Onboarding Acceleration", "Capital Expenditure (CapEx) Optimization"]
+  },
+  {
+    chapterNumber: "CHAPTER 16",
+    title: "Executive Cybersecurity Leadership & Risk Thinking",
+    eyebrow: "Book 1 · Section 4 · Cybersecurity & Risk Management",
+    imageSrc: "/executive-cybersecurity-leadership.jpg",
+    imageAlt: "Executive Cybersecurity Leadership & Risk Thinking (Identify, Protect, Detect, Respond, Recover)",
+    readHref: "/knowledge/cybersecurity/chapter-1-executive-cybersecurity-leadership",
+    description:
+      "Sound like a business protector through technology, not just a technical security engineer. Master the five-stage NIST-aligned security framework, control IAM as the new perimeter, and govern legal compliance under data protection acts.",
+    principles: [
+      {
+        label: "Risk Reduction Focus",
+        value: "Executive cybersecurity is not about tool purchases—it is reducing business exposure to unacceptable risk. The real question is: 'Are we reducing risk faster than exposure is growing?'"
+      },
+      {
+        label: "The Security Spine",
+        value: "Govern cybersecurity maturity through five practical benchmarks: IDENTIFY (critical assets and threats) → PROTECT (IAM, least privilege, and MFA) → DETECT (early visibility and monitoring) → RESPOND (containment and communication) → RECOVER (business survival and BCP/DR)."
+      },
+      {
+        label: "Identity as the Perimeter",
+        value: "Modern security is about identity trust rather than network edge boundaries. Establish strict IAM controls: role-based access, privileged access reviews (PAM), MFA everywhere, and joiner/mover/leaver automation."
+      }
+    ],
+    traps: [
+      "Defining cybersecurity using vanity IT metrics (like antivirus scan counts) instead of leadership-focused risk and containment speed metrics",
+      "Treating security compliance (GDPR, Kenya Data Protection Act) as a technical checkbox instead of an executive legal accountability",
+      "Building security culture solely on fear and punishment rather than making security normal, proactive business behavior"
+    ],
+    metrics: ["Incident Detection Speed", "Incident Response Containment Speed", "MFA Coverage %", "Privileged Access Review Rate %", "Patch Compliance Rate %"]
   }
 ];
 

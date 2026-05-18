@@ -28,6 +28,8 @@ Cybersecurity is not about tools alone. It is about:
 
 This chapter is where you must sound like **a business protector through technology** — not only a technical security engineer.
 
+![Executive Cybersecurity Leadership & Risk Thinking](/executive-cybersecurity-leadership.jpg)
+
 ## PART 1 — WHAT CYBERSECURITY REALLY MEANS AT EXECUTIVE LEVEL
 
 Most candidates answer with antivirus, firewalls, password policies. **Too small.**
