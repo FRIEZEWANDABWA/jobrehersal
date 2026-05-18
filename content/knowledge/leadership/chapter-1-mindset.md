@@ -45,6 +45,8 @@ This is the first mindset shift.
 
 ## 2. THE EXECUTIVE DECISION FRAMEWORK
 
+![Executive Decision Framework](/executive-decision-framework.jpg)
+
 Senior interview answers must reflect how leaders decide.
 
 Every major IT decision should pass through this framework:

@@ -34,6 +34,7 @@ type ParsedBlock =
   | { kind: "h2"; text: string; id: string }
   | { kind: "h3"; text: string; id: string }
   | { kind: "ul"; items: string[] }
+  | { kind: "img"; src: string; alt: string }
   | { kind: "p"; text: string };
 
 function parseBlocks(markdown: string): ParsedBlock[] {
@@ -64,6 +65,14 @@ function parseBlocks(markdown: string): ParsedBlock[] {
       blocks.push({ kind: "h1", text });
       i++;
       continue;
+    }
+    if (line.trim().startsWith("![") && line.trim().endsWith(")")) {
+      const match = line.trim().match(/^!\[(.*?)\]\((.*?)\)/);
+      if (match) {
+        blocks.push({ kind: "img", alt: match[1], src: match[2] });
+        i++;
+        continue;
+      }
     }
     if (line.startsWith("- ")) {
       const items: string[] = [];
@@ -155,6 +164,16 @@ function parsedBlockToNode(
         >
           {renderInline(b.text)}
         </p>
+      );
+    case "img":
+      return (
+        <div key={key} className="my-6 overflow-hidden rounded-xl border border-slate-800 bg-slate-950/60 p-2">
+          <img
+            src={b.src}
+            alt={b.alt}
+            className="w-full h-auto object-contain rounded-lg"
+          />
+        </div>
       );
     default:
       return null;
