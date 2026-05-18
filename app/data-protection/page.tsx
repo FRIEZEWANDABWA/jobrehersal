@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExecutiveBrief, ActiveRecallQuiz, TermTooltip } from "@/components/learningComponents";
-import { Shield, BookOpen, UserCheck, Activity, Award, FileText, CheckCircle, AlertTriangle, AlertCircle } from "lucide-react";
+import { Shield, BookOpen, UserCheck, Activity, Award, FileText, CheckCircle, AlertTriangle, AlertCircle, ChevronDown, ChevronRight, Check } from "lucide-react";
+import { gdprSyllabus, isoSyllabus, kdpaSyllabus, caseStudies } from "./syllabusData";
 
 // Boardroom Terms Glossary definitions for inline hover tooltips
 const masterbookGlossary = [
@@ -173,9 +174,14 @@ function ComplianceDashboard() {
 
 export default function DataProtectionMasterbook() {
   const [activeSystem, setActiveSystem] = useState<"learning" | "interview" | "operational" | "governance" | "executive">("learning");
-  const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso">("gdpr");
+  const [activeFramework, setActiveFramework] = useState<"gdpr" | "kdpa" | "iso" | "cases">("gdpr");
   const [activeQnaLevel, setActiveQnaLevel] = useState<"all" | "gdpr_kdpa" | "tier1" | "tier2" | "tier3" | "tier4" | "leadership" | "casestudy">("all");
   const [searchQuery, setSearchQuery] = useState("");
+  
+  // Learning Syllabus UI States
+  const [expandedModule, setExpandedModule] = useState<string | null>(null);
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [masteredSections, setMasteredSections] = useState<Record<string, boolean>>({});
   
   // Interactive Simulator State (kept for simulation tab)
   const [simGdpr, setSimGdpr] = useState(false);
@@ -598,9 +604,13 @@ export default function DataProtectionMasterbook() {
           className="space-y-8 animate-in fade-in"
         >
           {/* Section Framework Toggle */}
-          <div className="flex gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800/80 self-start">
+          <div className="flex flex-wrap gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800/80 self-start">
             <button
-              onClick={() => setActiveFramework("gdpr")}
+              onClick={() => {
+                setActiveFramework("gdpr");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
               className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
                 activeFramework === "gdpr" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
               }`}
@@ -608,7 +618,11 @@ export default function DataProtectionMasterbook() {
               GDPR Master Module
             </button>
             <button
-              onClick={() => setActiveFramework("kdpa")}
+              onClick={() => {
+                setActiveFramework("kdpa");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
               className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
                 activeFramework === "kdpa" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
               }`}
@@ -616,120 +630,170 @@ export default function DataProtectionMasterbook() {
               Kenya DPA Module
             </button>
             <button
-              onClick={() => setActiveFramework("iso")}
+              onClick={() => {
+                setActiveFramework("iso");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
               className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
                 activeFramework === "iso" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
               }`}
             >
               ISO 27001 ISMS Module
             </button>
+            <button
+              onClick={() => {
+                setActiveFramework("cases");
+                setExpandedModule(null);
+                setExpandedSection(null);
+              }}
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition ${
+                activeFramework === "cases" ? "bg-purple-500/10 text-purple-300 shadow-sm" : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              Enterprise Case Studies
+            </button>
           </div>
 
-          {/* DYNAMIC FRAMEWORK READING TEXTS */}
-          {activeFramework === "gdpr" && (
-            <div className="space-y-8">
-              {/* GDPR Overview Brief */}
-              <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Module 1 — GDPR Fundamentals</span>
-                <h3 className="text-sm font-extrabold text-slate-100">GDPR — General Data Protection Regulation</h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  GDPR is the European Union’s flagship data privacy regulation. It governs how organizations <strong>collect, process, store, transfer, protect, and delete personal data</strong>. Even if a company is outside Europe, GDPR may still apply if it handles EU citizen data, works with international organizations, uses global cloud services, or supports multinational clients.
-                </p>
-                <p className="text-[10px] text-purple-300 font-semibold uppercase tracking-wider">
-                  ⚠️ Critical Environment Scope: Gates Foundation, Amazon, international NGOs, cloud systems, and global clients.
-                </p>
+          {/* PROGRESS TRACKER */}
+          {activeFramework !== "cases" && (
+            <div className="p-4 rounded-2xl border border-slate-800/80 bg-slate-900/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">Learning Status</span>
+                <span className="text-xs text-slate-300 font-semibold mt-0.5">
+                  {activeFramework === "gdpr" && "GDPR Master Syllabus Progress"}
+                  {activeFramework === "kdpa" && "Kenya DPA Syllabus Progress"}
+                  {activeFramework === "iso" && "ISO 27001 ISMS Syllabus Progress"}
+                </span>
               </div>
-
-              {/* GDPR Principles List */}
-              <div className="space-y-4">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">📖 Module 2 — GDPR Principles</span>
-                <h4 className="text-xs sm:text-sm font-extrabold text-amber-300 uppercase tracking-wider border-b border-slate-800 pb-2">
-                  Core GDPR Principles You Must Know
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
-                  <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                    <span className="font-extrabold text-slate-200 block">1. Lawfulness, Fairness & Transparency</span>
-                    <p className="text-slate-400">You must clearly explain why data is collected, how it is used, and who accesses it.</p>
-                    <p className="text-amber-400/90 text-[11px] italic">Example in your environment: visitor management systems, access control, CCTV, HR systems, bookings systems, biometrics.</p>
-                  </div>
-
-                  <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                    <span className="font-extrabold text-slate-200 block">2. Purpose Limitation</span>
-                    <p className="text-slate-400">Only collect data for a highly specific and legitimate purpose.</p>
-                    <p className="text-rose-400 text-[11px] font-semibold">❌ Bad example: Collecting ID/passport data for WiFi access when not necessary.</p>
-                  </div>
-
-                  <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                    <span className="font-extrabold text-slate-200 block">3. Data Minimization</span>
-                    <p className="text-slate-400">Only collect the minimum necessary data to perform operations.</p>
-                    <p className="text-emerald-400/90 text-[11px] font-semibold">✅ Example: For guest WiFi: maybe only email and phone number, not passport, address, or biometrics.</p>
-                  </div>
-
-                  <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                    <span className="font-extrabold text-slate-200 block">4. Accuracy</span>
-                    <p className="text-slate-400">Data must remain updated and correct across operational networks.</p>
-                    <p className="text-slate-400 text-[11px]">Example: Access control users, staff records, tenant systems, client databases.</p>
-                  </div>
-
-                  <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                    <span className="font-extrabold text-slate-200 block">5. Storage Limitation</span>
-                    <p className="text-slate-400">Do not keep data forever. You must define retention periods, deletion policies, and archival processes.</p>
-                    <p className="text-slate-400 text-[11px] italic">Example: CCTV footage retention, former employee accounts, old visitor logs.</p>
-                  </div>
-
-                  <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                    <span className="font-extrabold text-slate-200 block">6. Integrity & Confidentiality</span>
-                    <p className="text-slate-400">You must protect: systems, access, backups, networks, endpoints, cloud environments, and databases.</p>
-                    <p className="text-purple-400 text-[11px] font-bold">This is where cybersecurity becomes part of compliance.</p>
-                  </div>
+              <div className="flex items-center gap-4 flex-1 max-w-md">
+                <div className="h-2 w-full bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+                  <div
+                    className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${
+                        activeFramework === "gdpr"
+                          ? gdprSyllabus.flatMap(m => m.sections).length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("gdpr-")).length / gdprSyllabus.flatMap(m => m.sections).length) * 100 : 0
+                          : activeFramework === "kdpa"
+                          ? kdpaSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("kdpa-")).length / kdpaSyllabus.length) * 100 : 0
+                          : isoSyllabus.length > 0 ? (Object.keys(masteredSections).filter(k => k.startsWith("iso-")).length / isoSyllabus.length) * 100 : 0
+                      }%`
+                    }}
+                  />
                 </div>
-              </div>
-
-              {/* GDPR Rights Module */}
-              <div className="p-5 rounded-2xl border border-slate-800 bg-slate-950/40 space-y-3">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">📖 Module 3 — Data Subject Rights</span>
-                <h4 className="text-xs sm:text-sm font-extrabold text-blue-300 uppercase tracking-wider">
-                  GDPR Rights of Users (Very Important)
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  Users have the right to know what data you hold, request deletion, request correction, request export, and object to processing.
-                </p>
-                <p className="text-xs text-slate-400">
-                  <strong>Example in practice:</strong> An employee requests deletion of old records, export of personal information, or removal from mailing systems.
-                </p>
-              </div>
-
-              {/* Environmental Mapping */}
-              <div className="space-y-4">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500 block">📖 Module 8 — Environment Mapping</span>
-                <h4 className="text-xs sm:text-sm font-purple-400 uppercase tracking-wider text-purple-400">
-                  Mapping GDPR to Your Actual Multi-Site Environment
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">Access Control</span>
-                    <span className="text-slate-400 block">Biometrics & access logs must remain locally encrypted.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">CCTV Networks</span>
-                    <span className="text-slate-400 block">Surveillance privacy & NVR storage logs isolated.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">Google Workspace</span>
-                    <span className="text-slate-400 block">Admin logs, file sharing, and emails governed with MFA.</span>
-                  </div>
-                  <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/10 space-y-1">
-                    <span className="font-bold text-slate-200 block">WiFi / Internet</span>
-                    <span className="text-slate-400 block">VLAN network isolation between clients & guest hubs.</span>
-                  </div>
-                </div>
+                <span className="text-xs font-mono font-bold text-purple-400">
+                  {activeFramework === "gdpr" && `${Object.keys(masteredSections).filter(k => k.startsWith("gdpr-")).length}/${gdprSyllabus.flatMap(m => m.sections).length}`}
+                  {activeFramework === "kdpa" && `${Object.keys(masteredSections).filter(k => k.startsWith("kdpa-")).length}/${kdpaSyllabus.length}`}
+                  {activeFramework === "iso" && `${Object.keys(masteredSections).filter(k => k.startsWith("iso-")).length}/${isoSyllabus.length}`}
+                </span>
               </div>
             </div>
           )}
 
-          {/* KDPA READING TEXTS */}
+          {/* GDPR SYLLABUS VIEWER */}
+          {activeFramework === "gdpr" && (
+            <div className="space-y-4">
+              {gdprSyllabus.map((module) => {
+                const isModExpanded = expandedModule === module.id;
+                const masteredCount = module.sections.filter(s => masteredSections[s.id]).length;
+                return (
+                  <div
+                    key={module.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300"
+                  >
+                    <button
+                      onClick={() => setExpandedModule(isModExpanded ? null : module.id)}
+                      className="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-950/20 hover:bg-slate-950/40 transition"
+                    >
+                      <div>
+                        <span className="text-xs sm:text-sm font-extrabold text-slate-100 block">{module.title}</span>
+                        <span className="text-[10px] text-slate-500 font-mono mt-0.5">
+                          {masteredCount} / {module.sections.length} Sections Mastered
+                        </span>
+                      </div>
+                      {isModExpanded ? <ChevronDown className="w-4 h-4 text-purple-400" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isModExpanded && (
+                        <motion.div
+                          initial={{ height: 0 }}
+                          animate={{ height: "auto" }}
+                          exit={{ height: 0 }}
+                          className="overflow-hidden border-t border-slate-800/60 divide-y divide-slate-800/40 bg-slate-950/[0.05]"
+                        >
+                          {module.sections.map((section) => {
+                            const isSecExpanded = expandedSection === section.id;
+                            const isMastered = !!masteredSections[section.id];
+                            return (
+                              <div key={section.id} className="p-4 sm:p-5 space-y-3">
+                                <div className="flex items-start justify-between gap-4">
+                                  <button
+                                    onClick={() => setExpandedSection(isSecExpanded ? null : section.id)}
+                                    className="flex-1 flex items-start gap-2.5 text-left group"
+                                  >
+                                    {isSecExpanded ? (
+                                      <ChevronDown className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                                    ) : (
+                                      <ChevronRight className="w-4 h-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                                    )}
+                                    <div>
+                                      <span className="text-xs sm:text-sm font-extrabold text-slate-200 group-hover:text-slate-100 transition">
+                                        {section.title}
+                                      </span>
+                                      <p className="text-xs text-slate-400 leading-relaxed mt-1">{section.definition}</p>
+                                    </div>
+                                  </button>
+                                  <button
+                                    onClick={() => setMasteredSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                                    className={`px-3 py-1.5 rounded-xl border text-[10px] font-extrabold uppercase tracking-wider transition flex items-center gap-1.5 flex-shrink-0 ${
+                                      isMastered
+                                        ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
+                                        : "bg-slate-905 border-slate-800 text-slate-400 hover:text-slate-300"
+                                    }`}
+                                  >
+                                    {isMastered ? (
+                                      <>
+                                        <Check className="w-3.5 h-3.5" />
+                                        <span>Mastered</span>
+                                      </>
+                                    ) : (
+                                      <span>Mark Mastered</span>
+                                    )}
+                                  </button>
+                                </div>
+
+                                <AnimatePresence initial={false}>
+                                  {isSecExpanded && (
+                                    <motion.div
+                                      initial={{ opacity: 0, height: 0 }}
+                                      animate={{ opacity: 1, height: "auto" }}
+                                      exit={{ opacity: 0, height: 0 }}
+                                      className="pt-2 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-2"
+                                    >
+                                      {section.bullets.map((bullet, idx) => (
+                                        <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed py-1">
+                                          {renderAnswerWithTooltips(bullet)}
+                                        </div>
+                                      ))}
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </div>
+                            );
+                          })}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* KENYA DPA SYLLABUS VIEWER */}
           {activeFramework === "kdpa" && (
-            <div className="space-y-8">
+            <div className="space-y-4">
               <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Section 2 — Kenya Data Protection Act</span>
                 <h3 className="text-sm font-extrabold text-slate-100">Kenya DPA Legal Governance</h3>
@@ -738,50 +802,75 @@ export default function DataProtectionMasterbook() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-5 rounded-2xl border border-slate-850 bg-slate-900/10 space-y-3 text-xs sm:text-sm">
-                  <h4 className="font-extrabold text-amber-300 uppercase tracking-wider">
-                    Key Areas You MUST Know
-                  </h4>
-                  <ul className="space-y-2.5 pl-0 list-none text-slate-300">
-                    <li>
-                      <strong className="text-slate-200 block">A. Principles of Data Protection</strong>
-                      Requires personal data to be: lawfully processed, collected for specific purposes, limited to what is necessary, accurate, protected, and retained only as long as necessary.
-                    </li>
-                    <li>
-                      <strong className="text-slate-200 block">B. Rights of Data Subjects</strong>
-                      Kenyan citizens maintain rights to access data, request corrections, request permanent deletion, and object to processing.
-                    </li>
-                    <li>
-                      <strong className="text-slate-200 block">C. Data Controllers & Processors</strong>
-                      Organizations handling personal data must register and comply with operational safeguards. In your environment, KOFISI may act as data controller, processor, or both, depending on the service.
-                    </li>
-                  </ul>
-                </div>
+              {kdpaSyllabus.map((section) => {
+                const isSecExpanded = expandedSection === section.id;
+                const isMastered = !!masteredSections[section.id];
+                return (
+                  <div
+                    key={section.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300 p-4 sm:p-5"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <button
+                        onClick={() => setExpandedSection(isSecExpanded ? null : section.id)}
+                        className="flex-1 flex items-start gap-2.5 text-left group"
+                      >
+                        {isSecExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                        )}
+                        <div>
+                          <span className="text-xs sm:text-sm font-extrabold text-slate-200 group-hover:text-slate-100 transition block">
+                            {section.title}
+                          </span>
+                          <p className="text-xs text-slate-400 leading-relaxed mt-1">{section.definition}</p>
+                        </div>
+                      </button>
+                      <button
+                        onClick={() => setMasteredSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                        className={`px-3 py-1.5 rounded-xl border text-[10px] font-extrabold uppercase tracking-wider transition flex items-center gap-1.5 flex-shrink-0 ${
+                          isMastered
+                            ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
+                            : "bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        {isMastered ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Mastered</span>
+                          </>
+                        ) : (
+                          <span>Mark Mastered</span>
+                        )}
+                      </button>
+                    </div>
 
-                <div className="p-5 rounded-2xl border border-slate-850 bg-slate-900/10 space-y-4 text-xs sm:text-sm">
-                  <h4 className="font-extrabold text-blue-300 uppercase tracking-wider">
-                    Most Important Legal Sections for Frieze
-                  </h4>
-                  <div className="space-y-3">
-                    <div className="space-y-1">
-                      <span className="font-bold text-slate-200 block">Section 41 — Data Protection by Design</span>
-                      <p className="text-slate-400">Security and privacy must be built INTO systems from the beginning. Examples include: MFA enabled by default, encrypted devices (BitLocker), role-based access, limited permissions, secure WiFi segmentation, CCTV access restrictions, VPN enforcement, password policies, and backup encryption.</p>
-                      <p className="text-purple-400/90 text-[11px] font-semibold mt-1">The Act specifically requires: risk identification, safeguards, encryption, ability to restore systems, and continuous improvement.</p>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="font-bold text-slate-200 block">Section 43 — Breach Notification</span>
-                      <p className="text-slate-400">Very important. Breaches must be reported within <strong className="text-rose-400">72 hours</strong> to the Data Commissioner. As Head of IT, you must have incident response, logging, monitoring, forensic readiness, escalation workflows, and communication plans.</p>
-                    </div>
+                    <AnimatePresence initial={false}>
+                      {isSecExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pt-4 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-2 mt-3"
+                        >
+                          {section.bullets.map((bullet, idx) => (
+                            <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed py-1">
+                              {renderAnswerWithTooltips(bullet)}
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           )}
 
-          {/* ISO 27001 READING TEXTS */}
+          {/* ISO 27001 SYLLABUS VIEWER */}
           {activeFramework === "iso" && (
-            <div className="space-y-8">
+            <div className="space-y-4">
               <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">📖 Section 3 — ISO 27001 Governance</span>
                 <h3 className="text-sm font-extrabold text-slate-100">ISO 27001 — Information Security Management System (ISMS)</h3>
@@ -833,26 +922,158 @@ export default function DataProtectionMasterbook() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm">
-                <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                  <span className="font-extrabold text-slate-200 block">1. Security Triad (CIA)</span>
-                  <ul className="space-y-1 pl-4 list-disc text-slate-300">
-                    <li><strong>Confidentiality:</strong> Only authorized people access data.</li>
-                    <li><strong>Integrity:</strong> Data remains accurate and unchanged.</li>
-                    <li><strong>Availability:</strong> Systems remain accessible when needed.</li>
-                  </ul>
-                </div>
+              {isoSyllabus.map((section) => {
+                const isSecExpanded = expandedSection === section.id;
+                const isMastered = !!masteredSections[section.id];
+                return (
+                  <div
+                    key={section.id}
+                    className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300 p-4 sm:p-5"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <button
+                        onClick={() => setExpandedSection(isSecExpanded ? null : section.id)}
+                        className="flex-1 flex items-start gap-2.5 text-left group"
+                      >
+                        {isSecExpanded ? (
+                          <ChevronDown className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-4 h-4 text-slate-500 mt-0.5 flex-shrink-0" />
+                        )}
+                        <div>
+                          <span className="text-xs sm:text-sm font-extrabold text-slate-200 group-hover:text-slate-100 transition block">
+                            {section.title}
+                          </span>
+                          <p className="text-xs text-slate-400 leading-relaxed mt-1">{section.definition}</p>
+                        </div>
+                      </button>
+                      <button
+                        onClick={() => setMasteredSections(prev => ({ ...prev, [section.id]: !prev[section.id] }))}
+                        className={`px-3 py-1.5 rounded-xl border text-[10px] font-extrabold uppercase tracking-wider transition flex items-center gap-1.5 flex-shrink-0 ${
+                          isMastered
+                            ? "bg-purple-500/10 border-purple-500/30 text-purple-300"
+                            : "bg-slate-905 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        {isMastered ? (
+                          <>
+                            <Check className="w-3.5 h-3.5" />
+                            <span>Mastered</span>
+                          </>
+                        ) : (
+                          <span>Mark Mastered</span>
+                        )}
+                      </button>
+                    </div>
 
-                <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                  <span className="font-extrabold text-slate-200 block">2. Risk Management</span>
-                  <p className="text-slate-400">ISO 27001 is heavily risk-driven. Identify risks, assess likelihood, assess impact, implement controls, and continuously review.</p>
-                  <p className="text-rose-400 text-[11px] font-semibold">Example risks: ISP outage, ransomware, insider threats, CCTV compromise, cloud exposure, vendor compromise, stolen laptops, phishing, weak passwords.</p>
-                </div>
+                    <AnimatePresence initial={false}>
+                      {isSecExpanded && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="pt-4 pl-6 sm:pl-7 border-l-2 border-purple-500/20 space-y-2 mt-3"
+                        >
+                          {section.bullets.map((bullet, idx) => (
+                            <div key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed py-1">
+                              {renderAnswerWithTooltips(bullet)}
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
-                <div className="p-4 rounded-xl border border-slate-850 bg-slate-900/10 space-y-1.5">
-                  <span className="font-extrabold text-slate-200 block">3. Asset & Access Control</span>
-                  <p className="text-slate-400">Identify what assets exist, their owners, and lifecycle status. Implement access controls such as RBAC, PAM, MFA, access reviews, onboarding/offboarding, and least privilege.</p>
-                </div>
+          {/* REAL ENTERPRISE CASE STUDIES */}
+          {activeFramework === "cases" && (
+            <div className="space-y-6">
+              <div className="p-5 rounded-2xl border border-purple-500/10 bg-purple-500/[0.01] space-y-3">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 block">🚨 Case Study Hub</span>
+                <h3 className="text-sm font-extrabold text-slate-100">Real-World Enterprise Security Compromises</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Analyze actual governance and technical breakdowns from global breaches. Understand what went wrong, regulatory impacts, and how you will architect systems differently to guarantee absolute protection.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6">
+                {caseStudies.map((cs) => {
+                  const isCsExpanded = expandedSection === cs.id;
+                  return (
+                    <div
+                      key={cs.id}
+                      className="rounded-2xl border border-slate-800 bg-slate-900/10 overflow-hidden transition-all duration-300"
+                    >
+                      <button
+                        onClick={() => setExpandedSection(isCsExpanded ? null : cs.id)}
+                        className="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-950/20 hover:bg-slate-950/40 transition"
+                      >
+                        <div>
+                          <span className="text-xs sm:text-sm font-extrabold text-amber-300 block">
+                            {cs.title}
+                          </span>
+                          <span className="text-[10px] text-slate-500 font-mono mt-0.5">
+                            Click to expand full root-cause analysis and lessons learned
+                          </span>
+                        </div>
+                        {isCsExpanded ? <ChevronDown className="w-4 h-4 text-amber-300" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isCsExpanded && (
+                          <motion.div
+                            initial={{ height: 0 }}
+                            animate={{ height: "auto" }}
+                            exit={{ height: 0 }}
+                            className="overflow-hidden border-t border-slate-800/60 bg-slate-950/[0.05] p-5 space-y-4"
+                          >
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
+                              <div className="space-y-3">
+                                <div>
+                                  <span className="text-[10px] font-extrabold text-purple-400 uppercase tracking-wider block">1. What Happened</span>
+                                  <p className="text-slate-300 leading-relaxed mt-1">{cs.whatHappened}</p>
+                                </div>
+                                <div>
+                                  <span className="text-[10px] font-extrabold text-purple-400 uppercase tracking-wider block">2. Root Cause</span>
+                                  <p className="text-slate-300 leading-relaxed mt-1">{cs.rootCause}</p>
+                                </div>
+                                <div>
+                                  <span className="text-[10px] font-extrabold text-rose-400 uppercase tracking-wider block">3. Governance Failure</span>
+                                  <p className="text-slate-300 leading-relaxed mt-1">{cs.governanceFailure}</p>
+                                </div>
+                              </div>
+
+                              <div className="space-y-3">
+                                <div>
+                                  <span className="text-[10px] font-extrabold text-rose-400 uppercase tracking-wider block">4. Technical Failure</span>
+                                  <p className="text-slate-300 leading-relaxed mt-1">{cs.technicalFailure}</p>
+                                </div>
+                                <div>
+                                  <span className="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider block">5. Regulatory Impact</span>
+                                  <p className="text-slate-300 leading-relaxed mt-1">{cs.regulatoryImpact}</p>
+                                </div>
+                                <div>
+                                  <span className="text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider block">6. Lessons Learned</span>
+                                  <p className="text-slate-300 leading-relaxed mt-1">{cs.lessonsLearned}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="border-t border-slate-800/80 pt-4 mt-2">
+                              <span className="text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider block">💡 What Frieze Would Do Differently</span>
+                              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic mt-1.5 border-l-2 border-emerald-400/40 pl-3">
+                                {renderAnswerWithTooltips(cs.whatToDoDifferently)}
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
