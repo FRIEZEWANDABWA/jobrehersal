@@ -152,6 +152,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     instanceKey: 0,
   });
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [qnaFolderOpen, setQnaFolderOpen] = useState(() => {
+    return (
+      pathname === "/company" ||
+      pathname === "/interview-bank" ||
+      pathname === "/mock-interview" ||
+      pathname === "/rapid-revision" ||
+      pathname === "/final-prep" ||
+      pathname === "/interview-reflection"
+    );
+  });
 
   // Scroll Progress Hooks
   const { scrollYProgress } = useScroll();
@@ -250,15 +260,66 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
             <nav className="mt-10 flex-1 space-y-1" aria-label="Primary">
-              {mainNav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block rounded-lg px-3 py-2 text-sm text-slate-300 transition hover:bg-slate-800/80 hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {mainNav.map((item) => {
+                if ("isFolder" in item && item.isFolder) {
+                  return (
+                    <div key={item.label} className="space-y-1">
+                      <button
+                        onClick={() => setQnaFolderOpen(!qnaFolderOpen)}
+                        className="w-full flex items-center justify-between rounded-lg px-3 py-2 text-sm text-slate-300 transition hover:bg-slate-800/80 hover:text-white"
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="text-amber-500/90 font-mono text-xs">📁</span>
+                          {item.label}
+                        </span>
+                        <span className="text-[10px] text-slate-500 font-semibold">{qnaFolderOpen ? "▲" : "▼"}</span>
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {qnaFolderOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden pl-4 border-l border-slate-800/60 space-y-1 ml-3"
+                          >
+                            {item.subItems.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={sub.href}
+                                className={`block rounded-lg px-3 py-1.5 text-xs transition ${
+                                  pathname === sub.href
+                                    ? "bg-amber-500/10 text-amber-400 font-bold border-l-2 border-amber-500 pl-2"
+                                    : "text-slate-400 hover:bg-slate-850 hover:text-white"
+                                }`}
+                              >
+                                {sub.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                if ("href" in item && item.href) {
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`block rounded-lg px-3 py-2 text-sm transition ${
+                        pathname === item.href
+                          ? "bg-slate-800/80 text-white font-semibold"
+                          : "text-slate-300 hover:bg-slate-800/80 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+
+                return null;
+              })}
             </nav>
             <div className="mt-8 space-y-3 border-t border-slate-800/80 pt-6">
               <button
@@ -319,15 +380,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 className="mt-3 flex gap-2 overflow-x-auto pb-1 text-xs no-scrollbar"
                 aria-label="Primary mobile"
               >
-                {mainNav.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="shrink-0 rounded-full border border-slate-700/80 px-3 py-1 text-slate-200 hover:border-amber-500/50 hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                 {mainNav.map((item) => {
+                   if ("href" in item && item.href) {
+                     return (
+                       <Link
+                         key={item.href}
+                         href={item.href}
+                         className="shrink-0 rounded-full border border-slate-700/80 px-3 py-1 text-slate-200 hover:border-amber-500/50 hover:text-white"
+                       >
+                         {item.label}
+                       </Link>
+                     );
+                   }
+                   return null;
+                 })}
               </nav>
             </header>
           )}

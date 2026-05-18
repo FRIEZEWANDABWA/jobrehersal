@@ -109,6 +109,7 @@ export const knowledgeSections: {
     description: "Teams, talent, and operating cadence.",
   },
 ];
+
 export const mainNav = [
   { href: "/", label: "Command Centre" },
   { href: "/search", label: "Search" },
@@ -117,12 +118,18 @@ export const mainNav = [
   { href: "/modern-frameworks", label: "Modern Frameworks" },
   { href: "/budget", label: "Budget" },
   { href: "/star-vault", label: "STAR Vault" },
-  { href: "/interview-bank", label: "Interview Bank" },
-  { href: "/rapid-revision", label: "Rapid Revision" },
-  { href: "/mock-interview", label: "Mock Interview" },
-  { href: "/company", label: "Company Mode" },
   { href: "/executive-dashboard", label: "Executive dashboard" },
-  { href: "/final-prep", label: "Final prep" },
-  { href: "/networking-playbook", label: "Networking playbook" },
-  { href: "/interview-reflection", label: "Reflection" },
+  {
+    label: "Questions & Answers",
+    isFolder: true,
+    subItems: [
+      { href: "/company", label: "Company Mode" },
+      { href: "/interview-bank", label: "Interview Bank" },
+      { href: "/mock-interview", label: "Mock Interview" },
+      { href: "/rapid-revision", label: "Rapid Revision" },
+      { href: "/final-prep", label: "Final 24-Hour Prep" },
+      { href: "/interview-reflection", label: "Reflection" }
+    ]
+  },
+  { href: "/networking-playbook", label: "Networking playbook" }
 ] as const;

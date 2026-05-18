@@ -34,10 +34,10 @@ const strategicLeadership = [
     layer: "Layer 2 · Read",
   },
   {
-    title: "Company mode",
-    description: "Same fundamentals, tailored lenses—walk in knowing how the panel thinks.",
-    href: "/company",
-    layer: "Layer 3 · Context",
+    title: "STAR vault",
+    description: "Your real stories—structured so they land as executive proof, not anecdotes.",
+    href: "/star-vault",
+    layer: "Layer 3 · Stories",
   },
 ];
 
@@ -70,7 +70,20 @@ const dataProtection = [
     layer: "Layer 2 · Governance",
   },
 ];
-const interviewRehearsal = [
+
+const questionsAndAnswers = [
+  {
+    title: "Company mode",
+    description: "Same fundamentals, tailored lenses—walk in knowing how the panel thinks.",
+    href: "/company",
+    layer: "Layer 3 · Context",
+  },
+  {
+    title: "Interview Bank",
+    description: "50 real high-stakes executive questions and expert C-level answers under pressure.",
+    href: "/interview-bank",
+    layer: "Layer 3 · Bank",
+  },
   {
     title: "Mock interview",
     description: "Pressure blocks from the bank—rehearse out loud, not in your head.",
@@ -78,25 +91,10 @@ const interviewRehearsal = [
     layer: "Layer 3 · Practice",
   },
   {
-    title: "STAR vault",
-    description: "Your real stories—structured so they land as executive proof, not anecdotes.",
-    href: "/star-vault",
-    layer: "Layer 3 · Stories",
-  },
-  {
     title: "Rapid revision",
     description: "Compressed rhythm for the night before—speed without losing judgment.",
     href: "/rapid-revision",
     layer: "Layer 3 · Speed",
-  },
-];
-
-const analyticsWarRoom = [
-  {
-    title: "Executive dashboard",
-    description: "Progress metrics and weak-area pressure map—at a glance, no noise.",
-    href: "/executive-dashboard",
-    layer: "Layer 1 · Focus",
   },
   {
     title: "Final 24-hour prep",
@@ -109,6 +107,15 @@ const analyticsWarRoom = [
     description: "Capture the room while it is vivid—what was asked, what broke, what you will fix.",
     href: "/interview-reflection",
     layer: "Personal Layer",
+  },
+];
+
+const analyticsPerformance = [
+  {
+    title: "Executive dashboard",
+    description: "Progress metrics and weak-area pressure map—at a glance, no noise.",
+    href: "/executive-dashboard",
+    layer: "Layer 1 · Focus",
   },
 ];
 
@@ -159,7 +166,7 @@ export default function CommandCentrePage() {
         
         <section>
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 mb-6">
-            Strategic Leadership & Operations
+            Strategic Core Library
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {strategicLeadership.map((item) => (
@@ -191,12 +198,13 @@ export default function CommandCentrePage() {
         </section>
 
 
-        <section>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-500/80 mb-6">
-            Interview Rehearsal
+        <section className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/[0.05] p-6 sm:p-8">
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(245,158,11,0.02),transparent_60%)]" />
+          <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-500/85 mb-6">
+            📁 Questions & Answers Vault
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {interviewRehearsal.map((item) => (
+            {questionsAndAnswers.map((item) => (
               <CommandCentreCard key={item.href} {...item} />
             ))}
           </div>
@@ -204,10 +212,10 @@ export default function CommandCentrePage() {
 
         <section>
           <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-500/80 mb-6">
-            Analytics & War Room
+            Analytics & Performance
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {analyticsWarRoom.map((item) => (
+            {analyticsPerformance.map((item) => (
               <CommandCentreCard key={item.href} {...item} />
             ))}
           </div>

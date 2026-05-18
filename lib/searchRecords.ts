@@ -41,12 +41,23 @@ export function getSearchRecords(): SearchRecord[] {
   const out: SearchRecord[] = [];
 
   for (const item of mainNav) {
-    out.push({
-      title: item.label,
-      href: item.href,
-      snippet: "Primary navigation",
-      category: "Navigation",
-    });
+    if ("isFolder" in item && item.isFolder) {
+      for (const sub of item.subItems) {
+        out.push({
+          title: sub.label,
+          href: sub.href,
+          snippet: `Primary navigation · ${item.label}`,
+          category: "Navigation",
+        });
+      }
+    } else if ("href" in item && item.href) {
+      out.push({
+        title: item.label,
+        href: item.href,
+        snippet: "Primary navigation",
+        category: "Navigation",
+      });
+    }
   }
 
   for (const s of knowledgeSections) {

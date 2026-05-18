@@ -19,7 +19,25 @@ function CommandPalettePanel({ onClose }: { onClose: () => void }) {
 
   const items: Item[] = useMemo(
     () => [
-      ...mainNav.map((n) => ({ href: n.href, label: n.label, group: "Main" })),
+      ...mainNav.flatMap((n): Item[] => {
+        if ("isFolder" in n && n.isFolder) {
+          return n.subItems.map((sub) => ({
+            href: sub.href,
+            label: sub.label,
+            group: "Q&A",
+          }));
+        }
+        if ("href" in n && n.href) {
+          return [
+            {
+              href: n.href,
+              label: n.label,
+              group: "Main",
+            },
+          ];
+        }
+        return [];
+      }),
       ...knowledgeSections.map((s) => ({
         href: `/knowledge/${s.id}`,
         label: s.label,
