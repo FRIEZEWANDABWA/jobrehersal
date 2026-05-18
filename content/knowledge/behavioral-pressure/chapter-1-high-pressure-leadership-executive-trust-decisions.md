@@ -26,6 +26,8 @@ Senior interviews are not asking for drama. They are asking for **judgment under
 
 This chapter is critical.
 
+![High-Pressure Leadership, Executive Trust & Decision-Making Under Fire](/executive-behavioral-pressure.jpg)
+
 ## PART 1 — WHAT BEHAVIOURAL QUESTIONS ARE REALLY TESTING
 
 Most candidates think: “They want examples.” **Not exactly.**

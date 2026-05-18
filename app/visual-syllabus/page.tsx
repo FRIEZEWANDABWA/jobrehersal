@@ -156,6 +156,36 @@ const visualChapters = [
       "Adopting 'black box' AI tools where the recommendation pathway cannot be audited or explained to the board"
     ],
     metrics: ["AI Model Accuracy %", "Incident MTTR Reduction", "Support Ticket Self-Service %", "Compliance Audit Score"]
+  },
+  {
+    chapterNumber: "CHAPTER 6",
+    title: "High-Pressure Leadership & Decision-Making Under Fire",
+    eyebrow: "Book 1 · Section B · Behavioral & Pressure Foundations",
+    imageSrc: "/executive-behavioral-pressure.jpg",
+    imageAlt: "High-Pressure Leadership, Executive Trust & Decision-Making Under Fire (Context, Decision, Leadership, Result, Lesson)",
+    readHref: "/knowledge/behavioral-pressure/chapter-1-high-pressure-leadership-executive-trust-decisions",
+    description:
+      "Senior interviews do not test what you know—they predict who you are when pressure arrives. Transition from simple storytelling to demonstrating predictable executive-level ownership, structured calm, and courtroom decision-making under uncertainty.",
+    principles: [
+      {
+        label: "The Ownership Principle",
+        value: "Executives hire full ownership, not explanations. Never use blame language (e.g. 'the vendor failed')—instead, focus on how you identified the exposure, took custody, and protected the business."
+      },
+      {
+        label: "Decision-Making Under Uncertainty",
+        value: "When information is incomplete, lead using a structured validation spine: FACTS (what is certain) → RISK (exposures) → PRIORITY (urgencies) → ACTION → REVIEW. Remember: delay is also a decision."
+      },
+      {
+        label: "Failure & Incident Leadership",
+        value: "Defend high-severity outages or personal failure events cleanly using: OWN (take 100% custody) → CORRECT (immediate mitigation) → IMPROVE (long-term structural solution)."
+      }
+    ],
+    traps: [
+      "Getting lost in long, technical STAR narratives ('drama') instead of highlighting clear executive decisions",
+      "Using weak language (e.g., 'we were hoping' or 'I tried') that damages your perceived authority",
+      "Criticizing previous employers or presenting your professional history as a list of job titles instead of strategic outcomes"
+    ],
+    metrics: ["Incident Outage MTTR", "SLA Incident Containment %", "Business Ownership Index", "Change Leadership NPS Score"]
   }
 ];
 
